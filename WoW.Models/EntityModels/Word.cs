@@ -18,7 +18,7 @@ namespace WoW.Models.EntityModels
         public Word(string name)
         {
             this.Name = name;
-            this.Date = DateTime.Now;
+            this.DateAdded = DateTime.Now;
             this.Descriptions = new HashSet<Description>();
         }
 
@@ -31,7 +31,7 @@ namespace WoW.Models.EntityModels
 
         //public int UserId { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime DateAdded { get; set; }
 
         public virtual ICollection<Description> Descriptions // Navigation property
         {

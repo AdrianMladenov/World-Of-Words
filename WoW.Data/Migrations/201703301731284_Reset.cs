@@ -3,7 +3,7 @@ namespace WoW.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Seed : DbMigration
+    public partial class Reset : DbMigration
     {
         public override void Up()
         {
@@ -13,7 +13,6 @@ namespace WoW.Data.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Content = c.String(nullable: false),
-                        UserId = c.Int(nullable: false),
                         QuestionId = c.Int(nullable: false),
                         User_Id = c.String(nullable: false, maxLength: 128),
                     })
@@ -28,6 +27,7 @@ namespace WoW.Data.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        Word = c.String(nullable: false, maxLength: 30),
                         Content = c.String(nullable: false),
                         UserId = c.Int(nullable: false),
                         User_Id = c.String(nullable: false, maxLength: 128),
@@ -103,6 +103,7 @@ namespace WoW.Data.Migrations
                         FirstName = c.String(maxLength: 30),
                         LastName = c.String(maxLength: 30),
                         Age = c.Int(nullable: false),
+                        RegistrationDate = c.DateTime(nullable: false),
                         SocialStatus = c.Int(name: "Social Status", nullable: false),
                         Gender = c.Int(nullable: false),
                         EducationDegree = c.Int(name: "Education Degree", nullable: false),
@@ -119,7 +120,7 @@ namespace WoW.Data.Migrations
                     {
                         WordId = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false),
-                        UserId = c.Int(nullable: false),
+                        DateAdded = c.DateTime(nullable: false),
                         User_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.WordId)
@@ -151,9 +152,9 @@ namespace WoW.Data.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
-                        UserId = c.Int(nullable: false),
                         Description = c.String(),
                         IsValid = c.Boolean(nullable: false),
+                        IsCorrectWord = c.Boolean(nullable: false),
                         User_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
@@ -164,14 +165,14 @@ namespace WoW.Data.Migrations
                 "dbo.WordsDescriptions",
                 c => new
                     {
-                        DescriptiopnId = c.Int(nullable: false),
                         WordId = c.Int(nullable: false),
+                        DescriptiopnId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.DescriptiopnId, t.WordId })
-                .ForeignKey("dbo.Words", t => t.DescriptiopnId, cascadeDelete: true)
-                .ForeignKey("dbo.Descriptions", t => t.WordId, cascadeDelete: true)
-                .Index(t => t.DescriptiopnId)
-                .Index(t => t.WordId);
+                .PrimaryKey(t => new { t.WordId, t.DescriptiopnId })
+                .ForeignKey("dbo.Words", t => t.WordId, cascadeDelete: true)
+                .ForeignKey("dbo.Descriptions", t => t.DescriptiopnId, cascadeDelete: true)
+                .Index(t => t.WordId)
+                .Index(t => t.DescriptiopnId);
             
         }
         
@@ -183,14 +184,14 @@ namespace WoW.Data.Migrations
             DropForeignKey("dbo.Answer", "QuestionId", "dbo.Questions");
             DropForeignKey("dbo.Questions", "User_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.Words", "User_Id", "dbo.AspNetUsers");
-            DropForeignKey("dbo.WordsDescriptions", "WordId", "dbo.Descriptions");
-            DropForeignKey("dbo.WordsDescriptions", "DescriptiopnId", "dbo.Words");
+            DropForeignKey("dbo.WordsDescriptions", "DescriptiopnId", "dbo.Descriptions");
+            DropForeignKey("dbo.WordsDescriptions", "WordId", "dbo.Words");
             DropForeignKey("dbo.User Info", "User_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropIndex("dbo.WordsDescriptions", new[] { "WordId" });
             DropIndex("dbo.WordsDescriptions", new[] { "DescriptiopnId" });
+            DropIndex("dbo.WordsDescriptions", new[] { "WordId" });
             DropIndex("dbo.WordForValidates", new[] { "User_Id" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Words", new[] { "User_Id" });

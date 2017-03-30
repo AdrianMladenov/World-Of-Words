@@ -28,9 +28,9 @@ namespace WoW.Data.ModelConfiuration
                 .WithMany(w => w.Words)
                 .Map(wd =>
                 {
+                    wd.MapLeftKey("WordId");
+                    wd.MapRightKey("DescriptiopnId");
                     wd.ToTable("WordsDescriptions");
-                    wd.MapLeftKey("DescriptiopnId");
-                    wd.MapRightKey("WordId");
                 });
         }
     }

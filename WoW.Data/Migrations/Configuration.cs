@@ -150,8 +150,7 @@ namespace WoW.Data.Migrations
                     userZk.Words.Add(currentWord);
                     context.SaveChanges();
                 }
-
-
+                
             }
         }
     }

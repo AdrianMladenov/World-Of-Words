@@ -14,7 +14,7 @@ namespace WoW.Data
         public WoWContext()
             : base("WoWContext", throwIfV1Schema: false)
         {
-           // Database.SetInitializer(new MigrateDatabaseToLatestVersion<WoWContext, Configuration>());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<WoWContext, Configuration>());
         }
 
         public virtual DbSet<Word> Words { get; set; }

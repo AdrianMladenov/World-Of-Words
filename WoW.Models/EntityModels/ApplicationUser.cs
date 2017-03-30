@@ -15,6 +15,7 @@ namespace WoW.Models.EntityModels
 
         public ApplicationUser()
         {
+            this.IsDeleted = false;
             this.Words = new HashSet<Word>();
             this.Questions = new HashSet<Question>();
             this.Answers = new HashSet<Answer>();

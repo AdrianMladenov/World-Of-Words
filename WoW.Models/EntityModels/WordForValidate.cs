@@ -17,6 +17,8 @@ namespace WoW.Models.EntityModels
         public WordForValidate(string name)
         {
             this.Name = name;
+            this.IsValid = false;
+            this.IsCorrectWord = false;
         }
 
 
@@ -26,10 +28,12 @@ namespace WoW.Models.EntityModels
 
         public virtual ApplicationUser User { get; set; }
 
-        public int UserId { get; set; }
+        //public int UserId { get; set; }
 
         public string Description { get; set; }
 
         public bool IsValid { get; set; }
+
+        public bool IsCorrectWord { get; set; }
     }
 }

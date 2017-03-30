@@ -67,6 +67,10 @@
     <Compile Include="Migrations\201703282056069_addRegistrationDateForUser.Designer.cs">
       <DependentUpon>201703282056069_addRegistrationDateForUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703301710298_unknown.cs" />
+    <Compile Include="Migrations\201703301710298_unknown.Designer.cs">
+      <DependentUpon>201703301710298_unknown.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfiuration\AnswerConfiguration.cs" />
     <Compile Include="ModelConfiuration\DescriptionConfiguration.cs" />
@@ -92,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703282056069_addRegistrationDateForUser.resx">
       <DependentUpon>201703282056069_addRegistrationDateForUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703301710298_unknown.resx">
+      <DependentUpon>201703301710298_unknown.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

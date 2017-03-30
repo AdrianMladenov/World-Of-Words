@@ -112,45 +112,64 @@ namespace WoW.Data.Migrations
 
             //context.SaveChanges();
 
-            string[] words = File.ReadAllLines(@"C:\Users\2351x\Documents\Visual Studio 2015\Projects\World-Of-Words-master\World-Of-Words-master/Words.txt");
+            string[] words = File.ReadAllLines(@"C:\Users\Sasho\Documents\GitHub\World-Of-Words/Words.txt");
 
-            string[] descriptions = File.ReadAllLines(@"C:\Users\2351x\Documents\Visual Studio 2015\Projects\World-Of-Words-master\World-Of-Words-master/WordsDescriptions.txt");
+            string[] descriptions = File.ReadAllLines(@"C:\Users\Sasho\Documents\GitHub\World-Of-Words/WordsDescriptions.txt");
 
 
             for (int i = 0; i < words.Length; i++)
             {
                 Word currentWord = new Word(words[i]);
 
-                for (int j = 0; j < descriptions.Length; j++)
+                Description currentDescription = new Description(descriptions[i]);
+                //currentWord.Descriptions.Add(currentDescription);
+
+                if (context.Words.Any(w => w.Name == currentWord.Name))
                 {
-                    Description currentDescription = new Description(descriptions[j]);
+                    var existingWord = context.Words.Include(ew => ew.Descriptions).SingleOrDefault(ew => ew.Name == currentWord.Name);
+                    existingWord.Descriptions.Add(currentDescription);
+                    context.SaveChanges();
+                }
+
+                else if(context.Descriptions.Any(d => d.Content == currentDescription.Content))
+                {
+                    var existingDescription = context.Descriptions.Include(ew => ew.Words).SingleOrDefault(ew => ew.Content == currentDescription.Content);
+                    existingDescription.Words.Add(currentWord);
+                    context.SaveChanges();
+                }
+
+                else
+                {
                     currentWord.Descriptions.Add(currentDescription);
-                }
-
-                if (i % 2 != 0 && i <= 30)
-                {
-                    userAl.Words.Add(currentWord);
+                    context.Words.Add(currentWord);
+                    context.Descriptions.Add(currentDescription);
                     context.SaveChanges();
                 }
 
-                else if (i % 2 == 0 && i <= 30)
-                {
-                    userAm.Words.Add(currentWord);
-                    context.SaveChanges();
-                }
+                //if (i % 2 != 0 && i <= 30)
+                //{
+                //    userAl.Words.Add(currentWord);
+                //    context.SaveChanges();
+                //}
 
-                else if (i % 2 == 0 && i >= 30)
-                {
-                    userNl.Words.Add(currentWord);
-                    context.SaveChanges();
-                }
+                //else if (i % 2 == 0 && i <= 30)
+                //{
+                //    userAm.Words.Add(currentWord);
+                //    context.SaveChanges();
+                //}
 
-                else if (i % 2 != 0 && i >= 30)
-                {
-                    userZk.Words.Add(currentWord);
-                    context.SaveChanges();
-                }
-                
+                //else if (i % 2 == 0 && i >= 30)
+                //{
+                //    userNl.Words.Add(currentWord);
+                //    context.SaveChanges();
+                //}
+
+                //else if (i % 2 != 0 && i >= 30)
+                //{
+                //    userZk.Words.Add(currentWord);
+                //    context.SaveChanges();
+                //}
+
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -6,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using WoW.Models.ViewModels.Words;
 using WoW.Services;
+
 
 namespace WoW.Web.Controllers
 {
@@ -34,6 +36,7 @@ namespace WoW.Web.Controllers
         // GET: Word/Create
         public ActionResult Add()
         {
+            
             return View();
         }
 
@@ -41,13 +44,12 @@ namespace WoW.Web.Controllers
         [HttpPost]
         public ActionResult Add([Bind(Include ="Name, Description" )] AddWordVM word)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-
-            }
+            
             if (this.ModelState.IsValid)
             {
-                this.wordService.AddWord(word);
+                var user = User.Identity.Name;
+                //var user = System.Web.HttpContext.Current.User.Identity.GetUserName();
+                this.wordService.AddWord(word, user); 
                 return this.RedirectToAction("About");
             }
 

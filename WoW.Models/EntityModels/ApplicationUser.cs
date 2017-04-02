@@ -6,6 +6,7 @@ namespace WoW.Models.EntityModels
     using System.Collections.Generic;
     using System.Security.Claims;
     using System.Threading.Tasks;
+    using ViewModels.Words;
 
     public class ApplicationUser : IdentityUser
     {
@@ -27,6 +28,10 @@ namespace WoW.Models.EntityModels
         public virtual UserInfo UserInfo { get; set; }
 
         public virtual ICollection<Word> Words { get; set; }
+
+        public virtual ICollection<WordForValidate> WordsForValidate { get; set; }
+
+        //public virtual  AddWordVM wordsForValidation { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

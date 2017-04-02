@@ -7,12 +7,12 @@ namespace WoW.Data.Migrations
     {
         public override void Up()
         {
-            AlterColumn("dbo.WordForValidates", "dateAdded", c => c.DateTime());
+            AddColumn("dbo.WordForValidates", "dateAdded", c => c.DateTime(nullable: false));
         }
         
         public override void Down()
         {
-            AlterColumn("dbo.WordForValidates", "dateAdded", c => c.DateTime(nullable: false));
+            DropColumn("dbo.WordForValidates", "dateAdded");
         }
     }
 }

@@ -33,6 +33,9 @@ namespace WoW.Data
             modelBuilder.Configurations.Add(new DescriptionConfiguration());
             modelBuilder.Configurations.Add(new QuestionConfiguration());
             modelBuilder.Configurations.Add(new AnswerConfiguration());
+
+            //modelBuilder.Entity<WordForValidate>().Property(wv => wv.dateAdded).HasColumnName("dateAdded");
+            //modelBuilder.Entity<WordForValidate>().Property(wv => wv.dateAdded).HasColumnType("datetime2");
            
             base.OnModelCreating(modelBuilder);
         }

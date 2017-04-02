@@ -9,11 +9,12 @@ namespace WoW.Models.ViewModels.Words
 {
    public class AddWordVM
     {
+      
         public string Name { get; set; }
 
         public string Description { get; set; }
 
-        //public ApplicationUser User { get; set; }
+        public ApplicationUser User { get; set; }
 
     }
 }

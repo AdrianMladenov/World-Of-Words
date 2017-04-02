@@ -13,7 +13,7 @@ namespace WoW.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201704021448226_AddDateAddedToWordsForValidate"; }
+            get { return "201704021613503_AddDateAddedToWordsForValidate"; }
         }
         
         string IMigrationMetadata.Source

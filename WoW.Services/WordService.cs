@@ -11,16 +11,16 @@ namespace WoW.Services
 {
    public class WordService : Service
     {
-        public void AddWord(AddWordVM model)
+        public void AddWord(AddWordVM model, string user)
         {
             WordForValidate word = new WordForValidate();
-            //var user = Context.Users.SingleOrDefault(u => u.UserName == model.User.UserName);
+            var currentUser = this.Context.Users.FirstOrDefault(u => u.UserName == user);
             word.Name = model.Name;
             word.Description = model.Description;
-            //word.User = user;
+            word.dateAdded = DateTime.Now;
+            currentUser.WordsForValidate.Add(word);
             
-            
-            this.Context.WordsForValidation.Add(word);
+            //this.Context.WordsForValidation.Add(word);
             this.Context.SaveChanges();
         }
 

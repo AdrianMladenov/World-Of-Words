@@ -31,7 +31,7 @@ namespace WoW.Models.EntityModels
 
         public string Description { get; set; }
 
-        public DateTime? dateAdded { get; set; }
+        public DateTime dateAdded { get; set; }
 
         public bool IsValid { get; set; }
 

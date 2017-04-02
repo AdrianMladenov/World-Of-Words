@@ -22,3 +22,8 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.words{
+    border: 2px solid green;
+    margin-bottom: 5px;
+}

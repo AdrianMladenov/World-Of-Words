@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System;
 
 namespace WoW.Models.EntityModels
 {
@@ -14,9 +11,11 @@ namespace WoW.Models.EntityModels
 
         }
 
-        public WordForValidate(string name)
+        public WordForValidate(string name, string description)
         {
             this.Name = name;
+            this.Description = description;
+            this.dateAdded = DateTime.Now;
             this.IsValid = false;
             this.IsCorrectWord = false;
         }
@@ -31,6 +30,8 @@ namespace WoW.Models.EntityModels
         //public int UserId { get; set; }
 
         public string Description { get; set; }
+
+        public DateTime? dateAdded { get; set; }
 
         public bool IsValid { get; set; }
 

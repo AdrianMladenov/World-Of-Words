@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace WoW.Models.EntityModels
 {
-   public class UserInfo
+    using System;
+
+    public class UserInfo
     {
         public UserInfo()
         {
@@ -30,7 +27,7 @@ namespace WoW.Models.EntityModels
         public string FirstName { get; set; } //Optional
 
         public string LastName { get; set; } //Optional
-        
+
         public int Age { get; set; } //Validation
 
         public DateTime RegistrationDate { get; set; }

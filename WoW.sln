@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoW.Data", "WoW.Data\WoW.Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoW.Models", "WoW.Models\WoW.Models.csproj", "{92672528-E501-4FA1-AD02-6511C7AA03E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoW.Services", "WoW.Services\WoW.Services.csproj", "{B1E6E33A-A185-4CD4-AC51-D0E446EE0351}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{92672528-E501-4FA1-AD02-6511C7AA03E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92672528-E501-4FA1-AD02-6511C7AA03E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92672528-E501-4FA1-AD02-6511C7AA03E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1E6E33A-A185-4CD4-AC51-D0E446EE0351}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1E6E33A-A185-4CD4-AC51-D0E446EE0351}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1E6E33A-A185-4CD4-AC51-D0E446EE0351}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1E6E33A-A185-4CD4-AC51-D0E446EE0351}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WoW.Models.EntityModels
+﻿namespace WoW.Models.EntityModels
 {
-   public class Enum
+    public class Enum
     {
         public int EnumId { get; set; }
 

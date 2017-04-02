@@ -22,6 +22,14 @@ namespace WoW.Data.Migrations
         {
             context.Database.Initialize(true);
             //context.Roles.AddOrUpdate(r => new IdentityRole("User"));
+            //if (!context.Roles.Any(role => role.Name == "User"))
+            //{
+            //    var store = new RoleStore<IdentityRole>(context);
+            //    var manager = new RoleManager<IdentityRole>(store);
+            //    var userRole = new IdentityRole("Guest");
+            //    manager.Create(userRole);
+            //}
+
             if (!context.Roles.Any(role => role.Name == "User"))
             {
                 var store = new RoleStore<IdentityRole>(context);
@@ -112,9 +120,9 @@ namespace WoW.Data.Migrations
 
             //context.SaveChanges();
 
-            string[] words = File.ReadAllLines(@"C:\Users\Sasho\Documents\GitHub\World-Of-Words/Words.txt");
+            string[] words = File.ReadAllLines(@"C:\Users\2351x\Documents\GitHub\World-Of-Words\Words.txt");
 
-            string[] descriptions = File.ReadAllLines(@"C:\Users\Sasho\Documents\GitHub\World-Of-Words/WordsDescriptions.txt");
+            string[] descriptions = File.ReadAllLines(@"C:\Users\2351x\Documents\GitHub\World-Of-Words\WordsDescriptions.txt");
 
 
             for (int i = 0; i < words.Length; i++)
@@ -131,45 +139,45 @@ namespace WoW.Data.Migrations
                     context.SaveChanges();
                 }
 
-                else if(context.Descriptions.Any(d => d.Content == currentDescription.Content))
+                else if (context.Descriptions.Any(d => d.Content == currentDescription.Content))
                 {
                     var existingDescription = context.Descriptions.Include(ew => ew.Words).SingleOrDefault(ew => ew.Content == currentDescription.Content);
                     existingDescription.Words.Add(currentWord);
+                    ChooseUser(context, userAl, userAm, userNl, userZk, i, words, currentWord);
                     context.SaveChanges();
                 }
 
                 else
                 {
                     currentWord.Descriptions.Add(currentDescription);
-                    context.Words.Add(currentWord);
+                    //context.Words.Add(currentWord);
                     context.Descriptions.Add(currentDescription);
+                    ChooseUser(context, userAl, userAm, userNl, userZk, i, words, currentWord);
                     context.SaveChanges();
                 }
+            }
+        }
 
-                //if (i % 2 != 0 && i <= 30)
-                //{
-                //    userAl.Words.Add(currentWord);
-                //    context.SaveChanges();
-                //}
+        private static void ChooseUser(WoWContext context, ApplicationUser userAl, ApplicationUser userAm, ApplicationUser userNl, ApplicationUser userZk, int i , string[] words, Word currentWord)
+        {
+            if (i % 2 != 0 && i <= words.Length / 2)
+            {
+                userAl.Words.Add(currentWord);
+            }
 
-                //else if (i % 2 == 0 && i <= 30)
-                //{
-                //    userAm.Words.Add(currentWord);
-                //    context.SaveChanges();
-                //}
+            else if (i % 2 == 0 && i <= words.Length / 2)
+            {
+                userAm.Words.Add(currentWord);
+            }
 
-                //else if (i % 2 == 0 && i >= 30)
-                //{
-                //    userNl.Words.Add(currentWord);
-                //    context.SaveChanges();
-                //}
+            else if (i % 2 == 0 && i > words.Length / 2)
+            {
+                userNl.Words.Add(currentWord);
+            }
 
-                //else if (i % 2 != 0 && i >= 30)
-                //{
-                //    userZk.Words.Add(currentWord);
-                //    context.SaveChanges();
-                //}
-
+            else if (i % 2 != 0 && i > words.Length / 2)
+            {
+                userZk.Words.Add(currentWord);
             }
         }
     }

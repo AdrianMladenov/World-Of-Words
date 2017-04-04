@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,9 +25,16 @@ namespace WoW.Services
             this.Context.SaveChanges();
         }
 
-        //public void IsWordExisting(WordForValidate word)
-        //{
+        public bool IsWordForValidateIsExisting(WordForValidate word)
+        {
+            return Context.WordsForValidation.Any(w => w.Name == word.Name);
+        }
 
-        //}
+        public IEnumerable<AllWordsOfUser> GetWordsOfUserByName(string name)
+        {
+            IEnumerable<WordForValidate> words = this.Context.WordsForValidation.Where(u => u.User.UserName == name);
+            IEnumerable<AllWordsOfUser> awou = Mapper.Map<IEnumerable<WordForValidate>, IEnumerable<AllWordsOfUser>>(words);
+            return awou;
+        }
     }
 }

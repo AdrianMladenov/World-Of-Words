@@ -3,6 +3,7 @@ namespace WoW.Models.EntityModels
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     public class Word
     {
@@ -29,8 +30,10 @@ namespace WoW.Models.EntityModels
 
         //public int UserId { get; set; }
 
+        //[Display(Name = "Дата на добавяне:")]
         public DateTime DateAdded { get; set; }
 
+        //[Display(Name = "Описание:")]
         public virtual ICollection<Description> Descriptions // Navigation property
         {
             get { return this.descriptions; }

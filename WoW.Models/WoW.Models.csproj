@@ -120,11 +120,11 @@
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Words\AddWordVM.cs" />
+    <Compile Include="ViewModels\Words\AllWordsOfUser.cs" />
     <Compile Include="ViewModels\Words\WordsVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Attributes\" />
-    <Folder Include="BindingModels\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

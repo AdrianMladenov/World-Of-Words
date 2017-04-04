@@ -47,13 +47,22 @@ namespace WoW.Web.Controllers
             
             if (this.ModelState.IsValid)
             {
-                var user = User.Identity.Name;
                 //var user = System.Web.HttpContext.Current.User.Identity.GetUserName();
+                var user = User.Identity.Name;
                 this.wordService.AddWord(word, user); 
-                return this.RedirectToAction("About");
+                return this.RedirectToAction("GetWordsOfUser");
             }
 
             return this.View();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "User, Admin")]
+        public ActionResult GetWordsOfUser()
+        {
+            string userName = User.Identity.Name;
+            IEnumerable<AllWordsOfUser> awou = this.wordService.GetWordsOfUserByName(userName);
+            return this.View(awou);
         }
 
         // GET: Word/Edit/5

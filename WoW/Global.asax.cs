@@ -8,6 +8,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using WoW.Models.EntityModels;
 using WoW.Models.ViewModels;
+using WoW.Models.ViewModels.Words;
 
 namespace WoW
 {
@@ -27,7 +28,7 @@ namespace WoW
             Mapper.Initialize(exp =>
             {
                 exp.CreateMap<Word, WordsVM>();
-               
+                exp.CreateMap<WordForValidate, AllWordsOfUser>();
             });
         }
     }

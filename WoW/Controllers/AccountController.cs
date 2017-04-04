@@ -88,6 +88,7 @@ namespace WoW.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
+                    ModelState.AddModelError("", "Потребителското име или паролата са невалидни.");
                     return View(model);
             }
         }

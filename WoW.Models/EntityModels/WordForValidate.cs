@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WoW.Models.EntityModels
 {
@@ -14,9 +13,11 @@ namespace WoW.Models.EntityModels
 
         }
 
-        public WordForValidate(string name)
+        public WordForValidate(string name, string description)
         {
             this.Name = name;
+            this.Description = description;
+            this.dateAdded = DateTime.Now;
             this.IsValid = false;
             this.IsCorrectWord = false;
         }
@@ -30,10 +31,20 @@ namespace WoW.Models.EntityModels
 
         //public int UserId { get; set; }
 
+        //[Display(Name = "Описание:")]
         public string Description { get; set; }
 
-        public bool IsValid { get; set; }
+        //[Display(Name = "Дата на добавяне:")]
+        public DateTime dateAdded { get; set; }
 
+        //[Display(Name = "Статус:")]
+        public bool IsValid { get; set; }
+        
         public bool IsCorrectWord { get; set; }
+
+        public override string ToString()
+        {
+            return $"{this.Name} {this.dateAdded} {this.IsValid.ToString()}";
+        }
     }
 }

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace WoW.Models.EntityModels
 {
-   public class Word
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    public class Word
     {
         private ICollection<Description> descriptions;
 
@@ -31,12 +30,19 @@ namespace WoW.Models.EntityModels
 
         //public int UserId { get; set; }
 
+        //[Display(Name = "Дата на добавяне:")]
         public DateTime DateAdded { get; set; }
 
+        //[Display(Name = "Описание:")]
         public virtual ICollection<Description> Descriptions // Navigation property
         {
             get { return this.descriptions; }
             set { this.descriptions = value; }
-        } 
+        }
+
+        public override string ToString()
+        {
+            return $"{this.Name} {this.DateAdded}";
+        }
     }
 }

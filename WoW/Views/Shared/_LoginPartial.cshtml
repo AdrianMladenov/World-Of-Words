@@ -1,4 +1,14 @@
 ﻿@using Microsoft.AspNet.Identity
+@{
+    var txt = "";
+    if (DateTime.Now.Hour < 12)
+    { txt = "Good Morning,"; }
+    else if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18)
+    { txt = "Good Afternoon,"; }
+    else
+    { txt = "Good Evening,"; }
+}
+
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -7,7 +17,7 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink(txt + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>

@@ -1,15 +1,13 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using WoW.Models.EntityModels;
-
+﻿
 namespace WoW.Models.EntityModels
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using System.Collections.Generic;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+    using ViewModels.Words;
+
     public class ApplicationUser : IdentityUser
     {
 
@@ -31,6 +29,10 @@ namespace WoW.Models.EntityModels
 
         public virtual ICollection<Word> Words { get; set; }
 
+        public virtual ICollection<WordForValidate> WordsForValidate { get; set; }
+
+        //public virtual  AddWordVM wordsForValidation { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -38,5 +40,6 @@ namespace WoW.Models.EntityModels
             // Add custom user claims here
             return userIdentity;
         }
+        
     }
 }

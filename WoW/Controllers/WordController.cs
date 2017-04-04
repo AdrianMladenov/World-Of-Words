@@ -12,6 +12,7 @@ using WoW.Services;
 namespace WoW.Web.Controllers
 {
     [Authorize(Roles ="User")]
+    [RoutePrefix("word")]
     public class WordController : Controller
     {
         private WordService wordService;
@@ -71,12 +72,12 @@ namespace WoW.Web.Controllers
         public ActionResult Edit(int id)
         {
             string userName = User.Identity.Name;
-            AddWordVM editWord = this.wordService.GetSpecificWord(id);
-            if (editWord == null)
+            AddWordVM wordForEdit = this.wordService.GetSpecificWord(id);
+            if (wordForEdit == null)
             {
                 return HttpNotFound();
             }
-            return this.View(editWord);
+            return this.View(wordForEdit);
         }
 
         // POST: Word/Edit/5
@@ -93,25 +94,30 @@ namespace WoW.Web.Controllers
         }
 
         // GET: Word/Delete/5
+        [HttpGet, Route("delete/{id}")]
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Delete(int id)
         {
-            return View();
+            AddWordVM wordForDelete = this.wordService.GetSpecificWord(id);
+            if (wordForDelete == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return this.View(wordForDelete);
         }
 
         // POST: Word/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [Authorize(Roles = "User, Admin")]
+        public ActionResult Delete([Bind(Include = "Name, Description")] AddWordVM word, string id)
         {
-            try
+            if (this.ModelState.IsValid)
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                this.wordService.DeleteWord(word, id);
+                return RedirectToAction("GetWordsOfUser");
             }
-            catch
-            {
-                return View();
-            }
+            return View(word);
         }
     }
 }

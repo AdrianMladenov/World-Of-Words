@@ -1,0 +1,38 @@
+﻿@using WoW.Models.ViewModels.Words
+@model AddWordVM
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<h3>Are you sure you want to delete this?</h3>
+
+    @using (Html.BeginForm("Delete", "Word", new { id = Model.Id }))
+    {
+                @Html.AntiForgeryToken()
+
+         <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+                <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default"/>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

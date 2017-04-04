@@ -120,9 +120,9 @@ namespace WoW.Data.Migrations
 
             //context.SaveChanges();
 
-            string[] words = File.ReadAllLines(@"C:\Users\2351x\Documents\GitHub\World-Of-Words\Words.txt");
+            string[] words = File.ReadAllLines(@"C:\Users\Sasho\Documents\GitHub\World-Of-Words\Words.txt");
 
-            string[] descriptions = File.ReadAllLines(@"C:\Users\2351x\Documents\GitHub\World-Of-Words\WordsDescriptions.txt");
+            string[] descriptions = File.ReadAllLines(@"C:\Users\Sasho\Documents\GitHub\World-Of-Words\WordsDescriptions.txt");
 
 
             for (int i = 0; i < words.Length; i++)
@@ -150,8 +150,8 @@ namespace WoW.Data.Migrations
                 else
                 {
                     currentWord.Descriptions.Add(currentDescription);
-                    context.Words.Add(currentWord);
-                    //context.Descriptions.Add(currentDescription);
+                    //context.Words.Add(currentWord);
+                    context.Descriptions.Add(currentDescription);
                     ChooseUser(context, userAl, userAm, userNl, userZk, i, words, currentWord);
                     context.SaveChanges();
                 }

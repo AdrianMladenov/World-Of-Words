@@ -23,7 +23,7 @@
             <br />
             @if (User.IsInRole("Administrators") || word.User.UserName == User.Identity.Name)
             {
-                @Html.ActionLink("Edit", "Edit", new { id = word.Id })
+                @Html.ActionLink("Промени", "Edit", new { id = word.Id })
             }
         </div>
     }

@@ -14,7 +14,7 @@ namespace WoW.Models.ViewModels.Words
 
         public string Name { get; set; }
 
-       // [Display(Name ="Описание:")]
+        //[Display(Name ="Описание:")]
         public string Description { get; set; }
 
        // [Display(Name = "Статус:")]

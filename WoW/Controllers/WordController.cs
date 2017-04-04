@@ -56,7 +56,7 @@ namespace WoW.Web.Controllers
             return this.View();
         }
 
-        [HttpGet]
+        
         [Authorize(Roles = "User, Admin")]
         public ActionResult GetWordsOfUser()
         {
@@ -66,32 +66,30 @@ namespace WoW.Web.Controllers
         }
 
         // GET: Word/Edit/5
+        [HttpGet, Route("edit/{id}")]
         [Authorize(Roles = "User, Admin")]
         public ActionResult Edit(int id)
         {
             string userName = User.Identity.Name;
-            IEnumerable<AllWordsOfUser> awou = this.wordService.GetWordsOfUserByName(userName);
-            if (awou == null)
+            AddWordVM editWord = this.wordService.GetSpecificWord(id);
+            if (editWord == null)
             {
                 return HttpNotFound();
             }
-            return View(awou);
+            return this.View(editWord);
         }
 
         // POST: Word/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [Authorize(Roles = "User, Admin")]
+        public ActionResult Edit([Bind(Include = "Name, Description")] AddWordVM word, string id)
         {
-            try
+            if (this.ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                this.wordService.EditWord(word, id);
+                return RedirectToAction("GetWordsOfUser");
             }
-            catch
-            {
-                return View();
-            }
+            return View(word);
         }
 
         // GET: Word/Delete/5

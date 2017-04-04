@@ -8,13 +8,16 @@ using WoW.Models.EntityModels;
 
 namespace WoW.Models.ViewModels.Words
 {
-    public class AddWordVM
+   public class AddWordVM
     {
-
+        public int Id { get; set; }
+      
         [Display(Name = "Дума")]
+        [Required]
         public string Name { get; set; }
 
         [Display(Name = "Описание")]
+        [Required]
         public string Description { get; set; }
 
         public ApplicationUser User { get; set; }

@@ -28,6 +28,7 @@ namespace WoW
             Mapper.Initialize(exp =>
             {
                 exp.CreateMap<Word, WordsVM>();
+                exp.CreateMap<WordForValidate, AddWordVM>();
                 exp.CreateMap<WordForValidate, AllWordsOfUser>();
             });
         }

@@ -25,6 +25,15 @@ namespace WoW.Services
             this.Context.SaveChanges();
         }
 
+        public void EditWord(AddWordVM word, string id)
+        {
+            int wordId = Convert.ToInt32(id);
+            var wordForEdit = Context.WordsForValidation.SingleOrDefault(w => w.Id == wordId);
+            wordForEdit.Name = word.Name;
+            wordForEdit.Description = word.Description;
+            Context.SaveChanges();
+        }
+
         public void TransferWords(WordForValidate word)
         {
             Description currentDescription = new Description(word.Description);
@@ -56,6 +65,17 @@ namespace WoW.Services
             IEnumerable<WordForValidate> words = this.Context.WordsForValidation.Where(u => u.User.UserName == name);
             IEnumerable<AllWordsOfUser> awou = Mapper.Map<IEnumerable<WordForValidate>, IEnumerable<AllWordsOfUser>>(words);
             return awou;
+        }
+
+        public AddWordVM GetSpecificWord(int id)
+        {
+            WordForValidate editWord = Context.WordsForValidation.Find(id);
+            if (editWord == null)
+            {
+                return null;
+            }
+            AddWordVM vm = Mapper.Map<WordForValidate, AddWordVM>(editWord);
+            return vm;
         }
     }
 }

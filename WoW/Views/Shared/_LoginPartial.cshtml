@@ -2,16 +2,16 @@
 @{
     var txt = "";
     if (DateTime.Now.Hour < 12)
-    { txt = "Good Morning,"; }
+    { txt = "Добро утро,"; }
     else if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18)
-    { txt = "Good Afternoon,"; }
+    { txt = "Добър ден,"; }
     else
-    { txt = "Good Evening,"; }
+    { txt = "Добър вечер,"; }
 }
 
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("Излез", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
 

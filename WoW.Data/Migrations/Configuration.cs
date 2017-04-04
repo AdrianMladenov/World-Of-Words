@@ -120,9 +120,9 @@ namespace WoW.Data.Migrations
 
             //context.SaveChanges();
 
-            string[] words = File.ReadAllLines(@"C:\Users\Sasho\Documents\GitHub\World-Of-Words\Words.txt");
+            string[] words = File.ReadAllLines(@"C:\Users\Adrian\Documents\Visual Studio 2015\Projects\World-Of-Words\Words.txt");
 
-            string[] descriptions = File.ReadAllLines(@"C:\Users\Sasho\Documents\GitHub\World-Of-Words\WordsDescriptions.txt");
+            string[] descriptions = File.ReadAllLines(@"C:\Users\Adrian\Documents\Visual Studio 2015\Projects\World-Of-Words\WordsDescriptions.txt");
 
 
             for (int i = 0; i < words.Length; i++)

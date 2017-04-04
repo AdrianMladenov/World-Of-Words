@@ -67,6 +67,10 @@
     <Compile Include="Migrations\201704021613503_AddDateAddedToWordsForValidate.Designer.cs">
       <DependentUpon>201704021613503_AddDateAddedToWordsForValidate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704041712099_renameIsCorrectWordToIsDeleted.cs" />
+    <Compile Include="Migrations\201704041712099_renameIsCorrectWordToIsDeleted.Designer.cs">
+      <DependentUpon>201704041712099_renameIsCorrectWordToIsDeleted.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfiuration\AnswerConfiguration.cs" />
     <Compile Include="ModelConfiuration\DescriptionConfiguration.cs" />
@@ -92,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704021613503_AddDateAddedToWordsForValidate.resx">
       <DependentUpon>201704021613503_AddDateAddedToWordsForValidate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704041712099_renameIsCorrectWordToIsDeleted.resx">
+      <DependentUpon>201704041712099_renameIsCorrectWordToIsDeleted.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

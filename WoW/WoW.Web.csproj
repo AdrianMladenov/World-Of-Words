@@ -254,6 +254,7 @@
     <Content Include="Views\Word\GetWordsOfUser.cshtml" />
     <Content Include="Views\Word\Add.cshtml" />
     <Content Include="Views\Word\Edit.cshtml" />
+    <Content Include="Views\Word\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

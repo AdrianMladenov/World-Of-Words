@@ -19,7 +19,7 @@ namespace WoW.Models.EntityModels
             this.Description = description;
             this.dateAdded = DateTime.Now;
             this.IsValid = false;
-            this.IsCorrectWord = false;
+            this.IsDeleted = false;
         }
 
 
@@ -40,7 +40,7 @@ namespace WoW.Models.EntityModels
         //[Display(Name = "Статус:")]
         public bool IsValid { get; set; }
         
-        public bool IsCorrectWord { get; set; }
+        public bool IsDeleted { get; set; }
 
         public override string ToString()
         {

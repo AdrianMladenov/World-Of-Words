@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WoW.Models.ViewModels.Words.AllWordsOfUser>
+﻿
+@model IEnumerable<WoW.Models.ViewModels.Words.AllWordsOfUser>
 @{
     ViewBag.Title = "GetWords";
     string Active = "";
@@ -23,9 +24,28 @@
             <br />
             @if (User.IsInRole("Administrators") || word.User.UserName == User.Identity.Name)
             {
-                @Html.ActionLink("Промени", "Edit", new { id = word.Id })
+                @Html.ActionLink("Промени", "Edit", new { id = word.Id }) @: |
+                @Html.ActionLink("Изтрий", "Delete", new { id = word.Id })
+               @*new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "delpop", InsertionMode = InsertionMode.Replace, OnSuccess = "openPopup" })<br/>
+
+                <div id="delpop" style="display:none;"></div>
+
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $("#delpop").dialog({
+                            autoOpen: false,
+                            title: 'Title',
+                            width: 500,
+                            height: 'auto',
+                            modal: true
+                        });
+                    });
+                    function openPopup() {
+                        $("#delpop").dialog("open");
+                    }
+                </script>*@
             }
         </div>
-    }
+   }
 
 }

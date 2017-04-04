@@ -34,6 +34,14 @@ namespace WoW.Services
             Context.SaveChanges();
         }
 
+        public void DeleteWord(AddWordVM word, string id)
+        {
+            int wordId = Convert.ToInt32(id);
+            var wordForDelete = Context.WordsForValidation.Find(wordId);
+            wordForDelete.IsDeleted = true;
+            Context.SaveChanges();
+        }
+
         public void TransferWords(WordForValidate word)
         {
             Description currentDescription = new Description(word.Description);
@@ -62,7 +70,7 @@ namespace WoW.Services
 
         public IEnumerable<AllWordsOfUser> GetWordsOfUserByName(string name)
         {
-            IEnumerable<WordForValidate> words = this.Context.WordsForValidation.Where(u => u.User.UserName == name);
+            IEnumerable<WordForValidate> words = this.Context.WordsForValidation.Where(u => u.User.UserName == name && u.IsDeleted == false);
             IEnumerable<AllWordsOfUser> awou = Mapper.Map<IEnumerable<WordForValidate>, IEnumerable<AllWordsOfUser>>(words);
             return awou;
         }

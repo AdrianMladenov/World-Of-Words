@@ -10,7 +10,7 @@ using WoW.Models.ViewModels.Words;
 
 namespace WoW.Services
 {
-   public class WordService : Service
+    public class WordService : Service
     {
         public void AddWord(AddWordVM model, string user)
         {
@@ -20,14 +20,35 @@ namespace WoW.Services
             word.Description = model.Description;
             word.dateAdded = DateTime.Now;
             currentUser.WordsForValidate.Add(word);
-            
+
             //this.Context.WordsForValidation.Add(word);
             this.Context.SaveChanges();
         }
 
-        public bool IsWordForValidateIsExisting(WordForValidate word)
+        public void TransferWords(WordForValidate word)
         {
-            return Context.WordsForValidation.Any(w => w.Name == word.Name);
+            Description currentDescription = new Description(word.Description);
+            Word existingWord = Context.Words.SingleOrDefault(w => w.Name == word.Name);
+            Description existingDescription = Context.Descriptions.SingleOrDefault(d => d.Content == currentDescription.Content);
+            if (existingWord.Name == word.Name)
+            {
+                existingWord.Descriptions.Add(currentDescription);
+            }
+
+            else if (currentDescription.Content == existingDescription.Content)
+            {
+                existingDescription.Words.Add(existingWord);
+            }
+            else
+            {
+
+                Word newWord = new Word();
+                newWord.Name = word.Name;
+                newWord.Descriptions.Add(currentDescription);
+                Context.Words.Add(newWord);
+            }
+
+            Context.SaveChanges();
         }
 
         public IEnumerable<AllWordsOfUser> GetWordsOfUserByName(string name)

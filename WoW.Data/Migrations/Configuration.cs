@@ -150,8 +150,8 @@ namespace WoW.Data.Migrations
                 else
                 {
                     currentWord.Descriptions.Add(currentDescription);
-                    //context.Words.Add(currentWord);
-                    context.Descriptions.Add(currentDescription);
+                    context.Words.Add(currentWord);
+                    //context.Descriptions.Add(currentDescription);
                     ChooseUser(context, userAl, userAm, userNl, userZk, i, words, currentWord);
                     context.SaveChanges();
                 }

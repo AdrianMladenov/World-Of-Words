@@ -10,6 +10,8 @@ namespace WoW.Models.ViewModels.Words
 {
    public class AllWordsOfUser
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
        // [Display(Name ="Описание:")]
@@ -17,6 +19,8 @@ namespace WoW.Models.ViewModels.Words
 
        // [Display(Name = "Статус:")]
         public bool IsValid { get; set; }
+
+        public ApplicationUser  User { get; set; }
 
     }
 }

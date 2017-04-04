@@ -66,9 +66,16 @@ namespace WoW.Web.Controllers
         }
 
         // GET: Word/Edit/5
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Edit(int id)
         {
-            return View();
+            string userName = User.Identity.Name;
+            IEnumerable<AllWordsOfUser> awou = this.wordService.GetWordsOfUserByName(userName);
+            if (awou == null)
+            {
+                return HttpNotFound();
+            }
+            return View(awou);
         }
 
         // POST: Word/Edit/5

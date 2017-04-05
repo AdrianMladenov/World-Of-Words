@@ -7,16 +7,9 @@ namespace WoW.Models.EntityModels
 {
    public class WordForValidate
     {
-        
+      
         public WordForValidate()
         {
-
-        }
-
-        public WordForValidate(string name, string description)
-        {
-            this.Name = name;
-            this.Description = description;
             this.dateAdded = DateTime.Now;
             this.IsValid = false;
             this.IsDeleted = false;

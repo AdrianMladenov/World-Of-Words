@@ -44,7 +44,8 @@ namespace WoW.Services
 
         public void TransferWords(WordForValidate word)
         {
-            Description currentDescription = new Description(word.Description);
+            Description currentDescription = new Description();
+            currentDescription.Content = word.Description;
             Word existingWord = Context.Words.SingleOrDefault(w => w.Name == word.Name);
             Description existingDescription = Context.Descriptions.SingleOrDefault(d => d.Content == currentDescription.Content);
             if (existingWord.Name == word.Name)

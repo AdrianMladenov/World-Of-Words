@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WoW.Models.ViewModels.Words.AllWordsOfUser>
+@{
+    ViewBag.Title = "GetWords";
+    string Active = "";
+}
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+
+
+
+<div id="dialog-confirm" style="display: none">
+    @*<p>
+        <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+        Are you sure to delete?
+    </p>*@
+</div>
+
+<div id="dialog-edit" style="display: none">
+</div>
+
+<h2>Това са думите добавени от вас</h2>
+
+
+<h3>TODO да се покажат всички въпроси, отговори и думи в които потребителя участва</h3>
+
+@using (Html.BeginForm())
+{
+    foreach (var word in Model)
+    {
+        <div class="words">
+            @Html.LabelFor(w => word.Name, "Дума:")
+            @Html.DisplayFor(w => word.Name)
+            @Html.LabelFor(w => word.Description, "Описание:")
+            @*@Html.DisplayNameFor(m => m.Description)*@
+            @Html.DisplayFor(w => word.Description)
+            @Html.LabelFor(w => word.IsValid, "Статус:")
+            @{if (word.IsValid == false) { Active = "Не е одобрена"; } else { Active = "Одобрена"; }}
+            @Active
+            <br />
+            @if (User.IsInRole("Administrators") || word.User.UserName == User.Identity.Name)
+            {
+                @Html.ActionLink("Промени", "Edit", new { id = word.Id }, new { @class = "lnkEdit" }) @: |
+                @Html.ActionLink("Изтрий", "Delete", new { id = word.Id }, new { @class = "lnkDelete" })
+
+            }
+        </div>
+                    }
+
+                }
+<script src="~/Scripts/PopUpDialog.js"></script>

@@ -2,17 +2,6 @@
 {
     public class Answer
     {
-
-        public Answer()
-        {
-
-        }
-
-        public Answer(string content)
-        {
-            this.Content = content;     
-        }
-
         public int Id { get; set; }
 
         public string Content { get; set; }

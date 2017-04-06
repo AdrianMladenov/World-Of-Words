@@ -46,31 +46,32 @@ namespace WoW.Data.Migrations
                 manager.Create(adminRole);
             }
 
+            var PasswordHash = new PasswordHasher();
             ApplicationUser userAl = new ApplicationUser
             {
                 UserName = "Alexander",
-                PasswordHash = "123Abb",
+                PasswordHash = PasswordHash.HashPassword("123Abb"),
                 Email = "al@mail.bg"
             };
 
             ApplicationUser userAm = new ApplicationUser
             {
                 UserName = "Adriankata",
-                PasswordHash = "123Abb",
+                PasswordHash = PasswordHash.HashPassword("123Abb"),
                 Email = "am@mail.bg"
             };
 
             ApplicationUser userNl = new ApplicationUser
             {
                 UserName = "Lutaka",
-                PasswordHash = "123Abb",
+                PasswordHash = PasswordHash.HashPassword("123Abb"),
                 Email = "nl@mail.bg"
             };
 
             ApplicationUser userZk = new ApplicationUser
             {
                 UserName = "Bate Zdravko",
-                PasswordHash = "123Abb",
+                PasswordHash = PasswordHash.HashPassword("123Abb"),
                 Email = "zk@mail.bg",
             };
 
@@ -139,9 +140,11 @@ namespace WoW.Data.Migrations
 
             for (int i = 0; i < words.Length; i++)
             {
-                Word currentWord = new Word(words[i]);
+                Word currentWord = new Word();
+                currentWord.Name = words[i];
 
-                Description currentDescription = new Description(descriptions[i]);
+                Description currentDescription = new Description();
+                currentDescription.Content = descriptions[i];
                 //currentWord.Descriptions.Add(currentDescription);
 
                 if (context.Words.Any(w => w.Name == currentWord.Name))

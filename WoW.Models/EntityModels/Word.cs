@@ -9,14 +9,9 @@ namespace WoW.Models.EntityModels
     {
         private ICollection<Description> descriptions;
 
+
         public Word()
         {
-
-        }
-
-        public Word(string name)
-        {
-            this.Name = name;
             this.DateAdded = DateTime.Now;
             this.Descriptions = new HashSet<Description>();
         }

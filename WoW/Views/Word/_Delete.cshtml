@@ -1,0 +1,24 @@
+﻿@using WoW.Models.ViewModels.Words
+@model AddWordVM
+@using (Html.BeginForm("Delete", "Word", FormMethod.Post, new { id = Model.Id, @class = "col-md-12" }))
+{
+    @Html.AntiForgeryToken()
+<div  class="form-group">
+    @*<span class="ui-icon ui-icon-alert" style="margin: 0 7px 20px 0;"></span>*@
+    <p>Желате ли да изтриете тази дума?</p>
+</div>
+<hr/>
+<div class="form-group">
+    <div class="col-md-offset-3 col-md-9 pull-left">
+        <input type="submit" id="btndelete" value="Изтрий" class="btn btn-default" />
+        <input type="button" autofocus="true" id="btncancelcfm" value="Отказ" class="btn btn-default" />
+    </div>
+</div>
+}
+
+<script>
+    $("#btncancelcfm").on("click", function (e) {
+        $("#dialog-confirm").dialog("close");
+        return false;
+    });
+</script>

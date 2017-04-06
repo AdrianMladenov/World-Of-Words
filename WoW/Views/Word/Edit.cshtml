@@ -1,10 +1,8 @@
 ﻿@using WoW.Models.ViewModels.Words
 @model AddWordVM
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Промени дума";
 }
-
-<h2>Edit</h2>
 
 
 @using (Html.BeginForm("Edit","Word", new {id = Model.Id }))
@@ -12,7 +10,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Review</h4>
+      
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @*@Html.HiddenFor(model => model.Id)*@
@@ -40,10 +38,6 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

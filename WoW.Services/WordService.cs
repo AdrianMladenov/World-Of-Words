@@ -34,7 +34,7 @@ namespace WoW.Services
             Context.SaveChanges();
         }
 
-        public void DeleteWord(AddWordVM word, string id)
+        public void DeleteWord(string id)
         {
             int wordId = Convert.ToInt32(id);
             var wordForDelete = Context.WordsForValidation.Find(wordId);
@@ -85,5 +85,7 @@ namespace WoW.Services
             AddWordVM vm = Mapper.Map<WordForValidate, AddWordVM>(editWord);
             return vm;
         }
+
+
     }
 }

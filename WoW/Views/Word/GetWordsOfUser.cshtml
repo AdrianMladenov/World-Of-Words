@@ -4,6 +4,22 @@
     ViewBag.Title = "GetWords";
     string Active = "";
 }
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+
+
+
+<div id="dialog-confirm" style="display: none">
+    @*<p>
+        <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+        Are you sure to delete?
+    </p>*@
+</div>
+
+<div id="dialog-edit" style="display: none">
+</div>
+
 <h2>Това са думите добавени от вас</h2>
 
 
@@ -14,6 +30,7 @@
     foreach (var word in Model)
     {
         <div class="words">
+            @Html.LabelFor(w => word.Name, "Дума:")
             @Html.DisplayFor(w => word.Name)
             @Html.LabelFor(w => word.Description, "Описание:")
             @*@Html.DisplayNameFor(m => m.Description)*@
@@ -24,28 +41,12 @@
             <br />
             @if (User.IsInRole("Administrators") || word.User.UserName == User.Identity.Name)
             {
-                @Html.ActionLink("Промени", "Edit", new { id = word.Id }) @: |
-                @Html.ActionLink("Изтрий", "Delete", new { id = word.Id })
-               @*new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "delpop", InsertionMode = InsertionMode.Replace, OnSuccess = "openPopup" })<br/>
+                @Html.ActionLink("Промени", "Edit", new { id = word.Id }, new { @class = "lnkEdit" }) @: |
+                @Html.ActionLink("Изтрий", "Delete", new { id = word.Id }, new { @class = "lnkDelete" })
 
-                <div id="delpop" style="display:none;"></div>
-
-                <script type="text/javascript">
-                    $(document).ready(function () {
-                        $("#delpop").dialog({
-                            autoOpen: false,
-                            title: 'Title',
-                            width: 500,
-                            height: 'auto',
-                            modal: true
-                        });
-                    });
-                    function openPopup() {
-                        $("#delpop").dialog("open");
-                    }
-                </script>*@
             }
         </div>
-   }
+                    }
 
-}
+                }
+<script src="~/Scripts/PopUpDialog.js"></script>

@@ -119,10 +119,22 @@ namespace WoW.Data.Migrations
             userManager.AddToRole(userZk.Id, "Admin");
 
             //context.SaveChanges();
+            var userFolderName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            var userSasho = "Sasho";
+            var userAdrian = "Adrian";
+            if (userFolderName.Contains(userSasho))
+            {
+                userFolderName = userFolderName + @"\GitHub\World-Of-Words\";
+            }
+            else if (userFolderName.Contains(userAdrian))
+            {
+                userFolderName = userFolderName + @"\Visual Studio 2015\Projects\World-Of-Words\";
+            }
 
-            string[] words = File.ReadAllLines(@"C:\Users\Sasho\Documents\GitHub\World-Of-Words\Words.txt");
 
-            string[] descriptions = File.ReadAllLines(@"C:\Users\Sasho\Documents\GitHub\World-Of-Words\WordsDescriptions.txt");
+            string[] words = File.ReadAllLines(userFolderName + @"\Words.txt");
+
+            string[] descriptions = File.ReadAllLines(userFolderName + @"\WordsDescriptions.txt");
 
 
             for (int i = 0; i < words.Length; i++)

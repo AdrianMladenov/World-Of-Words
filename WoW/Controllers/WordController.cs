@@ -77,7 +77,7 @@ namespace WoW.Web.Controllers
             {
                 return HttpNotFound();
             }
-            return this.View(wordForEdit);
+            return this.PartialView("_Edit", wordForEdit);
         }
 
         // POST: Word/Edit/5
@@ -104,20 +104,20 @@ namespace WoW.Web.Controllers
                 return HttpNotFound();
             }
             
-            return this.View(wordForDelete);
+            return this.PartialView("_Delete", wordForDelete);
         }
 
         // POST: Word/Delete/5
         [HttpPost]
         [Authorize(Roles = "User, Admin")]
-        public ActionResult Delete([Bind(Include = "Name, Description")] AddWordVM word, string id)
+        public ActionResult Delete([Bind(Include = "Name, Description")] string id)
         {
             if (this.ModelState.IsValid)
             {
-                this.wordService.DeleteWord(word, id);
+                this.wordService.DeleteWord(id);
                 return RedirectToAction("GetWordsOfUser");
             }
-            return View(word);
+            return RedirectToAction("GetWordsOfUser");
         }
     }
 }

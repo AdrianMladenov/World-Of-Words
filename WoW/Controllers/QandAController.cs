@@ -31,20 +31,40 @@ namespace WoW.Web.Controllers
         }
 
         // GET: QandA/Create
-        public ActionResult Add()
+        public ActionResult AddQuestion()
         {
             return View();
         }
 
         // POST: QandA/Create
         [HttpPost]
-        public ActionResult Add([Bind(Include = "Name, Description")] AddQVM question)
+        public ActionResult AddQuestion([Bind(Include = "Name, Description")] AddQVM question)
         {
 
             if (this.ModelState.IsValid)
             {
                 var user = User.Identity.Name;
                 this.QandAService.AddQuestion(question, user);
+                return this.RedirectToAction("AllQuestionsOfUsers");
+            }
+
+            return this.View();
+        }
+
+        public ActionResult AddAnswer()
+        {
+            return View();
+        }
+
+        // POST: QandA/Create
+        [HttpPost]
+        public ActionResult AddAnswer([Bind(Include = "Answer, User, Question")] AddAVM answer)
+        {
+
+            if (this.ModelState.IsValid)
+            {
+                var user = User.Identity.Name;
+                this.QandAService.GetQuestion(answer, user);
                 return this.RedirectToAction("AllQuestionsOfUsers");
             }
 

@@ -10,7 +10,8 @@ namespace WoW.Models.EntityModels
       
         public WordForValidate()
         {
-            this.dateAdded = DateTime.Now;
+            this.DateOfCreation = DateTime.Now;
+            this.LastModifed = DateTime.Now;
             this.IsValid = false;
             this.IsDeleted = false;
         }
@@ -28,7 +29,9 @@ namespace WoW.Models.EntityModels
         public string Description { get; set; }
 
         //[Display(Name = "Дата на добавяне:")]
-        public DateTime dateAdded { get; set; }
+        public DateTime DateOfCreation { get; set; }
+
+        public DateTime LastModifed { get; set; }
 
         //[Display(Name = "Статус:")]
         public bool IsValid { get; set; }
@@ -37,7 +40,7 @@ namespace WoW.Models.EntityModels
 
         public override string ToString()
         {
-            return $"{this.Name} {this.dateAdded} {this.IsValid.ToString()}";
+            return $"{this.Name} {this.DateOfCreation} {this.IsValid.ToString()}";
         }
     }
 }

@@ -20,7 +20,7 @@ namespace WoW.Data.Migrations
 
         protected override void Seed(WoWContext context)
         {
-            context.Database.Initialize(true);
+             context.Database.Initialize(true);
             //context.Roles.AddOrUpdate(r => new IdentityRole("User"));
             //if (!context.Roles.Any(role => role.Name == "User"))
             //{
@@ -161,6 +161,7 @@ namespace WoW.Data.Migrations
 
                     if (existingWord.Descriptions.Any(d => d.Content == currentDescription.Content))
                     {
+                        ChooseUser(context, userAl, userAm, userNl, userZk, i, words, currentWord);
                         context.SaveChanges();
                     }
                     else
@@ -168,7 +169,7 @@ namespace WoW.Data.Migrations
                         existingWord.Descriptions.Add(currentDescription);
                         context.SaveChanges();
                     }
-                    
+
                 }
 
                 else if (context.Descriptions.Any(d => d.Content == currentDescription.Content))
@@ -195,21 +196,26 @@ namespace WoW.Data.Migrations
             if (i % 2 != 0 && i <= words.Length / 2)
             {
                 userAl.Words.Add(currentWord);
+                //currentWord.Users.Add(userAl);
             }
 
             else if (i % 2 == 0 && i <= words.Length / 2)
             {
                 userAm.Words.Add(currentWord);
+                //currentWord.Users.Add(userAm);
             }
 
             else if (i % 2 == 0 && i > words.Length / 2)
             {
                 userNl.Words.Add(currentWord);
+                //currentWord.Users.Add(userNl);
             }
 
             else if (i % 2 != 0 && i > words.Length / 2)
             {
                 userZk.Words.Add(currentWord);
+                //currentWord.Users.Add(userZk);
+
             }
         }
     }

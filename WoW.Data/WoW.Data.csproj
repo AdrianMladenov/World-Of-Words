@@ -71,6 +71,14 @@
     <Compile Include="Migrations\201704041712099_renameIsCorrectWordToIsDeleted.Designer.cs">
       <DependentUpon>201704041712099_renameIsCorrectWordToIsDeleted.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704071314263_AddDateOfCreationAndICollUsersToWords.cs" />
+    <Compile Include="Migrations\201704071314263_AddDateOfCreationAndICollUsersToWords.Designer.cs">
+      <DependentUpon>201704071314263_AddDateOfCreationAndICollUsersToWords.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704071416039_RemoveUserFromWord.cs" />
+    <Compile Include="Migrations\201704071416039_RemoveUserFromWord.Designer.cs">
+      <DependentUpon>201704071416039_RemoveUserFromWord.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfiuration\AnswerConfiguration.cs" />
     <Compile Include="ModelConfiuration\DescriptionConfiguration.cs" />
@@ -99,6 +107,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704041712099_renameIsCorrectWordToIsDeleted.resx">
       <DependentUpon>201704041712099_renameIsCorrectWordToIsDeleted.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704071314263_AddDateOfCreationAndICollUsersToWords.resx">
+      <DependentUpon>201704071314263_AddDateOfCreationAndICollUsersToWords.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704071416039_RemoveUserFromWord.resx">
+      <DependentUpon>201704071416039_RemoveUserFromWord.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

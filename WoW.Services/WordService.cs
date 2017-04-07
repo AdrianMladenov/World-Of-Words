@@ -18,7 +18,7 @@ namespace WoW.Services
             var currentUser = this.Context.Users.FirstOrDefault(u => u.UserName == user);
             word.Name = model.Name;
             word.Description = model.Description;
-            word.dateAdded = DateTime.Now;
+            word.DateOfCreation = DateTime.Now;
             currentUser.WordsForValidate.Add(word);
 
             //this.Context.WordsForValidation.Add(word);

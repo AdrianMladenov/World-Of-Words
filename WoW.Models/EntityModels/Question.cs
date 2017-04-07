@@ -1,6 +1,7 @@
 ﻿
 namespace WoW.Models.EntityModels
 {
+    using System;
     using System.Collections.Generic;
 
     public class Question
@@ -9,6 +10,7 @@ namespace WoW.Models.EntityModels
         
         public Question()
         {
+            this.DateOfCreation = DateTime.Now;
             this.Answers = new HashSet<Answer>();
         }
 
@@ -17,6 +19,8 @@ namespace WoW.Models.EntityModels
         public string Word { get; set; }
 
         public string Content { get; set; }
+
+        public DateTime DateOfCreation { get; set; }
 
         public virtual ApplicationUser User { get; set; }
 

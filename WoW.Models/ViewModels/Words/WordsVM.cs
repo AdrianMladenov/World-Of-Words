@@ -11,11 +11,11 @@ namespace WoW.Models.ViewModels
     {
         public string Name { get; set; }
 
-        public DateTime DateAdded { get; set; }
+        public DateTime DateOfCreation { get; set; }
         
         public IEnumerable<Description> Descriptions { get; set; }
 
-        public virtual ApplicationUser User { get; set; }
+        public IEnumerable<ApplicationUser> Users { get; set; }
 
         //public override string ToString()
         //{

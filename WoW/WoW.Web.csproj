@@ -303,7 +303,7 @@
     <Content Include="Views\Word\_Edit.cshtml" />
     <Content Include="Views\Word\_Delete.cshtml" />
     <Content Include="Views\QandA\AllQuestionsOfUsers.cshtml" />
-    <Content Include="Views\QandA\Add.cshtml" />
+    <Content Include="Views\QandA\AddQuestion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

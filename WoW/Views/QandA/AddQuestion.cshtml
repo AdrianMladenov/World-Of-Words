@@ -1,0 +1,75 @@
+﻿@using WoW.Models.ViewModels.QandA
+@model AddQVM
+@{
+    ViewBag.Title = "AddQuestion";
+}
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+
+
+
+<div id="dialog-confirm" style="display: none">
+    @*<p>
+            <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+            Are you sure to delete?
+        </p>*@
+</div>
+
+<div id="dialog-edit" style="display: none">
+</div>
+
+<h2>Ако не можеш да откриеш дума</h2>
+
+
+<h3>Посочи нейната дължина, задай буквите които знаеш и изчакай отговор</h3>
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-horizontal">
+        <hr />
+        
+        <select class="1-30"></select>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Word, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Word, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Word, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+      
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Добави" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(function () {
+        var $select = $(".1-30");
+        for (i = 1; i <= 30; i++) {
+            $select.append($('<option></option>').val(i).html(i))
+        }
+    });
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+   
+    }

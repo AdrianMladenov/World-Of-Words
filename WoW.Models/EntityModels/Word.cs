@@ -7,12 +7,14 @@ namespace WoW.Models.EntityModels
 
     public class Word
     {
+        private ICollection<ApplicationUser> users;
         private ICollection<Description> descriptions;
 
 
         public Word()
         {
-            this.DateAdded = DateTime.Now;
+            this.DateOfCreation = DateTime.Now;
+            this.Users = new HashSet<ApplicationUser>();
             this.Descriptions = new HashSet<Description>();
         }
 
@@ -21,12 +23,18 @@ namespace WoW.Models.EntityModels
 
         public string Name { get; set; }
 
-        public virtual ApplicationUser User { get; set; }
+        //public virtual ApplicationUser User { get; set; }
 
         //public int UserId { get; set; }
 
         //[Display(Name = "Дата на добавяне:")]
-        public DateTime DateAdded { get; set; }
+        public DateTime DateOfCreation { get; set; }
+
+        public virtual ICollection<ApplicationUser> Users // Navigation property
+        {
+            get { return this.users; }
+            set { this.users = value; }
+        }
 
         //[Display(Name = "Описание:")]
         public virtual ICollection<Description> Descriptions // Navigation property
@@ -37,7 +45,7 @@ namespace WoW.Models.EntityModels
 
         public override string ToString()
         {
-            return $"{this.Name} {this.DateAdded}";
+            return $"{this.Name} {this.DateOfCreation}";
         }
     }
 }

@@ -119,6 +119,7 @@
     <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\QandA\AddAVM.cs" />
     <Compile Include="ViewModels\QandA\AddQVM.cs" />
     <Compile Include="ViewModels\Words\AddWordVM.cs" />
     <Compile Include="ViewModels\Words\AllWordsOfUser.cs" />

@@ -31,6 +31,11 @@ namespace WoW.Models.EntityModels
 
         public virtual ICollection<WordForValidate> WordsForValidate { get; set; }
 
+        public override string ToString()
+        {
+            return $"{this.UserName}";
+        }
+
         //public virtual  AddWordVM wordsForValidation { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

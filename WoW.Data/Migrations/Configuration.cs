@@ -51,21 +51,24 @@ namespace WoW.Data.Migrations
             {
                 UserName = "Alexander",
                 PasswordHash = PasswordHash.HashPassword("123Abb"),
-                Email = "al@mail.bg"
+                Email = "al@mail.bg",
+                SecurityStamp = Guid.NewGuid().ToString()
             };
 
             ApplicationUser userAm = new ApplicationUser
             {
                 UserName = "Adriankata",
                 PasswordHash = PasswordHash.HashPassword("123Abb"),
-                Email = "am@mail.bg"
+                Email = "am@mail.bg",
+                SecurityStamp = Guid.NewGuid().ToString()
             };
 
             ApplicationUser userNl = new ApplicationUser
             {
                 UserName = "Lutaka",
                 PasswordHash = PasswordHash.HashPassword("123Abb"),
-                Email = "nl@mail.bg"
+                Email = "nl@mail.bg",
+                SecurityStamp = Guid.NewGuid().ToString()
             };
 
             ApplicationUser userZk = new ApplicationUser
@@ -73,6 +76,7 @@ namespace WoW.Data.Migrations
                 UserName = "Bate Zdravko",
                 PasswordHash = PasswordHash.HashPassword("123Abb"),
                 Email = "zk@mail.bg",
+                SecurityStamp = Guid.NewGuid().ToString()
             };
 
             UserInfo alexanderInfo = new UserInfo(22, "Alexander", "Lazarov",
@@ -133,6 +137,10 @@ namespace WoW.Data.Migrations
             }
 
 
+            //string[] words = File.ReadAllLines(userFolderName + @"\Words.txt");
+
+            //string[] descriptions = File.ReadAllLines(userFolderName + @"\WordsDescriptions.txt");
+
             string[] words = File.ReadAllLines(userFolderName + @"\Words.txt");
 
             string[] descriptions = File.ReadAllLines(userFolderName + @"\WordsDescriptions.txt");
@@ -150,8 +158,17 @@ namespace WoW.Data.Migrations
                 if (context.Words.Any(w => w.Name == currentWord.Name))
                 {
                     var existingWord = context.Words.Include(ew => ew.Descriptions).SingleOrDefault(ew => ew.Name == currentWord.Name);
-                    existingWord.Descriptions.Add(currentDescription);
-                    context.SaveChanges();
+
+                    if (existingWord.Descriptions.Any(d => d.Content == currentDescription.Content))
+                    {
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        existingWord.Descriptions.Add(currentDescription);
+                        context.SaveChanges();
+                    }
+                    
                 }
 
                 else if (context.Descriptions.Any(d => d.Content == currentDescription.Content))

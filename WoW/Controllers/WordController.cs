@@ -11,7 +11,7 @@ using WoW.Services;
 
 namespace WoW.Web.Controllers
 {
-    [Authorize(Roles ="User")]
+    [Authorize(Roles ="User, Admin")]
     [RoutePrefix("word")]
     public class WordController : Controller
     {

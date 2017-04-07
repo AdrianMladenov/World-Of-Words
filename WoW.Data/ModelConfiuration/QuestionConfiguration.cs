@@ -20,6 +20,11 @@ namespace WoW.Data.ModelConfiuration
                 .IsRequired()
                 .HasColumnName("Content");
 
+            this.Property(q => q.Word)
+                .IsRequired()
+                .HasColumnName("Word")
+                .HasMaxLength(30);
+
             this.HasRequired(a => a.User)
                 .WithMany(u => u.Questions);
         }

@@ -23,15 +23,23 @@ namespace WoW.Data.ModelConfiuration
                 .IsRequired()
                 .HasColumnName("Name");
 
-
             this.HasMany(w => w.Descriptions)
                 .WithMany(w => w.Words)
                 .Map(wd =>
                 {
+                    wd.MapLeftKey("WordId");
+                    wd.MapRightKey("DescriptiopnId");
                     wd.ToTable("WordsDescriptions");
-                    wd.MapLeftKey("DescriptiopnId");
-                    wd.MapRightKey("WordId");
                 });
+
+            this.HasMany(w => w.Users)
+               .WithMany(w => w.Words)
+               .Map(wd =>
+               {
+                   wd.MapLeftKey("WordId");
+                   wd.MapRightKey("UserId");
+                   wd.ToTable("UsersWords");
+               });
         }
     }
 }

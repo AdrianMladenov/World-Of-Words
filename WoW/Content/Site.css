@@ -22,3 +22,20 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.words {
+    border: 2px solid green;
+    margin-bottom: 5px;
+}
+
+footer {
+    float: left;
+    position: fixed;
+    bottom: 0;
+}
+
+textarea {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}

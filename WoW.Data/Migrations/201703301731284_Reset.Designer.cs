@@ -7,13 +7,13 @@ namespace WoW.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class addRegistrationDateForUser : IMigrationMetadata
+    public sealed partial class Reset : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addRegistrationDateForUser));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Reset));
         
         string IMigrationMetadata.Id
         {
-            get { return "201703282056069_addRegistrationDateForUser"; }
+            get { return "201703301731284_Reset"; }
         }
         
         string IMigrationMetadata.Source

@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WoW.Models.EntityModels
 {
    public class WordForValidate
     {
-        
+      
         public WordForValidate()
         {
-
-        }
-
-        public WordForValidate(string name)
-        {
-            this.Name = name;
+            this.DateOfCreation = DateTime.Now;
+            this.LastModifed = DateTime.Now;
+            this.IsValid = false;
+            this.IsDeleted = false;
         }
 
 
@@ -26,10 +23,24 @@ namespace WoW.Models.EntityModels
 
         public virtual ApplicationUser User { get; set; }
 
-        public int UserId { get; set; }
+        //public int UserId { get; set; }
 
+        //[Display(Name = "Описание:")]
         public string Description { get; set; }
 
+        //[Display(Name = "Дата на добавяне:")]
+        public DateTime DateOfCreation { get; set; }
+
+        public DateTime LastModifed { get; set; }
+
+        //[Display(Name = "Статус:")]
         public bool IsValid { get; set; }
+        
+        public bool IsDeleted { get; set; }
+
+        public override string ToString()
+        {
+            return $"{this.Name} {this.DateOfCreation} {this.IsValid.ToString()}";
+        }
     }
 }

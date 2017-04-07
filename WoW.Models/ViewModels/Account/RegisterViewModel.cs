@@ -11,23 +11,23 @@ namespace WoW.Models.ViewModels.Account
     {
         [Required]
         [MinLength(3)]
-        [Display(Name = "Username")]
+        [Display(Name = "Потребителско име")]
         public string Username { get; set; }
 
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Ел. Поща")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} трябва да бъде с дължина поне {2} символа.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Парола")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Повтори парола")]
+        [Compare("Password", ErrorMessage = "Паролата не съвпада, моля попълнете полето Повтори парола отново.")]
         public string ConfirmPassword { get; set; }
     }
 }

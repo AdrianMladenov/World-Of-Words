@@ -1,0 +1,42 @@
+﻿@model IEnumerable<WoW.Models.ViewModels.QandA.QADetails>
+@{
+    ViewBag.Title = "AllAnswers";
+
+}
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+
+
+
+<div id="dialog-confirm" style="display: none">
+    @*<p>
+            <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+            Are you sure to delete?
+        </p>*@
+</div>
+
+<div id="dialog-edit" style="display: none">
+</div>
+
+<h2>Това са всички въпроси и техните отоговори</h2>
+
+@using (Html.BeginForm())
+{
+    foreach (var question in Model)
+    {
+        <div class="words">
+            @Html.LabelFor(q => question.Word, "Търсена дума:")
+            @Html.DisplayFor(q => question.Word)
+            @Html.LabelFor(q => question.Content, "Описание:")
+            @*@Html.DisplayNameFor(m => m.Description)*@
+            @Html.DisplayFor(q => question.Content)
+            @Html.LabelFor(q => question.User, "Потребител:")
+            @Html.DisplayFor(q => question.User.UserName)
+            @Html.LabelFor(q => question.Answers, "Отговори:")
+            @Html.DisplayFor(q => question.Answers)
+        </div>
+        @Html.ActionLink("Отговори", "AddAnswer", new { id = question.Id })
+    }
+}
+<script src="~/Scripts/PopUpDialog.js"></script>

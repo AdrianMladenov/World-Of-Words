@@ -20,8 +20,16 @@ namespace WoW.Data.Migrations
 
         protected override void Seed(WoWContext context)
         {
-            context.Database.Initialize(true);
+             context.Database.Initialize(true);
             //context.Roles.AddOrUpdate(r => new IdentityRole("User"));
+            //if (!context.Roles.Any(role => role.Name == "User"))
+            //{
+            //    var store = new RoleStore<IdentityRole>(context);
+            //    var manager = new RoleManager<IdentityRole>(store);
+            //    var userRole = new IdentityRole("Guest");
+            //    manager.Create(userRole);
+            //}
+
             if (!context.Roles.Any(role => role.Name == "User"))
             {
                 var store = new RoleStore<IdentityRole>(context);
@@ -38,32 +46,37 @@ namespace WoW.Data.Migrations
                 manager.Create(adminRole);
             }
 
+            var PasswordHash = new PasswordHasher();
             ApplicationUser userAl = new ApplicationUser
             {
                 UserName = "Alexander",
-                PasswordHash = "123Abb",
-                Email = "al@mail.bg"
+                PasswordHash = PasswordHash.HashPassword("123Abb"),
+                Email = "al@mail.bg",
+                SecurityStamp = Guid.NewGuid().ToString()
             };
 
             ApplicationUser userAm = new ApplicationUser
             {
                 UserName = "Adriankata",
-                PasswordHash = "123Abb",
-                Email = "am@mail.bg"
+                PasswordHash = PasswordHash.HashPassword("123Abb"),
+                Email = "am@mail.bg",
+                SecurityStamp = Guid.NewGuid().ToString()
             };
 
             ApplicationUser userNl = new ApplicationUser
             {
                 UserName = "Lutaka",
-                PasswordHash = "123Abb",
-                Email = "nl@mail.bg"
+                PasswordHash = PasswordHash.HashPassword("123Abb"),
+                Email = "nl@mail.bg",
+                SecurityStamp = Guid.NewGuid().ToString()
             };
 
             ApplicationUser userZk = new ApplicationUser
             {
                 UserName = "Bate Zdravko",
-                PasswordHash = "123Abb",
+                PasswordHash = PasswordHash.HashPassword("123Abb"),
                 Email = "zk@mail.bg",
+                SecurityStamp = Guid.NewGuid().ToString()
             };
 
             UserInfo alexanderInfo = new UserInfo(22, "Alexander", "Lazarov",
@@ -111,46 +124,97 @@ namespace WoW.Data.Migrations
             userManager.AddToRole(userZk.Id, "Admin");
 
             //context.SaveChanges();
+            var userFolderName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            var userSasho = "Sasho";
+            var userAdrian = "Adrian";
+            if (userFolderName.Contains(userSasho))
+            {
+                userFolderName = userFolderName + @"\GitHub\World-Of-Words\";
+            }
+            else if (userFolderName.Contains(userAdrian))
+            {
+                userFolderName = userFolderName + @"\Visual Studio 2015\Projects\World-Of-Words\";
+            }
 
-            string[] words = File.ReadAllLines(@"C:\Users\2351x\Documents\Visual Studio 2015\Projects\World-Of-Words-master\World-Of-Words-master/Words.txt");
 
-            string[] descriptions = File.ReadAllLines(@"C:\Users\2351x\Documents\Visual Studio 2015\Projects\World-Of-Words-master\World-Of-Words-master/WordsDescriptions.txt");
+            string[] words = File.ReadAllLines(userFolderName + @"\Words.txt");
+
+            string[] descriptions = File.ReadAllLines(userFolderName + @"\WordsDescriptions.txt");
+
+            //string[] words = File.ReadAllLines(@"C:\Users\2351x\Documents\GitHub\World-Of-Words\Words.txt");
+
+            //string[] descriptions = File.ReadAllLines(@"C:\Users\2351x\Documents\GitHub\World-Of-Words\WordsDescriptions.txt");
 
 
             for (int i = 0; i < words.Length; i++)
             {
-                Word currentWord = new Word(words[i]);
+                Word currentWord = new Word();
+                currentWord.Name = words[i];
 
-                for (int j = 0; j < descriptions.Length; j++)
+                Description currentDescription = new Description();
+                currentDescription.Content = descriptions[i];
+                //currentWord.Descriptions.Add(currentDescription);
+
+                if (context.Words.Any(w => w.Name == currentWord.Name))
                 {
-                    Description currentDescription = new Description(descriptions[j]);
+                    var existingWord = context.Words.Include(ew => ew.Descriptions).SingleOrDefault(ew => ew.Name == currentWord.Name);
+
+                    if (existingWord.Descriptions.Any(d => d.Content == currentDescription.Content))
+                    {
+                        ChooseUser(context, userAl, userAm, userNl, userZk, i, words, currentWord);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        existingWord.Descriptions.Add(currentDescription);
+                        context.SaveChanges();
+                    }
+
+                }
+
+                else if (context.Descriptions.Any(d => d.Content == currentDescription.Content))
+                {
+                    var existingDescription = context.Descriptions.Include(ew => ew.Words).SingleOrDefault(ew => ew.Content == currentDescription.Content);
+                    existingDescription.Words.Add(currentWord);
+                    ChooseUser(context, userAl, userAm, userNl, userZk, i, words, currentWord);
+                    context.SaveChanges();
+                }
+
+                else
+                {
                     currentWord.Descriptions.Add(currentDescription);
-                }
-
-                if (i % 2 != 0 && i <= 30)
-                {
-                    userAl.Words.Add(currentWord);
+                    //context.Words.Add(currentWord);
+                    context.Descriptions.Add(currentDescription);
+                    ChooseUser(context, userAl, userAm, userNl, userZk, i, words, currentWord);
                     context.SaveChanges();
                 }
+            }
+        }
 
-                else if (i % 2 == 0 && i <= 30)
-                {
-                    userAm.Words.Add(currentWord);
-                    context.SaveChanges();
-                }
+        private static void ChooseUser(WoWContext context, ApplicationUser userAl, ApplicationUser userAm, ApplicationUser userNl, ApplicationUser userZk, int i , string[] words, Word currentWord)
+        {
+            if (i % 2 != 0 && i <= words.Length / 2)
+            {
+                userAl.Words.Add(currentWord);
+                //currentWord.Users.Add(userAl);
+            }
 
-                else if (i % 2 == 0 && i >= 30)
-                {
-                    userNl.Words.Add(currentWord);
-                    context.SaveChanges();
-                }
+            else if (i % 2 == 0 && i <= words.Length / 2)
+            {
+                userAm.Words.Add(currentWord);
+                //currentWord.Users.Add(userAm);
+            }
 
-                else if (i % 2 != 0 && i >= 30)
-                {
-                    userZk.Words.Add(currentWord);
-                    context.SaveChanges();
-                }
+            else if (i % 2 == 0 && i > words.Length / 2)
+            {
+                userNl.Words.Add(currentWord);
+                //currentWord.Users.Add(userNl);
+            }
 
+            else if (i % 2 != 0 && i > words.Length / 2)
+            {
+                userZk.Words.Add(currentWord);
+                //currentWord.Users.Add(userZk);
 
             }
         }

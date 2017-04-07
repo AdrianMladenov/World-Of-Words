@@ -7,13 +7,13 @@ namespace WoW.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Seed : IMigrationMetadata
+    public sealed partial class AddDateAddedToWordsForValidate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Seed));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddDateAddedToWordsForValidate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201703271955363_Seed"; }
+            get { return "201704021613503_AddDateAddedToWordsForValidate"; }
         }
         
         string IMigrationMetadata.Source

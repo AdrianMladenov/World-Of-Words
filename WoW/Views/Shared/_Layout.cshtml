@@ -23,9 +23,10 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Начало", "Index", "Home")</li>
                     <li>@Html.ActionLink("Търсене", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Предложи ни дума", "About", "Home")</li>
-                    <li>@Html.ActionLink("Запитване", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Добави дума", "Add", "Word")</li>
+                    <li>@Html.ActionLink("Запитване", "AddQuestion", "QandA")</li>
                     <li>@Html.ActionLink("Класации", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Моите думи", "GetWordsOfUser", "Word")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -39,7 +40,7 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/jquery")*@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

@@ -304,6 +304,7 @@
     <Content Include="Views\Word\_Delete.cshtml" />
     <Content Include="Views\QandA\AllQuestionsOfUsers.cshtml" />
     <Content Include="Views\QandA\AddQuestion.cshtml" />
+    <Content Include="Views\QandA\AddAnswer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

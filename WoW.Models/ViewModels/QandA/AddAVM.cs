@@ -12,6 +12,7 @@ namespace WoW.Models.ViewModels.QandA
         public int Id { get; set; }
 
         [Required]
+        [Display(Name ="Отговор")]
         public string Answer { get; set; }
         
         public string User { get; set; }

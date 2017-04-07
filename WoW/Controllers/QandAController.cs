@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WoW.Models.EntityModels;
 using WoW.Models.ViewModels.QandA;
 using WoW.Services;
 
@@ -21,7 +22,8 @@ namespace WoW.Web.Controllers
         // GET: QandA
         public ActionResult AllQuestionsOfUsers()
         {
-            return View();
+           IEnumerable<QADetails> all =  this.QandAService.GetAllQuestionsAndAnswers();
+            return View(all);
         }
 
         // GET: QandA/Details/5
@@ -38,7 +40,7 @@ namespace WoW.Web.Controllers
 
         // POST: QandA/Create
         [HttpPost]
-        public ActionResult AddQuestion([Bind(Include = "Name, Description")] AddQVM question)
+        public ActionResult AddQuestion([Bind(Include = "Word, Content")] AddQVM question)
         {
 
             if (this.ModelState.IsValid)
@@ -58,7 +60,7 @@ namespace WoW.Web.Controllers
 
         // POST: QandA/Create
         [HttpPost]
-        public ActionResult AddAnswer([Bind(Include = "Answer, User, Question")] AddAVM answer)
+        public ActionResult AddAnswer([Bind(Include = "Answer, Question")] Answer answer)
         {
 
             if (this.ModelState.IsValid)

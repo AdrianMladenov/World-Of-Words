@@ -121,6 +121,7 @@
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\QandA\AddAVM.cs" />
     <Compile Include="ViewModels\QandA\AddQVM.cs" />
+    <Compile Include="ViewModels\QandA\Q&amp;ADetails.cs" />
     <Compile Include="ViewModels\Words\AddWordVM.cs" />
     <Compile Include="ViewModels\Words\AllWordsOfUser.cs" />
     <Compile Include="ViewModels\Words\WordsVM.cs" />

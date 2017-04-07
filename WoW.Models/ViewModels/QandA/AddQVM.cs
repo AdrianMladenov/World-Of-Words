@@ -11,9 +11,9 @@ namespace WoW.Models.ViewModels.QandA
     {
         public int Id { get; set; }
 
-        [MaxLength(30)]
-        [Display(Name = "Дължина на думата")]
-        public int LetterCount { get; set; }
+        //[MaxLength(30)]
+        //[Display(Name = "Дължина на думата")]
+        //public int LetterCount { get; set; }
 
         [Required]
         [MaxLength(30)]

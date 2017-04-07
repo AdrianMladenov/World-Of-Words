@@ -32,7 +32,7 @@ namespace WoW
                 exp.CreateMap<WordForValidate, AddWordVM>();
                 exp.CreateMap<WordForValidate, AllWordsOfUser>();
                 exp.CreateMap<Question, AddQVM>();
-                exp.CreateMap<Answer, AddAVM>();
+                exp.CreateMap<Question, QADetails>();
             });
         }
     }

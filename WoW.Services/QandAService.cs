@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,9 +23,22 @@ namespace WoW.Services
             this.Context.SaveChanges();
         }
 
-        public void GetQuestion(object question, string user)
+        public void GetQuestion(Answer answer, string user)
         {
-            throw new NotImplementedException();
+            Question specificQuestion = Context.Questions.SingleOrDefault(q => q.Content == answer.Question.Content);
+            specificQuestion.Answers.Add(answer);
+
+            ApplicationUser specificUser = Context.Users.SingleOrDefault(u => u.UserName == user);
+            specificUser.Answers.Add(answer);
+
+            this.Context.SaveChanges();
+        }
+
+        public IEnumerable<QADetails> GetAllQuestionsAndAnswers()
+        {
+           IEnumerable<Question> all = Context.Questions.OrderByDescending(q => q.DateOfCreation).ToList();
+           IEnumerable<QADetails> collection = Mapper.Map<IEnumerable<Question>, IEnumerable<QADetails>>(all);
+            return collection;
         }
     }
 }

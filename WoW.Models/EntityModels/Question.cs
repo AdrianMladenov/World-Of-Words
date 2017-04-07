@@ -2,9 +2,10 @@
 namespace WoW.Models.EntityModels
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
 
-    public class Question
+    public class Question 
     {
         private ICollection<Answer> answers;
         
@@ -31,6 +32,6 @@ namespace WoW.Models.EntityModels
             get { return this.answers; }
             set { this.answers = value; }
         }
-
+        
     }
 }

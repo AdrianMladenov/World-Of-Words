@@ -1,7 +1,7 @@
-﻿@model IEnumerable<WoW.Models.ViewModels.Words.AllWordsOfUser>
+﻿@model IEnumerable<WoW.Models.ViewModels.QandA.QADetails>
 @{
-    ViewBag.Title = "GetWords";
-    string Active = "";
+    ViewBag.Title = "AllAnswers";
+
 }
 <script src="~/Scripts/jquery-3.1.1.min.js"></script>
 <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
@@ -11,41 +11,32 @@
 
 <div id="dialog-confirm" style="display: none">
     @*<p>
-        <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
-        Are you sure to delete?
-    </p>*@
+            <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+            Are you sure to delete?
+        </p>*@
 </div>
 
 <div id="dialog-edit" style="display: none">
 </div>
 
-<h2>Това са думите добавени от вас</h2>
-
-
-<h3>TODO да се покажат всички въпроси, отговори и думи в които потребителя участва</h3>
+<h2>Това са всички въпроси и техните отоговори</h2>
 
 @using (Html.BeginForm())
 {
-    foreach (var word in Model)
+    foreach (var question in Model)
     {
         <div class="words">
-            @Html.LabelFor(w => word.Name, "Дума:")
-            @Html.DisplayFor(w => word.Name)
-            @Html.LabelFor(w => word.Description, "Описание:")
+            @Html.LabelFor(q => question.Word, "Търсена дума:")
+            @Html.DisplayFor(q => question.Word)
+            @Html.LabelFor(q => question.Content, "Описание:")
             @*@Html.DisplayNameFor(m => m.Description)*@
-            @Html.DisplayFor(w => word.Description)
-            @Html.LabelFor(w => word.IsValid, "Статус:")
-            @{if (word.IsValid == false) { Active = "Не е одобрена"; } else { Active = "Одобрена"; }}
-            @Active
-            <br />
-            @if (User.IsInRole("Administrators") || word.User.UserName == User.Identity.Name)
-            {
-                @Html.ActionLink("Промени", "Edit", new { id = word.Id }, new { @class = "lnkEdit" }) @: |
-                @Html.ActionLink("Изтрий", "Delete", new { id = word.Id }, new { @class = "lnkDelete" })
-
-            }
+            @Html.DisplayFor(q => question.Content)
+            @Html.LabelFor(q => question.User, "Потребител:")
+            @Html.DisplayFor(q => question.User.UserName)
+            @Html.LabelFor(q => question.Answers, "Отговори:")
+            @Html.DisplayFor(q => question.Answers)
         </div>
-                    }
-
-                }
+        @Html.ActionLink("Отговори", "AddAnswer", new { id = question.Id })
+    }
+}
 <script src="~/Scripts/PopUpDialog.js"></script>

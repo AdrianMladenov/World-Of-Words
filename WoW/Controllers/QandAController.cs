@@ -38,7 +38,7 @@ namespace WoW.Web.Controllers
 
         // POST: QandA/Create
         [HttpPost]
-        public ActionResult AddQuestion([Bind(Include = "Name, Description")] AddQVM question)
+        public ActionResult AddQuestion([Bind(Include = "Word, Content")] AddQVM question)
         {
 
             if (this.ModelState.IsValid)

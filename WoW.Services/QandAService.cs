@@ -23,15 +23,15 @@ namespace WoW.Services
             this.Context.SaveChanges();
         }
 
-        public void GetQuestion(Answer answer, string user)
+        public AddQVM GetQuestion(int id)
         {
-            Question specificQuestion = Context.Questions.SingleOrDefault(q => q.Content == answer.Question.Content);
-            specificQuestion.Answers.Add(answer);
-
-            ApplicationUser specificUser = Context.Users.SingleOrDefault(u => u.UserName == user);
-            specificUser.Answers.Add(answer);
-
-            this.Context.SaveChanges();
+            Question specificQuestion = Context.Questions.Find(id);
+            if (specificQuestion == null)
+            {
+                return null;
+            }
+            AddQVM question = Mapper.Map<Question, AddQVM>(specificQuestion);
+            return question;
         }
 
         public IEnumerable<QADetails> GetAllQuestionsAndAnswers()
@@ -39,6 +39,18 @@ namespace WoW.Services
            IEnumerable<Question> all = Context.Questions.OrderByDescending(q => q.DateOfCreation).ToList();
            IEnumerable<QADetails> collection = Mapper.Map<IEnumerable<Question>, IEnumerable<QADetails>>(all);
             return collection;
+        }
+
+        public void AddAnswerToQuestion(AddQVM answerInfo,string user, int id)
+        {
+            var question = Context.Questions.Find(id);
+            var currentUser = this.Context.Users.FirstOrDefault(u => u.UserName == user);
+            Answer newAnswer = new Answer();
+            newAnswer.Content = answerInfo.Answer;
+            question.Answers.Add(newAnswer);
+            currentUser.Answers.Add(newAnswer);
+           
+            Context.SaveChanges();
         }
     }
 }

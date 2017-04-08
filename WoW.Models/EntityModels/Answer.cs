@@ -23,9 +23,10 @@ namespace WoW.Models.EntityModels
 
         public int QuestionId { get; set; }
 
+
         public override string ToString()
         {
-            return $"{this.Content}";
+            return $"{this.Content}\t";
         }
     }
 }

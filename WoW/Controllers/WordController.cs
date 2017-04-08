@@ -83,7 +83,7 @@ namespace WoW.Web.Controllers
         // POST: Word/Edit/5
         [HttpPost]
         [Authorize(Roles = "User, Admin")]
-        public ActionResult Edit([Bind(Include = "Name, Description")] AddWordVM word, string id)
+        public ActionResult Edit([Bind(Include = "Name, Description")] AddWordVM word, int id)
         {
             if (this.ModelState.IsValid)
             {

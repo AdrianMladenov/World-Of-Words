@@ -53,20 +53,29 @@ namespace WoW.Web.Controllers
             return this.View();
         }
 
-        public ActionResult AddAnswer()
+        [HttpGet, Route("addAnswer/{id}")]
+        [Authorize(Roles = "User, Admin")]
+        public ActionResult AddAnswer(int id)
         {
-            return View();
+           AddQVM question =  this.QandAService.GetQuestion(id);
+            if (question == null)
+            {
+                return HttpNotFound();
+            }
+            return this.PartialView("_AddAnswer", question);
         }
 
         // POST: QandA/Create
         [HttpPost]
-        public ActionResult AddAnswer([Bind(Include = "Answer, Question")] Answer answer)
+        [Authorize(Roles = "User, Admin")]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddAnswer(AddQVM currentAnswer)
         {
-
             if (this.ModelState.IsValid)
             {
                 var user = User.Identity.Name;
-                this.QandAService.GetQuestion(answer, user);
+                int id = currentAnswer.Id;
+                this.QandAService.AddAnswerToQuestion(currentAnswer, user, id);
                 return this.RedirectToAction("AllQuestionsOfUsers");
             }
 

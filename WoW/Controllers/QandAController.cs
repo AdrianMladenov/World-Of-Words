@@ -47,7 +47,8 @@ namespace WoW.Web.Controllers
             {
                 var user = User.Identity.Name;
                 this.QandAService.AddQuestion(question, user);
-                return this.RedirectToAction("AllQuestionsOfUsers");
+                //return this.RedirectToAction("AllQuestionsOfUsers");
+                return Json(new { result = "Redirect", url = Url.Action("AllQuestionsOfUsers", "QandA") });
             }
 
             return this.View();

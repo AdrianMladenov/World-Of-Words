@@ -19,8 +19,21 @@ namespace WoW.Services
             newQuestion.Content = question.Content;
             newQuestion.DateOfCreation = DateTime.Now;
             currentUser.Questions.Add(newQuestion);
-            
             this.Context.SaveChanges();
+
+        //    try { this.Context.SaveChanges(); }
+        //    catch (DbEntityValidationException dbEx)
+        //    {
+        //        foreach (var validationErrors in dbEx.EntityValidationErrors)
+        //        {
+        //            foreach (var validationError in validationErrors.ValidationErrors)
+        //            {
+        //                Trace.TraceInformation("Property: {0} Error: {1}",
+        //                                        validationError.PropertyName,
+        //                                        validationError.ErrorMessage);
+        //            }
+        //        }
+        //    }
         }
 
         public AddQVM GetQuestion(int id)

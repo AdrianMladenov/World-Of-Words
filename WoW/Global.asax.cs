@@ -9,6 +9,7 @@ using System.Web.Routing;
 using WoW.Models.EntityModels;
 using WoW.Models.ViewModels;
 using WoW.Models.ViewModels.QandA;
+using WoW.Models.ViewModels.User;
 using WoW.Models.ViewModels.Words;
 
 namespace WoW
@@ -33,6 +34,7 @@ namespace WoW
                 exp.CreateMap<WordForValidate, AllWordsOfUser>();
                 exp.CreateMap<Question, AddQVM>();
                 exp.CreateMap<Question, QADetails>();
+                exp.CreateMap<ApplicationUser, ProfileVM>();
             });
         }
     }

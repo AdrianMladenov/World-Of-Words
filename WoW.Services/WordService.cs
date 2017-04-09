@@ -20,15 +20,13 @@ namespace WoW.Services
             word.Description = model.Description;
             word.DateOfCreation = DateTime.Now;
             currentUser.WordsForValidate.Add(word);
-
-            //this.Context.WordsForValidation.Add(word);
+            
             this.Context.SaveChanges();
         }
 
-        public void EditWord(AddWordVM word, string id)
+        public void EditWord(AddWordVM word, int id)
         {
-            int wordId = Convert.ToInt32(id);
-            var wordForEdit = Context.WordsForValidation.SingleOrDefault(w => w.Id == wordId);
+            var wordForEdit = Context.WordsForValidation.SingleOrDefault(w => w.Id == id);
             wordForEdit.Name = word.Name;
             wordForEdit.Description = word.Description;
             Context.SaveChanges();
@@ -36,7 +34,7 @@ namespace WoW.Services
 
         public void DeleteWord(string id)
         {
-            int wordId = Convert.ToInt32(id);
+            var wordId = Convert.ToInt32(id);
             var wordForDelete = Context.WordsForValidation.Find(wordId);
             wordForDelete.IsDeleted = true;
             Context.SaveChanges();

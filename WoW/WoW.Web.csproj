@@ -176,6 +176,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\QandAController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WordController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -306,6 +307,7 @@
     <Content Include="Views\QandA\AddQuestion.cshtml" />
     <Content Include="Views\QandA\AddAnswer.cshtml" />
     <Content Include="Views\QandA\_AddAnswer.cshtml" />
+    <Content Include="Views\User\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

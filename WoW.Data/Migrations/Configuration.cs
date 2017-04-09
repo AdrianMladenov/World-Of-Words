@@ -141,7 +141,7 @@ namespace WoW.Data.Migrations
 
             //string[] descriptions = File.ReadAllLines(userFolderName + @"\WordsDescriptions.txt");
 
-            string[] words = File.ReadAllLines(userFolderName + @"\Words.txt");
+            //string[] words = File.ReadAllLines(userFolderName + @"\Words.txt");
 
             //string[] descriptions = File.ReadAllLines(userFolderName + @"\WordsDescriptions.txt");
 

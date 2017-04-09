@@ -21,19 +21,7 @@ namespace WoW.Web.Controllers
         {
             this.wordService = new WordService();
         }
-
-        // GET: Word
-        public ActionResult About()
-        {
-            return View();
-        }
-
-        // GET: Word/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
+        
         // GET: Word/Create
         public ActionResult Add()
         {
@@ -43,6 +31,8 @@ namespace WoW.Web.Controllers
 
         // POST: Word/Create
         [HttpPost]
+        [Authorize(Roles = "User, Admin")]
+        [ValidateAntiForgeryToken]
         public ActionResult Add([Bind(Include ="Name, Description" )] AddWordVM word)
         {
             

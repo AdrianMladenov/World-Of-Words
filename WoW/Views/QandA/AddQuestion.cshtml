@@ -4,8 +4,6 @@
     ViewBag.Title = "AddQuestion";
 }
 <script src="~/Scripts/jquery-3.1.1.min.js"></script>
-<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
-<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
 
 
 
@@ -35,26 +33,28 @@
 
         @*<select class="1-30"></select>*@
 
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Word, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Word, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-10" id="letters">
+                @Html.HiddenFor(model => model.Word, new { htmlAttributes = new { @class = "form-control", id = "searchedWord" } })
                 @Html.ValidationMessageFor(model => model.Word, "", new { @class = "text-danger" })
             </div>
         </div>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <hr />
         <div class="form-group">
             @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control", id = "content" } })
                 @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Добави" class="btn btn-default" />
+                <input type="submit" id="getword" value="Добави" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -62,12 +62,13 @@
 
 @*<script>
     $(function () {
-        var $select = $(".1-30");
+        let $select = $(".1-30");
         for (i = 1; i <= 30; i++) {
             $select.append($('<option></option>').val(i).html(i))
         }
     });
 </script>*@
+<script src="~/Scripts/searching-form.js"></script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

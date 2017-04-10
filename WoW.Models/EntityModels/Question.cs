@@ -32,6 +32,6 @@ namespace WoW.Models.EntityModels
             get { return this.answers; }
             set { this.answers = value; }
         }
-        
+
     }
 }

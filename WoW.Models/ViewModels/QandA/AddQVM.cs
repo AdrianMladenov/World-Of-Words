@@ -15,12 +15,14 @@ namespace WoW.Models.ViewModels.QandA
         //[Display(Name = "Дължина на думата")]
         //public int LetterCount { get; set; }
 
-        [Required]
+        //[Required]
         [MaxLength(30)]
         [Display(Name ="Думата която търсите")]
         public string Word { get; set; }
 
         [Display(Name = "Описание")]
         public string Content { get; set; }
+
+        public string Answer { get; set; }
     }
 }

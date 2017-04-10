@@ -176,6 +176,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\QandAController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\WordController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -261,6 +262,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\searching-form.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -305,6 +307,8 @@
     <Content Include="Views\QandA\AllQuestionsOfUsers.cshtml" />
     <Content Include="Views\QandA\AddQuestion.cshtml" />
     <Content Include="Views\QandA\AddAnswer.cshtml" />
+    <Content Include="Views\QandA\_AddAnswer.cshtml" />
+    <Content Include="Views\User\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

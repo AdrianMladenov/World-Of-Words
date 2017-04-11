@@ -35,6 +35,7 @@ namespace WoW
                 exp.CreateMap<Question, AddQVM>();
                 exp.CreateMap<Question, QADetails>();
                 exp.CreateMap<ApplicationUser, ProfileVM>();
+                exp.CreateMap<UserInfo, Info>();
             });
         }
     }

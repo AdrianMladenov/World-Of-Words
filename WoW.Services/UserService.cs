@@ -18,6 +18,7 @@ namespace WoW.Services
             UserInfo currentInfo = currentUser.UserInfo;
             ProfileVM userInfo = Mapper.Map<ApplicationUser, ProfileVM>(currentUser);
             userInfo.AllWords = Mapper.Map<IEnumerable<WordForValidate>, IEnumerable<AllWordsOfUser> > (currentUser.WordsForValidate);
+            userInfo.Info = Mapper.Map<UserInfo, Info>(currentUser.UserInfo);
             return userInfo;
         }
     }

@@ -14,6 +14,6 @@ namespace WoW.Models.ViewModels.User
 
         public IEnumerable<AllWordsOfUser> AllWords { get; set; }
 
-        public UserInfo Info { get; set; }
+        public Info Info { get; set; }
     }
 }

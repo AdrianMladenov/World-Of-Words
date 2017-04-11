@@ -308,7 +308,7 @@
     <Content Include="Views\QandA\AddQuestion.cshtml" />
     <Content Include="Views\QandA\AddAnswer.cshtml" />
     <Content Include="Views\QandA\_AddAnswer.cshtml" />
-    <Content Include="Views\User\Profile.cshtml" />
+    <Content Include="Views\User\Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

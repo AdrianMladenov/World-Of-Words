@@ -28,6 +28,8 @@ namespace WoW.Models.EntityModels
         //[Display(Name = "Описание:")]
         public string Description { get; set; }
 
+        public int? LetterCount { get; set; }
+        
         //[Display(Name = "Дата на добавяне:")]
         public DateTime DateOfCreation { get; set; }
 

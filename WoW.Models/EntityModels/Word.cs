@@ -23,6 +23,8 @@ namespace WoW.Models.EntityModels
 
         public string Name { get; set; }
 
+        public int? LetterCount { get; set; }
+
         //public virtual ApplicationUser User { get; set; }
 
         //public int UserId { get; set; }

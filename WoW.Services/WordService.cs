@@ -77,6 +77,7 @@ namespace WoW.Services
         public IEnumerable<SearchedWordVM> SearchWord(SearchedWordVM sWord)
         {
             var searchedWordLength = sWord.Word.Length;
+            //var allWords
             
             return null;
         }

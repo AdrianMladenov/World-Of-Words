@@ -74,6 +74,13 @@ namespace WoW.Services
             return awou;
         }
 
+        public IEnumerable<SearchedWordVM> SearchWord(SearchedWordVM sWord)
+        {
+            var searchedWordLength = sWord.Word.Length;
+            
+            return null;
+        }
+
         public AddWordVM GetSpecificWord(int id)
         {
             WordForValidate editWord = Context.WordsForValidation.Find(id);

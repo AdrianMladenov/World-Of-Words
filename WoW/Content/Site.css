@@ -56,6 +56,10 @@ textarea {
 /*.ui-dialog[aria-describedby="dialog-confirm"] {
     border: 1px solid rgba(255, 121, 121, 0.98) !important;
 }*/
+/*.ui-dialog-titlebar
+{ 
+   display: none !important;
+}*/
 #btndelete{
     border: 1px solid rgba(255, 121, 121, 0.98)
 }

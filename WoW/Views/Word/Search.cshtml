@@ -1,0 +1,92 @@
+﻿@using WoW.Models.ViewModels.Words
+@model SearchedWordVM
+@{
+    ViewBag.Title = "Search";
+}
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <select class="1-30"></select>
+        <div class="form-group">
+            
+            @*@Html.LabelFor(model => model.Word, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <div class="col-md-10" id="letters">
+                @Html.ValidationMessageFor(model => model.Word, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr/>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control", id = "content" } })
+                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" id="getword" value="Търси" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+
+    $(function () {
+        let $select = $(".1-30");
+        for (i = 1; i <= 30; i++) {
+            $select.append($('<option></option>').val(i).html(i))
+        }
+    });
+
+    let tempChars = [];
+    $('#getword').on('click', function (e) {
+        //e.preventDefault();
+        tempChars = $('.lett').toArray();
+        let selected = $('.1-30').find(":selected").text();
+        for (let i = 1; i <= selected; i++) {
+            tempChars[i - 1] = $('#letter' + i).val() == '' || $('#letter' + i).val() == ' ' ? '?' : $('#letter' + i).val();
+        }
+        let word = tempChars.join('');
+
+        //$('#searchedWord').val(word);
+
+
+        let wordAndDescription = JSON.stringify({
+            Word: word,
+            Content: $('#content').val()
+        });
+
+        $.ajax({
+            type: "POST",
+            url: '/Word/Search',
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+            data: wordAndDescription,
+            dataType: "json",
+            success: function (response) {
+                console.log('o ye')
+                window.location = response.url;
+
+            },
+            error: function (response) {
+                console.dir(response)
+
+            }
+        });
+    })
+
+</script>
+<script src="~/Scripts/searching-form.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/jquery")*@
+
+}

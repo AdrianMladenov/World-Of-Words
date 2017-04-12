@@ -109,5 +109,25 @@ namespace WoW.Web.Controllers
             }
             return RedirectToAction("GetWordsOfUser");
         }
+
+        // GET: QandA/Create
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        // POST: QandA/Create
+        [HttpPost]
+        public ActionResult Search([Bind(Include = "Word, Content")] SearchedWordVM sWord)
+        {
+            if (this.ModelState.IsValid)
+            {
+                IEnumerable<SearchedWordVM> all = this.wordService.SearchWord(sWord);
+                return Json(new { result = "Redirect", url = Url.Action("AllQuestionsOfUsers", "QandA") });
+            }
+
+
+            return this.View();
+        }
     }
 }

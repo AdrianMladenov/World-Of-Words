@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using WoW.Models.EntityModels;
 using WoW.Models.ViewModels.Words;
 using WoW.Services;
 
@@ -22,14 +23,14 @@ namespace WoW.Web.Controllers
             this.wordService = new WordService();
         }
         
-        // GET: Word/Create
+        // GET: Word/Add
         public ActionResult Add()
         {
             
             return View();
         }
 
-        // POST: Word/Create
+        // POST: Word/Add
         [HttpPost]
         [Authorize(Roles = "User, Admin")]
         [ValidateAntiForgeryToken]
@@ -54,6 +55,12 @@ namespace WoW.Web.Controllers
             string userName = User.Identity.Name;
             IEnumerable<AllWordsOfUser> awou = this.wordService.GetWordsOfUserByName(userName);
             return this.View(awou);
+        }
+
+        public ActionResult TransferWords(int id)
+        {
+            this.wordService.TransferWords(id);
+            return RedirectToAction("GetWordsOfUser");
         }
 
         // GET: Word/Edit/5

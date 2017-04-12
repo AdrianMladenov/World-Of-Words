@@ -137,24 +137,37 @@ namespace WoW.Data.Migrations
             }
 
 
-            //string[] words = File.ReadAllLines(userFolderName + @"\Words.txt");
+            string[] words = File.ReadAllLines(userFolderName + @"\Words.txt");
 
-            //string[] descriptions = File.ReadAllLines(userFolderName + @"\WordsDescriptions.txt");
+            string[] descriptions = File.ReadAllLines(userFolderName + @"\WordsDescriptions.txt");
 
-            //string[] words = File.ReadAllLines(userFolderName + @"\Words.txt");
+            
+            //string[] words = File.ReadAllLines(@"C:\Users\2351x\Documents\GitHub\World-Of-Words\Words.txt");
 
-            //string[] descriptions = File.ReadAllLines(userFolderName + @"\WordsDescriptions.txt");
-
-            string[] words = File.ReadAllLines(@"C:\Users\2351x\Documents\GitHub\World-Of-Words\Words.txt");
-
-            string[] descriptions = File.ReadAllLines(@"C:\Users\2351x\Documents\GitHub\World-Of-Words\WordsDescriptions.txt");
+            //string[] descriptions = File.ReadAllLines(@"C:\Users\2351x\Documents\GitHub\World-Of-Words\WordsDescriptions.txt");
 
 
             for (int i = 0; i < words.Length; i++)
             {
                 Word currentWord = new Word();
+                int charCounter = 0;
                 currentWord.Name = words[i];
 
+                for (int p = 0; p < currentWord.Name.Length; p++)
+                {
+
+                    if (currentWord.Name[p] == ' ')
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        
+                        charCounter++;
+                    }
+                }
+                currentWord.LetterCount = charCounter;
+                
                 Description currentDescription = new Description();
                 currentDescription.Content = descriptions[i];
                 //currentWord.Descriptions.Add(currentDescription);

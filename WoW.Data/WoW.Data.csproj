@@ -79,6 +79,10 @@
     <Compile Include="Migrations\201704071416039_RemoveUserFromWord.Designer.cs">
       <DependentUpon>201704071416039_RemoveUserFromWord.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704111505486_AddLetterCount.cs" />
+    <Compile Include="Migrations\201704111505486_AddLetterCount.Designer.cs">
+      <DependentUpon>201704111505486_AddLetterCount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfiuration\AnswerConfiguration.cs" />
     <Compile Include="ModelConfiuration\DescriptionConfiguration.cs" />
@@ -113,6 +117,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704071416039_RemoveUserFromWord.resx">
       <DependentUpon>201704071416039_RemoveUserFromWord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704111505486_AddLetterCount.resx">
+      <DependentUpon>201704111505486_AddLetterCount.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

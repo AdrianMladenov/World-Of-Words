@@ -15,20 +15,47 @@ namespace WoW.Services
         public void AddWord(AddWordVM model, string user)
         {
             WordForValidate word = new WordForValidate();
+            int charCounter = TakeLetterCount(model, word);
+            word.LetterCount = charCounter;
             var currentUser = this.Context.Users.FirstOrDefault(u => u.UserName == user);
             word.Name = model.Name;
             word.Description = model.Description;
             word.DateOfCreation = DateTime.Now;
+            word.LetterCount = charCounter;
             currentUser.WordsForValidate.Add(word);
-            
+
             this.Context.SaveChanges();
         }
+
+        private static int TakeLetterCount(AddWordVM model, WordForValidate word)
+        {
+            int charCounter = 0;
+            for (int p = 0; p < model.Name.Length; p++)
+            {
+
+                if (model.Name[p] == ' ')
+                {
+                    continue;
+                }
+                else
+                {
+
+                    charCounter++;
+                }
+            }
+
+            return charCounter;
+        }
+
 
         public void EditWord(AddWordVM word, int id)
         {
             var wordForEdit = Context.WordsForValidation.SingleOrDefault(w => w.Id == id);
             wordForEdit.Name = word.Name;
             wordForEdit.Description = word.Description;
+            int charCounter = TakeLetterCount(word, wordForEdit);
+            wordForEdit.LetterCount = charCounter;
+            wordForEdit.LastModifed = DateTime.Now;
             Context.SaveChanges();
         }
 
@@ -40,18 +67,19 @@ namespace WoW.Services
             Context.SaveChanges();
         }
 
-        public void TransferWords(WordForValidate word)
+        public void TransferWords(int id)
         {
+            WordForValidate wordForDeleting = Context.WordsForValidation.SingleOrDefault(w => w.Id == id);
             Description currentDescription = new Description();
-            currentDescription.Content = word.Description;
-            Word existingWord = Context.Words.SingleOrDefault(w => w.Name == word.Name);
+            currentDescription.Content = wordForDeleting.Description;
+            Word existingWord = Context.Words.SingleOrDefault(w => w.Name == wordForDeleting.Name);
             Description existingDescription = Context.Descriptions.SingleOrDefault(d => d.Content == currentDescription.Content);
-            if (existingWord.Name == word.Name)
+            if (existingWord != null && existingWord.Name == wordForDeleting.Name)
             {
                 existingWord.Descriptions.Add(currentDescription);
             }
 
-            else if (currentDescription.Content == existingDescription.Content)
+            else if (existingDescription != null && currentDescription.Content == existingDescription.Content)
             {
                 existingDescription.Words.Add(existingWord);
             }
@@ -59,12 +87,36 @@ namespace WoW.Services
             {
 
                 Word newWord = new Word();
-                newWord.Name = word.Name;
+                newWord.Name = wordForDeleting.Name;
                 newWord.Descriptions.Add(currentDescription);
+                int counter = TakeLetterCountForTransferingWords(newWord);
+                newWord.LetterCount = counter;
                 Context.Words.Add(newWord);
             }
 
+            wordForDeleting.IsDeleted = true;
             Context.SaveChanges();
+        }
+
+        private static int TakeLetterCountForTransferingWords(Word newWord)
+        {
+            int counter = 0;
+            for (int i = 0; i < newWord.Name.Length; i++)
+            {
+
+                if (newWord.Name[i] == ' ')
+                {
+                    continue;
+                }
+                else
+                {
+
+                    counter++;
+                }
+
+            }
+
+            return counter;
         }
 
         public IEnumerable<AllWordsOfUser> GetWordsOfUserByName(string name)

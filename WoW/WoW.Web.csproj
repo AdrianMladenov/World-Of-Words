@@ -5779,6 +5779,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\load-ajax-loading-box.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\PopUpDialog.js" />
     <Content Include="Scripts\respond.js" />
@@ -5834,6 +5835,7 @@
     <Content Include="Views\User\Profile.cshtml" />
     <Content Include="Views\Word\Search.cshtml" />
     <Content Include="Views\Shared\tempLayout.cshtml" />
+    <Content Include="Views\Word\_SearchResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

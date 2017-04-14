@@ -123,3 +123,15 @@ function input_keyup(e) {
         }
     }
 }
+
+function makeWordPattern() {
+    let word = '';
+    //e.preventDefault();
+    //tempChars = $('.lett').toArray();
+    let selected = $('.1-30').find(":selected").text();
+    for (let i = 1; i <= selected; i++) {
+        //tempChars[i - 1] = $('#letter' + i).val() == '' || $('#letter' + i).val() == ' ' ? '.' : $('#letter' + i).val();
+        word += $('#letter' + i).val() == '' || $('#letter' + i).val() == ' ' ? '.' : $('#letter' + i).val();
+    }
+    return word;
+};

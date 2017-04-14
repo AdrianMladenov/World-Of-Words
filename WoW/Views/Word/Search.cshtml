@@ -4,22 +4,22 @@
     ViewBag.Title = "Search";
 }
 <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/load-ajax-loading-box.js"></script>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
     <div class="form-horizontal">
         <hr />
         <select class="1-30"></select>
         <div class="form-group">
-            
-            @*@Html.LabelFor(model => model.Word, htmlAttributes: new { @class = "control-label col-md-2" })*@
+
+            @Html.LabelFor(model => model.Word, "Въведете буквите, които знаете от думата", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10" id="letters">
                 @Html.ValidationMessageFor(model => model.Word, "", new { @class = "text-danger" })
             </div>
         </div>
-        <hr/>
+        <hr />
         <div class="form-group">
             @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -34,6 +34,8 @@
             </div>
         </div>
     </div>
+    <div id="loadingBox" style='display:none'><img src='~/Content/metronic/theme/assets/layouts/layout3/img/ajax-loading.gif' /></div>
+    <div id="wordResult"></div>
 }
 
 <script>
@@ -47,36 +49,28 @@
 
     let tempChars = [];
     $('#getword').on('click', function (e) {
-        //e.preventDefault();
-        tempChars = $('.lett').toArray();
-        let selected = $('.1-30').find(":selected").text();
-        for (let i = 1; i <= selected; i++) {
-            tempChars[i - 1] = $('#letter' + i).val() == '' || $('#letter' + i).val() == ' ' ? '?' : $('#letter' + i).val();
-        }
-        let word = tempChars.join('');
-
-        //$('#searchedWord').val(word);
-
-
         let wordAndDescription = JSON.stringify({
-            Word: word,
+            Word: makeWordPattern(),
             Content: $('#content').val()
         });
 
+        //$('.form-horizontal').hide()
         $.ajax({
             type: "POST",
             url: '/Word/Search',
             cache: false,
             contentType: "application/json; charset=utf-8",
             data: wordAndDescription,
-            dataType: "json",
+            dataType: "html",
             success: function (response) {
-                console.log('o ye')
-                window.location = response.url;
+                $('#wordResult').empty();
+                $('#wordResult').html(response);
+                console.log(response);
 
             },
             error: function (response) {
-                console.dir(response)
+                $('#wordResult').empty();
+                $('#wordResult').html('Опа. Възникна грешка. :(');
 
             }
         });

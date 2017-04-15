@@ -69,12 +69,12 @@ namespace WoW.Services
 
         public void TransferWords(int id)
         {
-            WordForValidate wordForDeleting = Context.WordsForValidation.SingleOrDefault(w => w.Id == id);
+            WordForValidate wordforTransfer = Context.WordsForValidation.SingleOrDefault(w => w.Id == id);
             Description currentDescription = new Description();
-            currentDescription.Content = wordForDeleting.Description;
-            Word existingWord = Context.Words.SingleOrDefault(w => w.Name == wordForDeleting.Name);
+            currentDescription.Content = wordforTransfer.Description;
+            Word existingWord = Context.Words.SingleOrDefault(w => w.Name == wordforTransfer.Name);
             Description existingDescription = Context.Descriptions.SingleOrDefault(d => d.Content == currentDescription.Content);
-            if (existingWord != null && existingWord.Name == wordForDeleting.Name)
+            if (existingWord != null && existingWord.Name == wordforTransfer.Name)
             {
                 existingWord.Descriptions.Add(currentDescription);
             }
@@ -87,14 +87,15 @@ namespace WoW.Services
             {
 
                 Word newWord = new Word();
-                newWord.Name = wordForDeleting.Name;
+                newWord.Name = wordforTransfer.Name;
                 newWord.Descriptions.Add(currentDescription);
                 int counter = TakeLetterCountForTransferingWords(newWord);
                 newWord.LetterCount = counter;
+                newWord.Users.Add(wordforTransfer.User);
                 Context.Words.Add(newWord);
             }
 
-            wordForDeleting.IsDeleted = true;
+            wordforTransfer.IsDeleted = true;
             Context.SaveChanges();
         }
 

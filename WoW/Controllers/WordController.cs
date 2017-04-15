@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using WoW.Models.EntityModels;
 using WoW.Models.ViewModels.Words;
 using WoW.Services;
@@ -116,5 +118,30 @@ namespace WoW.Web.Controllers
             }
             return RedirectToAction("GetWordsOfUser");
         }
+
+        // GET: QandA/Create
+        public ActionResult Search()
+        {
+            return View();
+        }
+
+        // POST: QandA/Create
+        [HttpPost]
+        public ActionResult Search([Bind(Include = "Word, Content")] SearchedWordVM sWord)
+        {
+            if (this.ModelState.IsValid)
+            {
+                IEnumerable<SearchedWordVM> allResults = this.wordService.SearchWord(sWord);
+                //var serializer = new JavaScriptSerializer();
+                //var jsonWords = serializer.Serialize(all);
+                //return Json(new { result = "Redirect", url = Url.Action("AllQuestionsOfUsers", "QandA") });
+                // return Json(new { error = true, message = RenderViewToString(PartialView("_SearchResult", sWord).ToString(), sWord)});
+                //return Json(new { wordsData = jsonWords });
+                return PartialView("_SearchResult", allResults);
+            }
+            
+            return this.View();
+        }
     }
+
 }

@@ -1,0 +1,25 @@
+﻿@*@using System.Linq*@
+@model IEnumerable<WoW.Models.ViewModels.Words.SearchedWordVM>
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    @if (Model.Any())
+    {
+        
+        foreach (var result in Model)
+        {
+            <div class="words">
+                @Html.LabelFor(w => result.Word, "Дума:")
+                @Html.DisplayFor(w => result.Word)
+                @Html.LabelFor(w => result.Content, "Описание:")
+                @Html.DisplayFor(w => result.Content)
+            </div>
+        }
+    }
+    else
+    {
+    <div class="words">
+        Не успяхме да намерим съвпадения. :(
+    </div>
+    }
+</div>

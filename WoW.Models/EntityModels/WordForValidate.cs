@@ -25,6 +25,7 @@ namespace WoW.Models.EntityModels
 
         //public int UserId { get; set; }
 
+            //TODO set max description length 
         //[Display(Name = "Описание:")]
         public string Description { get; set; }
 

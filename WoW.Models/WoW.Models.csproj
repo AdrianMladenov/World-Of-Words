@@ -126,6 +126,7 @@
     <Compile Include="ViewModels\User\ProfileVM.cs" />
     <Compile Include="ViewModels\Words\AddWordVM.cs" />
     <Compile Include="ViewModels\Words\AllWordsOfUser.cs" />
+    <Compile Include="ViewModels\Words\SearchedWordVM.cs" />
     <Compile Include="ViewModels\Words\WordsVM.cs" />
   </ItemGroup>
   <ItemGroup>

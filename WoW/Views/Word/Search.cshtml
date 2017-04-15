@@ -1,0 +1,86 @@
+﻿@using WoW.Models.ViewModels.Words
+@model SearchedWordVM
+@{
+    ViewBag.Title = "Search";
+}
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/load-ajax-loading-box.js"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        <select class="1-30"></select>
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.Word, "Въведете буквите, които знаете от думата", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10" id="letters">
+                @Html.ValidationMessageFor(model => model.Word, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control", id = "content" } })
+                @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" id="getword" value="Търси" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    <div id="loadingBox" style='display:none'><img src='~/Content/metronic/theme/assets/layouts/layout3/img/ajax-loading.gif' /></div>
+    <div id="wordResult"></div>
+}
+
+<script>
+
+    $(function () {
+        let $select = $(".1-30");
+        for (i = 1; i <= 30; i++) {
+            $select.append($('<option></option>').val(i).html(i))
+        }
+    });
+
+    let tempChars = [];
+    $('#getword').on('click', function (e) {
+        let wordAndDescription = JSON.stringify({
+            Word: makeWordPattern(),
+            Content: $('#content').val()
+        });
+
+        //$('.form-horizontal').hide()
+        $.ajax({
+            type: "POST",
+            url: '/Word/Search',
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+            data: wordAndDescription,
+            dataType: "html",
+            success: function (response) {
+                $('#wordResult').empty();
+                $('#wordResult').html(response);
+                console.log(response);
+
+            },
+            error: function (response) {
+                $('#wordResult').empty();
+                $('#wordResult').html('Опа. Възникна грешка. :(');
+
+            }
+        });
+    })
+
+</script>
+<script src="~/Scripts/searching-form.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/jquery")*@
+
+}

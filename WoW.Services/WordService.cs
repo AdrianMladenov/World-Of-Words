@@ -129,38 +129,62 @@ namespace WoW.Services
 
         public IEnumerable<SearchedWordVM> SearchWord(SearchedWordVM sWord)
         {
-            //get searched word length
-            var searchedWordLength = sWord.Word.Length;
-            //get words ONLY with searched word length and select only needed properties to save traffic and time
-            var allWordsWithSearchedLength = this.Context.Words
-                .Select(w => new { w.Descriptions, w.LetterCount, w.Name })
-                .Where(w => w.LetterCount == searchedWordLength);
-            //initializing list for matched words
-            var listResult = new List<SearchedWordVM>();
-            //iiterate over words
-            foreach (var word in allWordsWithSearchedLength)
+            if (!string.IsNullOrEmpty(sWord.Content))
             {
-                //itterate over descriptions
-                foreach (var descr in word.Descriptions)
+                var searchedWordDescr = sWord.Content;
+                var searchedWordLength = sWord.Word.Length;
+
+                var allWordsWithSearchedLength = this.Context.Words
+                .Where(w => w.LetterCount == searchedWordLength && w.Descriptions.Any(d => d.Content.Contains(sWord.Content)))
+                .Select(w => new { w.Descriptions, w.LetterCount, w.Name });
+                var listResult = new List<SearchedWordVM>();
+
+                foreach (var word in allWordsWithSearchedLength)
                 {
-                    //create new regex pattern
-                    Regex searchingPattern = new Regex(sWord.Word, RegexOptions.IgnoreCase);
-                    //removing white spaces for each word name if there are any
-                    var tempWord = word.Name.Split(' ');
-                    var cleanWord = string.Join("", tempWord);
-                    //check if word with searched length match the pattern -- if true -- add in result 
-                    if (searchingPattern.IsMatch(cleanWord))
+                    foreach (var descr in word.Descriptions)
                     {
-                        var newSearchedWord = new SearchedWordVM();
-                        newSearchedWord.Word = word.Name;
-                        newSearchedWord.Content = descr.Content;
-                        listResult.Add(newSearchedWord);
+                        Regex searchingPattern = new Regex(sWord.Word, RegexOptions.IgnoreCase);
+                        var tempWord = word.Name.Split(' ');
+                        var cleanWord = string.Join("", tempWord);
+                        if (searchingPattern.IsMatch(cleanWord))
+                        {
+                            var newSearchedWord = new SearchedWordVM();
+                            newSearchedWord.Word = word.Name;
+                            newSearchedWord.Content = descr.Content;
+                            listResult.Add(newSearchedWord);
+                        }
                     }
                 }
+                return listResult;
             }
+            else
+            {
+                var searchedWordDescr = sWord.Content;
+                var searchedWordLength = sWord.Word.Length;
 
+                var allWordsWithSearchedLength = this.Context.Words
+                .Where(w => w.LetterCount == searchedWordLength)
+                .Select(w => new { w.Descriptions, w.LetterCount, w.Name });
+                var listResult = new List<SearchedWordVM>();
 
-            return listResult;
+                foreach (var word in allWordsWithSearchedLength)
+                {
+                    foreach (var descr in word.Descriptions)
+                    {
+                        Regex searchingPattern = new Regex(sWord.Word, RegexOptions.IgnoreCase);
+                        var tempWord = word.Name.Split(' ');
+                        var cleanWord = string.Join("", tempWord);
+                        if (searchingPattern.IsMatch(cleanWord))
+                        {
+                            var newSearchedWord = new SearchedWordVM();
+                            newSearchedWord.Word = word.Name;
+                            newSearchedWord.Content = descr.Content;
+                            listResult.Add(newSearchedWord);
+                        }
+                    }
+                }
+                return listResult;
+            }
         }
 
         public AddWordVM GetSpecificWord(int id)

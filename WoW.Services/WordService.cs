@@ -70,12 +70,12 @@ namespace WoW.Services
 
         public void TransferWords(int id)
         {
-            WordForValidate wordforTransfer = Context.WordsForValidation.SingleOrDefault(w => w.Id == id);
+            WordForValidate wordForTransfer = Context.WordsForValidation.SingleOrDefault(w => w.Id == id);
             Description currentDescription = new Description();
-            currentDescription.Content = wordforTransfer.Description;
-            Word existingWord = Context.Words.SingleOrDefault(w => w.Name == wordforTransfer.Name);
+            currentDescription.Content = wordForTransfer.Description;
+            Word existingWord = Context.Words.SingleOrDefault(w => w.Name == wordForTransfer.Name);
             Description existingDescription = Context.Descriptions.SingleOrDefault(d => d.Content == currentDescription.Content);
-            if (existingWord != null && existingWord.Name == wordforTransfer.Name)
+            if (existingWord != null && existingWord.Name == wordForTransfer.Name)
             {
                 existingWord.Descriptions.Add(currentDescription);
             }
@@ -88,15 +88,16 @@ namespace WoW.Services
             {
 
                 Word newWord = new Word();
-                newWord.Name = wordforTransfer.Name;
+                newWord.Name = wordForTransfer.Name;
                 newWord.Descriptions.Add(currentDescription);
                 int counter = TakeLetterCountForTransferingWords(newWord);
                 newWord.LetterCount = counter;
-                newWord.Users.Add(wordforTransfer.User);
+                newWord.Users.Add(wordForTransfer.User);
                 Context.Words.Add(newWord);
             }
 
-            wordforTransfer.IsDeleted = true;
+            wordForTransfer.IsValid = true;
+            //Context.WordsForValidation.Remove(wordForTransfer);
             Context.SaveChanges();
         }
 
@@ -123,7 +124,7 @@ namespace WoW.Services
 
         public IEnumerable<AllWordsOfUser> GetWordsOfUserByName(string name)
         {
-            IEnumerable<WordForValidate> words = this.Context.WordsForValidation.Where(u => u.User.UserName == name && u.IsDeleted == false);
+            IEnumerable<WordForValidate> words = this.Context.WordsForValidation.Where(u => u.User.UserName == name && u.IsDeleted == false && u.IsValid == false);
             IEnumerable<AllWordsOfUser> awou = Mapper.Map<IEnumerable<WordForValidate>, IEnumerable<AllWordsOfUser>>(words);
             return awou;
         }

@@ -16,7 +16,7 @@ namespace WoW.Services
         {
             APIndexVM page = new APIndexVM();
 
-            IEnumerable<WordForValidate> wordsForValidate = Context.WordsForValidation;
+            IEnumerable<WordForValidate> wordsForValidate = this.Context.WordsForValidation.Where(u => u.IsDeleted == false && u.IsValid == false);
             IEnumerable<Word> words = Context.Words;
             IEnumerable<ApplicationUser> users = Context.Users;
 

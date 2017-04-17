@@ -7,35 +7,41 @@
 
 <h2>Admin</h2>
 
-@foreach (var word in Model.AllWordsForValidate)
+@using (Html.BeginForm())
 {
-    <div class="words">
-        @Html.LabelFor(w => word.Name, "Дума:")
-        @Html.DisplayFor(w => word.Name)
-        @Html.LabelFor(w => word.Description, "Описание:")
-        @Html.DisplayFor(w => word.Description)
-        @Html.LabelFor(w => word.IsValid, "Статус:")
-        @{if (word.IsValid == false) { Active = "Не е одобрена"; } else { Active = "Одобрена"; }}
-        @Active
-        <br />
-    </div>
 
-            }
+    foreach (var word in Model.AllWordsForValidate)
+    {
+        <div class="words">
+            @Html.LabelFor(w => word.Name, "Дума:")
+            @Html.DisplayFor(w => word.Name)
+            @Html.LabelFor(w => word.Description, "Описание:")
+            @Html.DisplayFor(w => word.Description)
+            @Html.LabelFor(w => word.IsValid, "Статус:")
+            @{if (word.IsValid == false) { Active = "Не е одобрена"; } else { Active = "Одобрена"; }}
+            @Active
+            @Html.ActionLink("Трансферирай", "TransferWords", "Word", new { id = word.Id }, null);
+            <br />
+        </div>
 
-@foreach (var word in Model.UsersInfo)
-{
-    <div class="words">
-        @Html.LabelFor(w => word.FirstName, "Потребителско име:")
-        @Html.DisplayFor(w => word.Username)
-        @Html.LabelFor(w => word.FirstName, "Първо име:")
-        @Html.DisplayFor(w => word.FirstName)
-        @Html.LabelFor(w => word.LastName, "Фамилия:")
-        @Html.DisplayFor(w => word.LastName)
-        @Html.LabelFor(w => word.LastName, "Роля:")
-        @Html.DisplayFor(w => word.Role)
-        
-        <br />
-    </div>
+                }
+                <br />
 
-            }
+                foreach (var word in Model.UsersInfo)
+                {
+                    <div class="words">
+                        @Html.LabelFor(w => word.FirstName, "Потребителско име:")
+                        @Html.DisplayFor(w => word.Username)
+                        @Html.LabelFor(w => word.FirstName, "Първо име:")
+                        @Html.DisplayFor(w => word.FirstName)
+                        @Html.LabelFor(w => word.LastName, "Фамилия:")
+                        @Html.DisplayFor(w => word.LastName)
+                        @Html.LabelFor(w => word.LastName, "Роля:")
+                        @Html.DisplayFor(w => word.Role)
 
+                        <br />
+                    </div>
+
+                }
+
+                }

@@ -8,7 +8,6 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using WoW.Models.EntityModels;
 using WoW.Models.ViewModels;
-using WoW.Models.ViewModels.Admin;
 using WoW.Models.ViewModels.QandA;
 using WoW.Models.ViewModels.User;
 using WoW.Models.ViewModels.Words;
@@ -37,15 +36,6 @@ namespace WoW
                 exp.CreateMap<Question, QADetails>();
                 exp.CreateMap<ApplicationUser, ProfileVM>();
                 exp.CreateMap<UserInfo, Info>();
-                exp.CreateMap<ApplicationUser, APUsersInfoVM>()
-                .ForMember(vm => vm.Username, 
-                configExpr => configExpr.MapFrom(user => user.UserName))
-                .ForMember(vm => vm.Role,
-                configExpr => configExpr.MapFrom(user => user.Roles))
-                .ForMember(vm => vm.FirstName,
-                configExpr => configExpr.MapFrom(user => user.UserInfo.FirstName))
-                .ForMember(vm => vm.LastName,
-                configExpr => configExpr.MapFrom(user => user.UserInfo.LastName));
             });
         }
     }

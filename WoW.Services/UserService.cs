@@ -19,7 +19,7 @@ namespace WoW.Services
             ApplicationUser currentUser = Context.Users.FirstOrDefault(u => u.UserName == name);
             UserInfo currentInfo = currentUser.UserInfo;
             userInfo = Mapper.Map<ApplicationUser, ProfileVM>(currentUser);
-            userInfo.AllWords = Mapper.Map<IEnumerable<WordForValidate>, IEnumerable<AllWordsOfUser> > (currentUser.WordsForValidate);
+            userInfo.WordCount = currentUser.WordsForValidate.Count();
             userInfo.Info = Mapper.Map<UserInfo, Info>(currentUser.UserInfo);
             return userInfo;
         }

@@ -35,19 +35,4 @@
     
 }
 <hr />
-<table class="table table-stripped">
-    <tr>
-        <th>Дума</th>
-        <th>Описание</th>
-        <th>Статус</th>
-    </tr>
-    @foreach (var item in Model.AllWords)
-    {
-        <tr>
-            <td>@Html.DisplayFor(vm => item.Name)</td>
-            <td>@Html.DisplayFor(vm => item.Description)</td>
-            @{if (item.IsValid == false) { Active = "Не е одобрена"; } else { Active = "Одобрена"; }}
-            <td>@Active</td>
-        </tr>
-                }
-</table>       
+<h3>Брой думи:@Html.DisplayFor(vm => vm.WordCount)</h3>

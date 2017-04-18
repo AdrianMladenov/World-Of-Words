@@ -19,7 +19,7 @@ namespace WoW.Models.ViewModels.User
 
         public string Email { get; set; }
 
-        public IEnumerable<AllWordsOfUser> AllWords { get; set; }
+        public int WordCount { get; set; }
 
         public Info Info { get; set; }
         

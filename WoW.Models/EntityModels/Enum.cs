@@ -36,10 +36,10 @@ namespace WoW.Models.EntityModels
 
         public enum Gender
         {
-            [Description("Мъж")]
+            [Display(Name = "Мъж")]
             Male = 0,
 
-            [Description("Жена")]
+            [Display(Name = "Жена")]
             Female = 1
         }
 

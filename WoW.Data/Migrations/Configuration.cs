@@ -1,4 +1,4 @@
-namespace WoW.Data.Migrations
+﻿namespace WoW.Data.Migrations
 {
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
@@ -79,25 +79,25 @@ namespace WoW.Data.Migrations
                 SecurityStamp = Guid.NewGuid().ToString()
             };
 
-            UserInfo alexanderInfo = new UserInfo(22, "Alexander", "Lazarov",
+            UserInfo alexanderInfo = new UserInfo(22, "Александър", "Лазаров",
                 Models.EntityModels.Enum.Gender.Male,
                 Models.EntityModels.Enum.SocialStatus.Student,
                 Models.EntityModels.Enum.EducationDegree.HalfHighEducation,
                 Models.EntityModels.Enum.WorkingSphere.IT);
 
-            UserInfo adrianInfo = new UserInfo(23, "Adrian", "Mladenov",
+            UserInfo adrianInfo = new UserInfo(23, "Адриан", "Младенов",
                 Models.EntityModels.Enum.Gender.Male,
                 Models.EntityModels.Enum.SocialStatus.Student,
                 Models.EntityModels.Enum.EducationDegree.HighEducation,
                 Models.EntityModels.Enum.WorkingSphere.IT);
 
-            UserInfo nikolaiInfo = new UserInfo(21, "Nikolai", "Lutakov",
+            UserInfo nikolaiInfo = new UserInfo(21, "Николай", "Лютаков",
                 Models.EntityModels.Enum.Gender.Male,
                 Models.EntityModels.Enum.SocialStatus.EmployeeInPrivateSector,
                 Models.EntityModels.Enum.EducationDegree.SecondarySpecialEducation,
                 Models.EntityModels.Enum.WorkingSphere.IT);
 
-            UserInfo zdravkoInfo = new UserInfo(25, "Zdravko", "Katsarov",
+            UserInfo zdravkoInfo = new UserInfo(25, "Здравко", "Кацаров",
                 Models.EntityModels.Enum.Gender.Male,
                 Models.EntityModels.Enum.SocialStatus.EmployeeInPrivateSector,
                 Models.EntityModels.Enum.EducationDegree.HighEducation,
@@ -141,10 +141,10 @@ namespace WoW.Data.Migrations
 
             string[] descriptions = File.ReadAllLines(userFolderName + @"\WordsDescriptions.txt");
 
-            
-            //string[] words = File.ReadAllLines(@"C:\Users\2351x\Documents\GitHub\World-Of-Words\Words.txt");
 
-            //string[] descriptions = File.ReadAllLines(@"C:\Users\2351x\Documents\GitHub\World-Of-Words\WordsDescriptions.txt");
+            //string[] words = File.ReadAllLines(@"C:\Users\AleksandarLazarov\Documents\GitHub\World-Of-Words\Words.txt");
+
+            //string[] descriptions = File.ReadAllLines(@"C:\Users\AleksandarLazarov\Documents\GitHub\World-Of-Words\WordsDescriptions.txt");
 
 
             for (int i = 0; i < words.Length; i++)

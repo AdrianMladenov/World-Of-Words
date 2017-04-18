@@ -1,21 +1,40 @@
 ﻿@model WoW.Models.ViewModels.User.ProfileVM
-
-@{ 
+@{
     ViewBag.Title = "Profile Page";
     string Active = "";
 }
+@using (Html.BeginForm("Info", "User", FormMethod.Post))
+{
+    <h2>Моята Зона</h2>
+   
+        <h3>Първо име: @Html.TextBoxFor(vm => vm.Info.FirstName)</h3>
+        <h3>Фамилия: @Html.TextBoxFor(vm => vm.Info.LastName)</h3>
+        <h3>Пол: @Html.EnumDropDownListFor(vm => vm.Info.Gender)</h3>
+        <h3>Възраст: @Html.TextBoxFor(vm => vm.Info.Age)</h3>
+        <h3>Ел. поща: @Html.TextBoxFor(vm => Model.Email)</h3>
+        <h3>Работна среда: @Html.EnumDropDownListFor(vm => vm.Info.WorkingSphere)</h3>
+        <h3>Степен на образование: @Html.EnumDropDownListFor(vm => vm.Info.EducationDegree)</h3>
+        <h3>Статут: @Html.EnumDropDownListFor(vm => vm.Info.SocialStatus)</h3>
 
-<h2>Моята Зона</h2>
-
-<h3>Първо име: @Html.DisplayFor(vm => vm.Info.FirstName)</h3>
-@*<h3>Първо име: @Html.EnumDropDownListFor(vm => vm.Info.FirstName, )</h3>*@
-<h3>Фамилия: @Html.DisplayFor(vm => vm.Info.LastName)</h3>
-<h3>Пол: @Html.DisplayFor(vm => vm.Info.Gender)</h3>
-<h3>Възраст @Html.DisplayFor(vm => vm.Info.Age)</h3>
-<h3>Работна среда: @Html.DisplayFor(vm => vm.Info.WorkingSphere)</h3>
-<h3>Степен на образование: @Html.DisplayFor(vm => vm.Info.EducationDegree)</h3>
-<h3>Статут: @Html.DisplayFor(vm => vm.Info.WorkingSphere)</h3>
-
+    if (Model.Info == null)
+    {
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Запази" class="btn btn-default" />
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Промени" class="btn btn-default" />
+            </div>
+        </div>
+    }
+    
+}
+<hr />
 <table class="table table-stripped">
     <tr>
         <th>Дума</th>
@@ -30,5 +49,5 @@
             @{if (item.IsValid == false) { Active = "Не е одобрена"; } else { Active = "Одобрена"; }}
             <td>@Active</td>
         </tr>
-    }
+                }
 </table>       

@@ -10,10 +10,10 @@ namespace WoW.Models.EntityModels
 
         }
 
-        public UserInfo(int age, string firstName, string lastNAme, Enum.Gender gender, Enum.SocialStatus socialStatus, Enum.EducationDegree educationDegree, Enum.WorkingSphere workingSphere)
+        public UserInfo(int age, string firstName, string lastName, Enum.Gender gender, Enum.SocialStatus socialStatus, Enum.EducationDegree educationDegree, Enum.WorkingSphere workingSphere)
         {
             this.FirstName = firstName;
-            this.LastName = LastName;
+            this.LastName = lastName;
             this.Age = age;
             this.RegistrationDate = DateTime.Now;
             this.Gender = gender;

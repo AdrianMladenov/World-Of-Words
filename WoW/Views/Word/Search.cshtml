@@ -47,33 +47,40 @@
         }
     });
 
-    let tempChars = [];
     $('#getword').on('click', function (e) {
-        let wordAndDescription = JSON.stringify({
-            Word: makeWordPattern(),
-            Content: $('#content').val()
-        });
+        let checkWord = makeWordPattern();
 
-        //$('.form-horizontal').hide()
-        $.ajax({
-            type: "POST",
-            url: '/Word/Search',
-            cache: false,
-            contentType: "application/json; charset=utf-8",
-            data: wordAndDescription,
-            dataType: "html",
-            success: function (response) {
-                $('#wordResult').empty();
-                $('#wordResult').html(response);
-                console.log(response);
+        if (checkWord.match(/[a-zA-Z-]/)) {
+            $('#wordResult').text('Моля ползвайте кирилица!')
+        }
+        else {
+            $('#wordResult').empty();
+            let wordAndDescription = JSON.stringify({
+                Word: makeWordPattern(),
+                Content: $('#content').val()
+            });
 
-            },
-            error: function (response) {
-                $('#wordResult').empty();
-                $('#wordResult').html('Опа. Възникна грешка. :(');
+            //$('.form-horizontal').hide()
+            $.ajax({
+                type: "POST",
+                url: '/Word/Search',
+                cache: false,
+                contentType: "application/json; charset=utf-8",
+                data: wordAndDescription,
+                dataType: "html",
+                success: function (response) {
+                    $('#wordResult').empty();
+                    $('#wordResult').html(response);
+                    console.log(response);
 
-            }
-        });
+                },
+                error: function (response) {
+                    $('#wordResult').empty();
+                    $('#wordResult').html('Опа. Възникна грешка. :(');
+
+                }
+            });
+        }
     })
 
 </script>

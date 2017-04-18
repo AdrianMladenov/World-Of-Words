@@ -38,7 +38,7 @@ function input_keydown(e) {
     let id = $(this).attr('id');
     last_id = id.replace('letter', '');
 
-    // $('#letter' + last_id).val('');
+     
 
     let keycode = e.keyCode;
 
@@ -74,18 +74,13 @@ function input_keydown(e) {
         }
     }
     else {
-        let result = ((keycode >= 65) && (keycode <= 90));
+        let result = ((keycode >= 65) && (keycode <= 90)) || keycode == 192 || keycode == 219 || keycode == 221 || keycode == 220;
         if (!result) {
-            console.log('o ye');
-            console.log(keycode);
-            console.log(result);
             e.preventDefault();
         }
         else {
+            $('#letter' + last_id).val('');
             $(this).addClass('lett-known').removeClass('lett-unknown');
-            console.log(keycode);
-            console.log(result);
-
         }
     }
 

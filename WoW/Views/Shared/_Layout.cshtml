@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
 
 </head>
 <body>
@@ -26,8 +27,15 @@
                     <li>@Html.ActionLink("Добави дума", "Add", "Word")</li>
                     <li>@Html.ActionLink("Запитване", "AddQuestion", "QandA")</li>
                     <li>@Html.ActionLink("Класации", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Моите думи", "GetWordsOfUser", "Word")</li>
-                    <li>@Html.ActionLink("Моят профил", "Info", "User")</li>
+                    
+                    @*<li>@Html.ActionLink("Моят профил", "Info", "User")</li>*@
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Моят профил <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("За мен", "Info", "User")</li>
+                            <li>@Html.ActionLink("Моите думи", "GetWordsOfUser", "Word")</li>
+                        </ul>
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

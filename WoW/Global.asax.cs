@@ -35,8 +35,9 @@ namespace WoW
                 exp.CreateMap<WordForValidate, AllWordsOfUser>();
                 exp.CreateMap<Question, AddQVM>();
                 exp.CreateMap<Question, QADetails>();
-                exp.CreateMap<ApplicationUser, ProfileVM>();
+                exp.CreateMap<ApplicationUser, ProfileVM>().ForMember(vm => vm.Id, configExpr => configExpr.Ignore());
                 exp.CreateMap<UserInfo, Info>();
+                exp.CreateMap<UserInfo, ProfileVM>().ForMember(vm => vm.Id, configExpr => configExpr.Ignore());
                 exp.CreateMap<ApplicationUser, APUsersInfoVM>()
                 .ForMember(vm => vm.Username, 
                 configExpr => configExpr.MapFrom(user => user.UserName))

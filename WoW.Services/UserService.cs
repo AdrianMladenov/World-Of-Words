@@ -14,12 +14,49 @@ namespace WoW.Services
     {
         public ProfileVM GetUser(string name)
         {
+            ProfileVM userInfo = new ProfileVM();
+
             ApplicationUser currentUser = Context.Users.FirstOrDefault(u => u.UserName == name);
             UserInfo currentInfo = currentUser.UserInfo;
-            ProfileVM userInfo = Mapper.Map<ApplicationUser, ProfileVM>(currentUser);
+            userInfo = Mapper.Map<ApplicationUser, ProfileVM>(currentUser);
             userInfo.AllWords = Mapper.Map<IEnumerable<WordForValidate>, IEnumerable<AllWordsOfUser> > (currentUser.WordsForValidate);
             userInfo.Info = Mapper.Map<UserInfo, Info>(currentUser.UserInfo);
             return userInfo;
         }
+
+        public void AddInfo(ProfileVM userInfo, string user)
+        {
+            ApplicationUser currentUser = Context.Users.FirstOrDefault(u => u.UserName == user);
+            if (currentUser.UserInfo == null)
+            {
+                UserInfo currentInfo = new UserInfo();
+                currentInfo.FirstName = userInfo.Info.FirstName;
+                currentInfo.LastName = userInfo.Info.LastName;
+                currentInfo.Age = userInfo.Info.Age;
+                currentInfo.RegistrationDate = DateTime.Now;
+                currentInfo.Gender = userInfo.Info.Gender;
+                currentInfo.WorkingSphere = userInfo.Info.WorkingSphere;
+                currentInfo.EducationDegree = userInfo.Info.EducationDegree;
+                currentInfo.SocialStatus = userInfo.Info.SocialStatus;
+
+                currentUser.UserInfo = currentInfo;
+            }
+            else
+            {
+
+                UserInfo currentInfo = Context.UsersInfo.SingleOrDefault(ui => ui.User.UserName == user);
+                currentInfo.FirstName = userInfo.Info.FirstName;
+                currentInfo.LastName = userInfo.Info.LastName;
+                currentInfo.Age = userInfo.Info.Age;
+                currentInfo.Gender = userInfo.Info.Gender;
+                currentInfo.WorkingSphere = userInfo.Info.WorkingSphere;
+                currentInfo.EducationDegree = userInfo.Info.EducationDegree;
+                currentInfo.SocialStatus = userInfo.Info.SocialStatus;
+                currentUser.Email = userInfo.Email;
+            }
+            Context.SaveChanges();
+
+        }
+        
     }
 }

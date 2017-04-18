@@ -10,7 +10,7 @@ namespace WoW.Models.EntityModels
         public enum SocialStatus
         {
             [Display(Name ="Ученик")]
-            SchollBoy = 0,
+            SchoolBoy = 0,
 
             [Display(Name = "Студент")]
             Student = 1,
@@ -83,7 +83,7 @@ namespace WoW.Models.EntityModels
             [Display(Name = "Промишленост")]
             Industry = 5,
 
-            [Display(Name = "спорт")]
+            [Display(Name = "Спорт")]
             Sport = 6,
 
             [Display(Name = "Търговия")]

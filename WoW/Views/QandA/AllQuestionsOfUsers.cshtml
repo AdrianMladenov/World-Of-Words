@@ -18,21 +18,24 @@
 
 @using (Html.BeginForm())
 {
-    foreach (var question in Model)
-    {
-        <div class="words">
-            @Html.LabelFor(q => question.Word, "Търсена дума:")
-            @Html.DisplayFor(q => question.Word)
-            @Html.LabelFor(q => question.Content, "Описание:")
-            @*@Html.DisplayNameFor(m => m.Description)*@
-            @Html.DisplayFor(q => question.Content)
-            @Html.LabelFor(q => question.User, "Потребител:")
-            @Html.DisplayFor(q => question.User.UserName)
-            @Html.LabelFor(q => question.Answers, "Отговори:")
-            @Html.DisplayFor(q => question.Answers)
-        </div>
-        @Html.ActionLink("Отговори", "AddAnswer", new { id = question.Id }, new { @class = "lnkEdit" })
-    }
+    <table class="table table-stripped">
+       
+        @foreach (var question in Model)
+        {
+            <tr>
+                <td>@Html.LabelFor(q => question.Word, "Търсена дума:")
+                @Html.DisplayFor(q => question.Word)</td>
+                <td>@Html.LabelFor(q => question.Content, "Описание:")
+                @Html.DisplayFor(q => question.Content)</td>
+                <td>@Html.LabelFor(q => question.User, "Потребител:")
+                @Html.DisplayFor(q => question.User.UserName)</td>
+                <td>@Html.LabelFor(q => question.Answers, "Отговори:")
+                @Html.DisplayFor(q => question.Answers)</td>
+
+                <td>@Html.ActionLink("Отговори", "AddAnswer", new { id = question.Id }, new { @class = "lnkEdit" })</td>
+            </tr>
+        }
+    </table>
 }
 <script src="~/Scripts/PopUpDialog.js"></script>
 <script>

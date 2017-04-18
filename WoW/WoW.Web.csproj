@@ -5833,11 +5833,11 @@
     <Content Include="Views\QandA\AddQuestion.cshtml" />
     <Content Include="Views\QandA\AddAnswer.cshtml" />
     <Content Include="Views\QandA\_AddAnswer.cshtml" />
-    <Content Include="Views\User\Profile.cshtml" />
     <Content Include="Views\Word\Search.cshtml" />
     <Content Include="Views\Shared\tempLayout.cshtml" />
     <Content Include="Views\Word\_SearchResult.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\User\Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

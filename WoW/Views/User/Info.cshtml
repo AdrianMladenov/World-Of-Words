@@ -1,5 +1,4 @@
 ﻿@model WoW.Models.ViewModels.User.ProfileVM
-
 @{ 
     ViewBag.Title = "Profile Page";
     string Active = "";
@@ -8,13 +7,12 @@
 <h2>Моята Зона</h2>
 
 <h3>Първо име: @Html.DisplayFor(vm => vm.Info.FirstName)</h3>
-@*<h3>Първо име: @Html.EnumDropDownListFor(vm => vm.Info.FirstName, )</h3>*@
 <h3>Фамилия: @Html.DisplayFor(vm => vm.Info.LastName)</h3>
-<h3>Пол: @Html.DisplayFor(vm => vm.Info.Gender)</h3>
+<h3>Пол: @Html.EnumDropDownListFor(vm => vm.Info.Gender)</h3>
 <h3>Възраст @Html.DisplayFor(vm => vm.Info.Age)</h3>
-<h3>Работна среда: @Html.DisplayFor(vm => vm.Info.WorkingSphere)</h3>
-<h3>Степен на образование: @Html.DisplayFor(vm => vm.Info.EducationDegree)</h3>
-<h3>Статут: @Html.DisplayFor(vm => vm.Info.WorkingSphere)</h3>
+<h3>Работна среда: @Html.EnumDropDownListFor(vm => vm.Info.WorkingSphere)</h3>
+<h3>Степен на образование: @Html.EnumDropDownListFor(vm => vm.Info.EducationDegree)</h3>
+<h3>Статут: @Html.EnumDropDownListFor(vm => vm.Info.SocialStatus)</h3>
 
 <table class="table table-stripped">
     <tr>

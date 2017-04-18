@@ -74,12 +74,17 @@ function input_keydown(e) {
         }
     }
     else {
-        let result = ((keycode >= 62) && (keycode <= 90));
+        let result = ((keycode >= 65) && (keycode <= 90));
         if (!result) {
+            console.log('o ye');
+            console.log(keycode);
+            console.log(result);
             e.preventDefault();
         }
         else {
             $(this).addClass('lett-known').removeClass('lett-unknown');
+            console.log(keycode);
+            console.log(result);
 
         }
     }

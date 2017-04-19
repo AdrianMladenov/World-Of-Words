@@ -42,8 +42,12 @@ namespace WoW.Web.Controllers
         [HttpPost]
         public ActionResult AddQuestion([Bind(Include = "Word, Content")] AddQVM question)
         {
+            if (string.IsNullOrEmpty(question.Content))
+            {
+                return Json(new { result = "Missing content", message = "Моля въведете описание!" });
+            }
 
-            if (this.ModelState.IsValid)
+            else if (this.ModelState.IsValid)
             {
                 var user = User.Identity.Name;
                 this.QandAService.AddQuestion(question, user);
@@ -51,7 +55,7 @@ namespace WoW.Web.Controllers
                 return Json(new { result = "Redirect", url = Url.Action("AllQuestionsOfUsers", "QandA") });
             }
 
-            return this.View();
+            return Json(new { result = "Model error", message = "Възникна проблем, моля опитайте отново." });
         }
 
         [HttpGet, Route("addAnswer/{id}")]

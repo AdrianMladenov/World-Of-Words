@@ -124,7 +124,7 @@ namespace WoW.Services
 
         public IEnumerable<AllWordsOfUser> GetWordsOfUserByName(string name)
         {
-            IEnumerable<WordForValidate> words = this.Context.WordsForValidation.Where(u => u.User.UserName == name && u.IsDeleted == false && u.IsValid == false);
+            IEnumerable<WordForValidate> words = this.Context.WordsForValidation.Where(u => u.User.UserName == name && u.IsDeleted == false);
             IEnumerable<AllWordsOfUser> awou = Mapper.Map<IEnumerable<WordForValidate>, IEnumerable<AllWordsOfUser>>(words);
             return awou;
         }

@@ -19,7 +19,10 @@ namespace WoW.Services
             ApplicationUser currentUser = Context.Users.FirstOrDefault(u => u.UserName == name);
             UserInfo currentInfo = currentUser.UserInfo;
             userInfo = Mapper.Map<ApplicationUser, ProfileVM>(currentUser);
-            userInfo.WordCount = currentUser.WordsForValidate.Count();
+            userInfo.WordForValidateCount = currentUser.WordsForValidate.Where(w => w.IsValid == false).Count();
+            userInfo.WordCount = currentUser.Words.Count();
+            userInfo.QuestionCount = currentUser.Questions.Count();
+            userInfo.AnswerCount = currentUser.Answers.Count();
             userInfo.Info = Mapper.Map<UserInfo, Info>(currentUser.UserInfo);
             return userInfo;
         }

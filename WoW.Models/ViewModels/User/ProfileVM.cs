@@ -19,9 +19,14 @@ namespace WoW.Models.ViewModels.User
 
         public string Email { get; set; }
 
-        public IEnumerable<AllWordsOfUser> AllWords { get; set; }
+        public int WordCount { get; set; }
+
+        public int WordForValidateCount { get; set; }
+
+        public int QuestionCount { get; set; }
+
+        public int AnswerCount { get; set; }
 
         public Info Info { get; set; }
-        
     }
 }

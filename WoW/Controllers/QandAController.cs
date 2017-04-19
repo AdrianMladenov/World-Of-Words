@@ -9,7 +9,8 @@ using WoW.Services;
 
 namespace WoW.Web.Controllers
 {
-    [RoutePrefix("Q&A")]
+    [RoutePrefix("q&a")]
+    [Authorize(Roles = "User, Admin")]
     public class QandAController : Controller
     {
         private QandAService QandAService;

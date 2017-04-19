@@ -137,9 +137,9 @@
             }
 
 
-            string[] words = File.ReadAllLines(userFolderName + @"\Words.txt");
+            string[] words = File.ReadAllLines(userFolderName + @"\Words5.txt");
 
-            string[] descriptions = File.ReadAllLines(userFolderName + @"\WordsDescriptions.txt");
+            string[] descriptions = File.ReadAllLines(userFolderName + @"\WordsDescriptions5.txt");
 
 
             //string[] words = File.ReadAllLines(@"C:\Users\AleksandarLazarov\Documents\GitHub\World-Of-Words\Words.txt");
@@ -174,7 +174,7 @@
 
                 if (context.Words.Any(w => w.Name == currentWord.Name))
                 {
-                    var existingWord = context.Words.Include(ew => ew.Descriptions).SingleOrDefault(ew => ew.Name == currentWord.Name);
+                    var existingWord = context.Words.Include(ew => ew.Descriptions).FirstOrDefault(ew => ew.Name == currentWord.Name);
 
                     if (existingWord.Descriptions.Any(d => d.Content == currentDescription.Content))
                     {
@@ -191,7 +191,7 @@
 
                 else if (context.Descriptions.Any(d => d.Content == currentDescription.Content))
                 {
-                    var existingDescription = context.Descriptions.Include(ew => ew.Words).SingleOrDefault(ew => ew.Content == currentDescription.Content);
+                    var existingDescription = context.Descriptions.Include(ew => ew.Words).FirstOrDefault(ew => ew.Content == currentDescription.Content);
                     existingDescription.Words.Add(currentWord);
                     ChooseUser(context, userAl, userAm, userNl, userZk, i, words, currentWord);
                     context.SaveChanges();

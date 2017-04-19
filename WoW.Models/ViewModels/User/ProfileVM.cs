@@ -28,6 +28,5 @@ namespace WoW.Models.ViewModels.User
         public int AnswerCount { get; set; }
 
         public Info Info { get; set; }
-        
     }
 }

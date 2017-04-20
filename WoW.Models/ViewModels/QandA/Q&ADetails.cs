@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WoW.Models.EntityModels;
-
-namespace WoW.Models.ViewModels.QandA
+﻿namespace WoW.Models.ViewModels.QandA
 {
+    using System;
+    using System.Collections.Generic;
+    using EntityModels;
+
     public class QADetails
     {
         public int Id { get; set; }

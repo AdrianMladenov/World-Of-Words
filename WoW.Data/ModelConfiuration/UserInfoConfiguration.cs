@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WoW.Models.EntityModels;
-
-namespace WoW.Data.ModelConfiuration
+﻿namespace WoW.Data.ModelConfiuration
 {
-   public class UserInfoConfiguration : EntityTypeConfiguration<UserInfo>
+    using System.Data.Entity.ModelConfiguration;
+    using Models.EntityModels;
+
+    public class UserInfoConfiguration : EntityTypeConfiguration<UserInfo>
     {
         public UserInfoConfiguration()
         {

@@ -1,19 +1,15 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using WoW.Models;
-using WoW.Models.ViewModels.Account;
-using WoW.Models.EntityModels;
-
-namespace WoW.Controllers
+﻿namespace WoW.Controllers
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web;
+    using System.Web.Mvc;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin.Security;
+    using Models.ViewModels.Account;
+    using Models.EntityModels;
+
     [Authorize]
     public class AccountController : Controller
     {

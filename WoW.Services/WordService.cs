@@ -1,16 +1,13 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using WoW.Data;
-using WoW.Models.EntityModels;
-using WoW.Models.ViewModels.Words;
-
-namespace WoW.Services
+﻿namespace WoW.Services
 {
+    using AutoMapper;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+    using Models.EntityModels;
+    using Models.ViewModels.Words;
+
     public class WordService : Service
     {
         public void AddWord(AddWordVM model, string user)
@@ -124,7 +121,7 @@ namespace WoW.Services
 
         public IEnumerable<AllWordsOfUser> GetWordsOfUserByName(string name)
         {
-            IEnumerable<WordForValidate> words = this.Context.WordsForValidation.Where(u => u.User.UserName == name && u.IsDeleted == false && u.IsValid == false);
+            IEnumerable<WordForValidate> words = this.Context.WordsForValidation.Where(u => u.User.UserName == name && u.IsDeleted == false);
             IEnumerable<AllWordsOfUser> awou = Mapper.Map<IEnumerable<WordForValidate>, IEnumerable<AllWordsOfUser>>(words);
             return awou;
         }

@@ -1,14 +1,12 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WoW.Models.EntityModels;
-using WoW.Models.ViewModels.QandA;
-
-namespace WoW.Services
+﻿namespace WoW.Services
 {
+    using AutoMapper;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Models.EntityModels;
+    using Models.ViewModels.QandA;
+
     public class QandAService : Service
     {
         public void AddQuestion(AddQVM question, string user)

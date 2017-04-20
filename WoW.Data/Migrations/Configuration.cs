@@ -3,13 +3,9 @@
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
-    using Models;
     using Models.EntityModels;
-    using System.IO;
-    using System.Collections.Generic;
 
     public sealed class Configuration : DbMigrationsConfiguration<WoWContext>
     {
@@ -20,7 +16,7 @@
 
         protected override void Seed(WoWContext context)
         {
-             context.Database.Initialize(true);
+            context.Database.Initialize(true);
             //context.Roles.AddOrUpdate(r => new IdentityRole("User"));
             //if (!context.Roles.Any(role => role.Name == "User"))
             //{
@@ -123,92 +119,93 @@
             userManager.AddToRole(userNl.Id, "Admin");
             userManager.AddToRole(userZk.Id, "Admin");
 
-            //context.SaveChanges();
-            var userFolderName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            var userSasho = "Sasho";
-            var userAdrian = "Adrian";
-            if (userFolderName.Contains(userSasho))
-            {
-                userFolderName = userFolderName + @"\GitHub\World-Of-Words\";
-            }
-            else if (userFolderName.Contains(userAdrian))
-            {
-                userFolderName = userFolderName + @"\Visual Studio 2015\Projects\World-Of-Words\";
-            }
+            context.SaveChanges();
+            //    var userFolderName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            //    var userSasho = "Sasho";
+            //    var userAdrian = "Adrian";
+            //    if (userFolderName.Contains(userSasho))
+            //    {
+            //        userFolderName = userFolderName + @"\GitHub\World-Of-Words\";
+            //    }
+            //    else if (userFolderName.Contains(userAdrian))
+            //    {
+            //        userFolderName = userFolderName + @"\Visual Studio 2015\Projects\World-Of-Words\";
+            //    }
 
 
-            string[] words = File.ReadAllLines(userFolderName + @"\Words5.txt");
+            //    string[] words = File.ReadAllLines(userFolderName + @"\Words5.txt");
 
-            string[] descriptions = File.ReadAllLines(userFolderName + @"\WordsDescriptions5.txt");
-
-
-            //string[] words = File.ReadAllLines(@"C:\Users\AleksandarLazarov\Documents\GitHub\World-Of-Words\Words.txt");
-
-            //string[] descriptions = File.ReadAllLines(@"C:\Users\AleksandarLazarov\Documents\GitHub\World-Of-Words\WordsDescriptions.txt");
+            //    string[] descriptions = File.ReadAllLines(userFolderName + @"\WordsDescriptions5.txt");
 
 
-            for (int i = 0; i < words.Length; i++)
-            {
-                Word currentWord = new Word();
-                int charCounter = 0;
-                currentWord.Name = words[i];
+            //    //string[] words = File.ReadAllLines(@"C:\Users\AleksandarLazarov\Documents\GitHub\World-Of-Words\Words.txt");
 
-                for (int p = 0; p < currentWord.Name.Length; p++)
-                {
+            //    //string[] descriptions = File.ReadAllLines(@"C:\Users\AleksandarLazarov\Documents\GitHub\World-Of-Words\WordsDescriptions.txt");
 
-                    if (currentWord.Name[p] == ' ')
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        
-                        charCounter++;
-                    }
-                }
-                currentWord.LetterCount = charCounter;
-                
-                Description currentDescription = new Description();
-                currentDescription.Content = descriptions[i];
-                //currentWord.Descriptions.Add(currentDescription);
 
-                if (context.Words.Any(w => w.Name == currentWord.Name))
-                {
-                    var existingWord = context.Words.Include(ew => ew.Descriptions).FirstOrDefault(ew => ew.Name == currentWord.Name);
 
-                    if (existingWord.Descriptions.Any(d => d.Content == currentDescription.Content))
-                    {
-                        ChooseUser(context, userAl, userAm, userNl, userZk, i, words, currentWord);
-                        context.SaveChanges();
-                    }
-                    else
-                    {
-                        existingWord.Descriptions.Add(currentDescription);
-                        context.SaveChanges();
-                    }
+            //    for (int i = 0; i < words.Length; i++)
+            //    {
+            //        Word currentWord = new Word();
+            //        int charCounter = 0;
+            //        currentWord.Name = words[i];
 
-                }
+            //        for (int p = 0; p < currentWord.Name.Length; p++)
+            //        {
 
-                else if (context.Descriptions.Any(d => d.Content == currentDescription.Content))
-                {
-                    var existingDescription = context.Descriptions.Include(ew => ew.Words).FirstOrDefault(ew => ew.Content == currentDescription.Content);
-                    existingDescription.Words.Add(currentWord);
-                    ChooseUser(context, userAl, userAm, userNl, userZk, i, words, currentWord);
-                    context.SaveChanges();
-                }
+            //            if (currentWord.Name[p] == ' ')
+            //            {
+            //                continue;
+            //            }
+            //            else
+            //            {
 
-                else
-                {
-                    currentWord.Descriptions.Add(currentDescription);
-                    //context.Words.Add(currentWord);
-                    context.Descriptions.Add(currentDescription);
-                    ChooseUser(context, userAl, userAm, userNl, userZk, i, words, currentWord);
-                    context.SaveChanges();
-                }
-            }
+            //                charCounter++;
+            //            }
+            //        }
+            //        currentWord.LetterCount = charCounter;
+
+            //        Description currentDescription = new Description();
+            //        currentDescription.Content = descriptions[i];
+            //        //currentWord.Descriptions.Add(currentDescription);
+
+            //        if (context.Words.Any(w => w.Name == currentWord.Name))
+            //        {
+            //            var existingWord = context.Words.Include(ew => ew.Descriptions).FirstOrDefault(ew => ew.Name == currentWord.Name);
+
+            //            if (existingWord.Descriptions.Any(d => d.Content == currentDescription.Content))
+            //            {
+            //                ChooseUser(context, userAl, userAm, userNl, userZk, i, words, currentWord);
+            //                context.SaveChanges();
+            //            }
+            //            else
+            //            {
+            //                existingWord.Descriptions.Add(currentDescription);
+            //                context.SaveChanges();
+            //            }
+
+            //        }
+
+            //        else if (context.Descriptions.Any(d => d.Content == currentDescription.Content))
+            //        {
+            //            var existingDescription = context.Descriptions.Include(ew => ew.Words).FirstOrDefault(ew => ew.Content == currentDescription.Content);
+            //            existingDescription.Words.Add(currentWord);
+            //            ChooseUser(context, userAl, userAm, userNl, userZk, i, words, currentWord);
+            //            context.SaveChanges();
+            //        }
+
+            //        else
+            //        {
+            //            currentWord.Descriptions.Add(currentDescription);
+            //            //context.Words.Add(currentWord);
+            //            context.Descriptions.Add(currentDescription);
+            //            ChooseUser(context, userAl, userAm, userNl, userZk, i, words, currentWord);
+            //            context.SaveChanges();
+            //        }
+            //    }
         }
 
-        private static void ChooseUser(WoWContext context, ApplicationUser userAl, ApplicationUser userAm, ApplicationUser userNl, ApplicationUser userZk, int i , string[] words, Word currentWord)
+        private static void ChooseUser(WoWContext context, ApplicationUser userAl, ApplicationUser userAm, ApplicationUser userNl, ApplicationUser userZk, int i, string[] words, Word currentWord)
         {
             if (i % 2 != 0 && i <= words.Length / 2)
             {

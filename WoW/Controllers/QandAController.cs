@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using WoW.Models.EntityModels;
-using WoW.Models.ViewModels.QandA;
-using WoW.Services;
-
-namespace WoW.Web.Controllers
+﻿namespace WoW.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+    using Models.ViewModels.QandA;
+    using Services;
+
     [RoutePrefix("q&a")]
     [Authorize(Roles = "User, Admin")]
     public class QandAController : Controller

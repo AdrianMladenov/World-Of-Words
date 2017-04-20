@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WoW.Models.EntityModels;
-
-namespace WoW.Models.ViewModels.Words
+﻿namespace WoW.Models.ViewModels.Words
 {
-   public class AddWordVM
+    using System.ComponentModel.DataAnnotations;
+    using EntityModels;
+
+    public class AddWordVM
     {
         public int Id { get; set; }
       

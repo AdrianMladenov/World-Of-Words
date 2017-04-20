@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using WoW.Models.ViewModels.User;
-using WoW.Services;
-
-namespace WoW.Web.Controllers
+﻿namespace WoW.Web.Controllers
 {
+    using System.Web.Mvc;
+    using Models.ViewModels.User;
+    using Services;
+
     public class UserController : Controller
     {
         private UserService userService;

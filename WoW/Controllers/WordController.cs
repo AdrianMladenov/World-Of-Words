@@ -1,19 +1,10 @@
-﻿using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Script.Serialization;
-using WoW.Models.EntityModels;
-using WoW.Models.ViewModels.Words;
-using WoW.Services;
-
-
-namespace WoW.Web.Controllers
+﻿namespace WoW.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+    using Models.ViewModels.Words;
+    using Services;
+
     [Authorize(Roles ="User, Admin")]
     [RoutePrefix("word")]
     public class WordController : Controller

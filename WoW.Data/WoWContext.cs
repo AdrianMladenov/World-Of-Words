@@ -1,13 +1,9 @@
 namespace WoW.Data
 {
-    using System;
     using System.Data.Entity;
-    using System.Linq;
     using Models.EntityModels;
     using Microsoft.AspNet.Identity.EntityFramework;
-    using Models;
     using ModelConfiuration;
-    using Migrations;
 
     public class WoWContext : IdentityDbContext<ApplicationUser>
     {

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WoW.Models.ViewModels.QandA
+﻿namespace WoW.Models.ViewModels.QandA
 {
-  public  class AddQVM
+    using System.ComponentModel.DataAnnotations;
+
+    public  class AddQVM
     {
         public int Id { get; set; }
 

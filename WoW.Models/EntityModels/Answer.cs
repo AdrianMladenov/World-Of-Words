@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace WoW.Models.EntityModels
+﻿namespace WoW.Models.EntityModels
 {
+    using System;
+    
     public class Answer
     {
         public Answer()

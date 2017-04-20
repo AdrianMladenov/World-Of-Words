@@ -1,15 +1,11 @@
 ﻿using AutoMapper;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WoW.Models.EntityModels;
-using WoW.Models.ViewModels.User;
-using WoW.Models.ViewModels.Words;
-
 namespace WoW.Services
 {
+    using Models.EntityModels;
+    using Models.ViewModels.User;
+
     public class UserService : Service
     {
         public ProfileVM GetUser(string name)

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WoW.Data;
-
-namespace WoW.Services
+﻿namespace WoW.Services
 {
-   public class Service
+    using Data;
+
+    public class Service
     {
         private WoWContext context;
 

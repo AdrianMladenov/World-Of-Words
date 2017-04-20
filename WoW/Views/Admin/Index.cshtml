@@ -9,6 +9,7 @@
 
 @using (Html.BeginForm())
 {
+    @Html.ActionLink("Вкарай данни", "Import", "Admin");
 
     foreach (var word in Model.AllWordsForValidate)
     {
@@ -27,21 +28,21 @@
                 }
                 <br />
 
-                foreach (var word in Model.UsersInfo)
-                {
-                    <div class="words">
-                        @Html.LabelFor(w => word.FirstName, "Потребителско име:")
-                        @Html.DisplayFor(w => word.Username)
-                        @Html.LabelFor(w => word.FirstName, "Първо име:")
-                        @Html.DisplayFor(w => word.FirstName)
-                        @Html.LabelFor(w => word.LastName, "Фамилия:")
-                        @Html.DisplayFor(w => word.LastName)
-                        @Html.LabelFor(w => word.LastName, "Роля:")
-                        @Html.DisplayFor(w => word.Role)
+                @*foreach (var word in Model.UsersInfo)
+                    {
+                        <div class="words">
+                            @Html.LabelFor(w => word.FirstName, "Потребителско име:")
+                            @Html.DisplayFor(w => word.Username)
+                            @Html.LabelFor(w => word.FirstName, "Първо име:")
+                            @Html.DisplayFor(w => word.FirstName)
+                            @Html.LabelFor(w => word.LastName, "Фамилия:")
+                            @Html.DisplayFor(w => word.LastName)
+                            @Html.LabelFor(w => word.LastName, "Роля:")
+                            @Html.DisplayFor(w => word.Role)
 
-                        <br />
-                    </div>
+                            <br />
+                        </div>
 
-                }
+                        }*@
 
                 }

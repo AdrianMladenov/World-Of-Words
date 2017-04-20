@@ -1,9 +1,7 @@
-﻿
-namespace WoW.Models.ViewModels.Words
+﻿namespace WoW.Models.ViewModels.Words
 {
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using EntityModels;
+    using System.ComponentModel.DataAnnotations;
+
     public class SearchedWordVM
     {
         [Required]
@@ -15,6 +13,5 @@ using EntityModels;
 
         [Display(Name = "Описание")]
         public string Content { get; set; }
-
     }
 }

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WoW.Models.EntityModels;
-
-namespace WoW.Models.ViewModels
+﻿namespace WoW.Models.ViewModels
 {
-   public class WordsVM
+    using System;
+    using System.Collections.Generic;
+    using EntityModels;
+
+    public class WordsVM
     {
         public string Name { get; set; }
 
@@ -16,18 +13,6 @@ namespace WoW.Models.ViewModels
         public IEnumerable<Description> Descriptions { get; set; }
 
         public IEnumerable<ApplicationUser> Users { get; set; }
-
-        //public override string ToString()
-        //{
-        //    StringBuilder sb = new StringBuilder();
-        //    sb.AppendLine($"{this.Name} {this.DateAdded}");
-        //    sb.AppendLine("Описание:");
-        //    foreach (var description in Descriptions)
-        //    {
-        //        sb.AppendLine(description.Content.ToString());
-
-        //    }
-        //    return sb.ToString();
-        //}
+        
     }
 }

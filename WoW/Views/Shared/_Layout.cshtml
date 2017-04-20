@@ -22,12 +22,15 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    @if (User.IsInRole("Admin"))
+                    {
                     <li>@Html.ActionLink("Админ", "Index", "Admin")</li>
+                    }
                     <li>@Html.ActionLink("Търсене", "Search", "Word")</li>
                     <li>@Html.ActionLink("Добави дума", "Add", "Word")</li>
                     <li>@Html.ActionLink("Запитване", "AddQuestion", "QandA")</li>
                     <li>@Html.ActionLink("Класации", "Contact", "Home")</li>
-                    
+
                     @*<li>@Html.ActionLink("Моят профил", "Info", "User")</li>*@
                     <li class="dropdown">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">Моят профил <b class="caret"></b></a>

@@ -9,6 +9,7 @@
 
 @using (Html.BeginForm())
 {
+    @Html.ActionLink("Вкарай данни", "Import", "Admin");
 
     foreach (var word in Model.AllWordsForValidate)
     {

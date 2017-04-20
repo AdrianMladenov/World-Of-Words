@@ -123,7 +123,7 @@
             userManager.AddToRole(userNl.Id, "Admin");
             userManager.AddToRole(userZk.Id, "Admin");
 
-            //context.SaveChanges();
+            context.SaveChanges();
             var userFolderName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             var userSasho = "Sasho";
             var userAdrian = "Adrian";
@@ -147,6 +147,7 @@
             //string[] descriptions = File.ReadAllLines(@"C:\Users\AleksandarLazarov\Documents\GitHub\World-Of-Words\WordsDescriptions.txt");
 
 
+
             for (int i = 0; i < words.Length; i++)
             {
                 Word currentWord = new Word();
@@ -162,12 +163,12 @@
                     }
                     else
                     {
-                        
+
                         charCounter++;
                     }
                 }
                 currentWord.LetterCount = charCounter;
-                
+
                 Description currentDescription = new Description();
                 currentDescription.Content = descriptions[i];
                 //currentWord.Descriptions.Add(currentDescription);

@@ -124,7 +124,7 @@ namespace WoW.Services
 
         public IEnumerable<AllWordsOfUser> GetWordsOfUserByName(string name)
         {
-            IEnumerable<WordForValidate> words = this.Context.WordsForValidation.Where(u => u.User.UserName == name && u.IsDeleted == false && u.IsValid == false);
+            IEnumerable<WordForValidate> words = this.Context.WordsForValidation.Where(u => u.User.UserName == name && u.IsDeleted == false);
             IEnumerable<AllWordsOfUser> awou = Mapper.Map<IEnumerable<WordForValidate>, IEnumerable<AllWordsOfUser>>(words);
             return awou;
         }
@@ -133,11 +133,11 @@ namespace WoW.Services
         {
             if (!string.IsNullOrEmpty(sWord.Content))
             {
-                var searchedWordDescr = sWord.Content;
+                var searchedWordDescr = sWord.Content.ToLower();
                 var searchedWordLength = sWord.Word.Length;
 
                 var allWordsWithSearchedLength = this.Context.Words
-                .Where(w => w.LetterCount == searchedWordLength && w.Descriptions.Any(d => d.Content.Contains(sWord.Content)))
+                .Where(w => w.LetterCount == searchedWordLength && w.Descriptions.Any(d => d.Content.ToLower().Contains(searchedWordDescr)))
                 .Select(w => new { w.Descriptions, w.LetterCount, w.Name });
                 var listResult = new List<SearchedWordVM>();
 
@@ -148,7 +148,7 @@ namespace WoW.Services
                         Regex searchingPattern = new Regex(sWord.Word, RegexOptions.IgnoreCase);
                         var tempWord = word.Name.Split(' ');
                         var cleanWord = string.Join("", tempWord);
-                        if (searchingPattern.IsMatch(cleanWord))
+                        if (searchingPattern.IsMatch(cleanWord) && descr.Content.ToLower().Contains(searchedWordDescr))
                         {
                             var newSearchedWord = new SearchedWordVM();
                             newSearchedWord.Word = word.Name;

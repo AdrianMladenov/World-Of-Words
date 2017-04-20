@@ -24,5 +24,11 @@ namespace WoW.Web.Controllers
             APIndexVM page = this.adminService.ShowAdminPage();
             return this.View(page);
         }
+
+        public ActionResult Import()
+        {
+            this.adminService.ImportEntitiesInDB();
+            return RedirectToAction("Info", "User");
+        }
     }
 }

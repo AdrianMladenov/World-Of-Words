@@ -37,7 +37,7 @@
                     @Active
                 </td>
                 <td>
-                    @if (User.IsInRole("Administrators") || word.User.UserName == User.Identity.Name)
+                    @if (User.IsInRole("Administrators") || word.User.UserName == User.Identity.Name && word.IsValid == false)
                     {
                         @Html.ActionLink("Промени", "Edit", new { id = word.Id }, new { @class = "lnkEdit" }) @: |
                         @Html.ActionLink("Изтрий", "Delete", new { id = word.Id }, new { @class = "lnkDelete" })

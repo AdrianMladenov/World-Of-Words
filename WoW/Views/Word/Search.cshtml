@@ -11,7 +11,13 @@
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
         <hr />
-        <select class="1-30"></select>
+        <div class="form-group">
+            <div class="col-md-4">
+                <select class="form-control 1-30 selectform">
+                    <option selected disabled>Брой букви</option>
+                </select>
+            </div>
+        </div>
         <div class="form-group">
 
             @Html.LabelFor(model => model.Word, "Въведете буквите, които знаете от думата", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -29,22 +35,27 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="button" id="getword" value="Търси" class="btn btn-default" />
+            <div class="row">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="button" id="getword" value="Търси" class="btn btn-default" />
+                    <div id="loadingBox" style='display:none'><img src='~/Content/images/ajaxloading.gif' /> Търсене..</div>
+                </div>
             </div>
         </div>
     </div>
-    <div id="loadingBox" style='display:none'><img src='~/Content/metronic/theme/assets/layouts/layout3/img/ajax-loading.gif' /></div>
+    
     <div id="wordResult"></div>
 }
 
 <script>
 
     $(function () {
+
         let $select = $(".1-30");
         for (i = 1; i <= 30; i++) {
             $select.append($('<option></option>').val(i).html(i))
         }
+        //$(".1-30").prop("selectedIndex", -1);
     });
 
     $('#getword').on('click', function (e) {

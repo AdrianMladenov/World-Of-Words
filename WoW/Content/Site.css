@@ -83,3 +83,6 @@ textarea {
     margin-top: 0; /*// remove the gap so it doesn't close*/
 }
 
+.selectform {
+    max-width : 125px;
+}

@@ -14,7 +14,7 @@
         [MaxLength(30)]
         [Display(Name ="Думата която търсите")]
         public string Word { get; set; }
-
+        [Required]
         [Display(Name = "Описание")]
         public string Content { get; set; }
 

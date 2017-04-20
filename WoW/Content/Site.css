@@ -26,6 +26,8 @@ textarea {
 .words {
     border: 2px solid green;
     margin-bottom: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
 }
 
 footer {
@@ -39,8 +41,57 @@ textarea {
     -moz-border-radius: 5px;
     border-radius: 5px;
 }
-.lett { 
-    cursor:help; border:1px solid #696767;
-	display:inline; width:60px; height:60px; line-height:60px; text-align:center;
-	font-size:40px; font-weight:500; text-transform:uppercase; 
+
+.lett {
+    cursor: help;
+    border: 1px solid #696767;
+    display: inline;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 500;
+    text-transform: uppercase;
 }
+
+/*.ui-dialog[aria-describedby="dialog-confirm"] {
+    border: 1px solid rgba(255, 121, 121, 0.98) !important;
+}*/
+/*.ui-dialog-titlebar
+{ 
+   display: none !important;
+}*/
+#btndelete {
+    border: 1px solid rgba(255, 121, 121, 0.98);
+}
+/*dropdown*/
+.navbar-nav > li > .dropdown-menu {
+    background-color: #343434;
+}
+
+.dropdown-menu a {
+    color: #FFFFFF !important;
+}
+
+.dropdown-menu > li > a:hover {
+    background-color: rgb(107, 107, 107);
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; /*// remove the gap so it doesn't close*/
+}
+
+.selectform {
+    max-width: 155px;
+    display: inline-block;
+    font-size: 20px;
+    text-indent: 4px;
+}
+/*select { 
+	display:inline-block;
+	font-size:26px; text-align:left; text-indent:4px; 
+	border:1px solid #909080;
+	width:105px; height:44px; line-height:44px;
+}*/

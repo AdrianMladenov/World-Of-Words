@@ -13,7 +13,7 @@ namespace WoW.Services
     {
         public IEnumerable<WordsVM> GetWords()
         {
-            IEnumerable<Word> words = this.Context.Words;
+            IEnumerable<Word> words = this.Context.Words.OrderByDescending(w => w.DateOfCreation).Take(10);
             IEnumerable<WordsVM> wvm = Mapper.Map<IEnumerable<Word>, IEnumerable<WordsVM>>(words);
             return wvm;
         }

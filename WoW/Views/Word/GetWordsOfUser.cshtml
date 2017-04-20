@@ -18,33 +18,32 @@
 
 <h2>Това са думите добавени от вас</h2>
 
-
-<h3>TODO да се покажат всички въпроси, отговори и думи в които потребителя участва</h3>
-
 @using (Html.BeginForm())
 {
-    foreach (var word in Model)
-    {
-        <div class="words">
-            @Html.LabelFor(w => word.Name, "Дума:")
-            @Html.DisplayFor(w => word.Name)
-            @Html.LabelFor(w => word.Description, "Описание:")
-            @*@Html.DisplayNameFor(m => m.Description)*@
-            @Html.DisplayFor(w => word.Description)
-            @Html.LabelFor(w => word.IsValid, "Статус:")
-            @{if (word.IsValid == false) { Active = "Не е одобрена"; } else { Active = "Одобрена"; }}
-            @Active
-            <br />
-            @if (User.IsInRole("Administrators") || word.User.UserName == User.Identity.Name)
-            {
-                @Html.ActionLink("Промени", "Edit", new { id = word.Id }, new { @class = "lnkEdit" }) @: |
-                @Html.ActionLink("Изтрий", "Delete", new { id = word.Id }, new { @class = "lnkDelete" })
-
-            }
-        </div>
+    <table class="table table-striped">
+        @foreach (var word in Model)
+        {
+            <tr>
+                <td>@Html.LabelFor(w => word.Name, "Дума:")
+                @Html.DisplayFor(w => word.Name)</td>
+                <td>@Html.LabelFor(w => word.Description, "Описание:")
+                @Html.DisplayFor(w => word.Description)</td>
+                <td>
+                    @Html.LabelFor(w => word.IsValid, "Статус:")
+                    @{if (word.IsValid == false) { Active = "Не е одобрена"; } else { Active = "Одобрена"; }}
+                    @Active
+                </td>
+                <td>
+                    @if (User.IsInRole("Administrators") || word.User.UserName == User.Identity.Name && word.IsValid == false)
+                    {
+                        @Html.ActionLink("Промени", "Edit", new { id = word.Id }, new { @class = "lnkEdit" }) @: |
+                        @Html.ActionLink("Изтрий", "Delete", new { id = word.Id }, new { @class = "lnkDelete" })
                     }
-
-                }
+                </td>
+            </tr>
+        }
+    </table>
+}
 <script src="~/Scripts/PopUpDialog.js"></script>
 <script>
     $(document).ready(function () {

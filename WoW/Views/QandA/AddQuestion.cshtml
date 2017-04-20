@@ -4,8 +4,7 @@
     ViewBag.Title = "AddQuestion";
 }
 <script src="~/Scripts/jquery-3.1.1.min.js"></script>
-
-
+<script src="~/Scripts/load-ajax-loading-box.js"></script>
 <div id="dialog-edit" style="display: none">
 </div>
 
@@ -16,21 +15,23 @@
 
 @using (Html.BeginForm())
 {
-
     @Html.AntiForgeryToken()
-
 
     <div class="form-horizontal">
         <hr />
-
-        <select class="1-30"></select>
-
+        <div class="form-group">
+            <div class="col-md-4">
+                <select class="form-control 1-30 selectform">
+                    <option selected disabled>Брой букви</option>
+                </select>
+            </div>
+        </div>
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(model => model.Word, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10" id="letters">
-                 @*@Html.HiddenFor(model => model.Word, new { htmlAttributes = new { @class = "form-control", id = "searchedWord" } })*@
+                @*@Html.HiddenFor(model => model.Word, new { htmlAttributes = new { @class = "form-control", id = "searchedWord" } })*@
                 @Html.ValidationMessageFor(model => model.Word, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -41,17 +42,17 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control", id = "content" } })
                 @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                <div id="errorResult" class="text-danger"></div>
             </div>
         </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="button" id="getword" value="Добави" class="btn btn-default" />
+                <div id="loadingBox" style='display:none'><img src='~/Content/images/ajaxloading.gif' />Добавяне..</div>
             </div>
         </div>
     </div>
 }
-
 <script>
 
     $(function () {
@@ -61,41 +62,36 @@
         }
     });
 
-    let temChars = [];
     $('#getword').on('click', function (e) {
-        //e.preventDefault();
-        temChars = $('.lett').toArray();
-        let selected = $('.1-30').find(":selected").text();
-        for (let i = 1; i <= selected; i++) {
-            temChars[i - 1] = $('#letter' + i).val() == '' || $('#letter' + i).val() == ' ' ? '?' : $('#letter' + i).val();
-        }
-        let word = temChars.join('');
-
-        //$('#searchedWord').val(word);
-
-
 
         $.ajax({
             type: "POST",
             url: '/QandA/AddQuestion',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({
-                Word: word,
+                Word: makeWordPattern(),
                 Content: $('#content').val()
             }),
             dataType: "json",
             success: function (response) {
-                console.log('o ye')
-                window.location = response.url;
-
+                if (response.result === 'Missing content') {
+                    $('#errorResult').text(response.message);
+                }
+                else if (response.result === 'Redirect') {
+                    window.location = response.url;
+                }
+                else if (response.result === 'Model error') {
+                    $('#errorResult').text(response.message);
+                }
             },
             error: function (response) {
                 console.dir(response)
-
             }
         });
     })
-
+</script>
+<script>
+    //jQuery.validator.messages.required = 'Полето е задължително!';
 </script>
 <script src="~/Scripts/searching-form.js"></script>
 

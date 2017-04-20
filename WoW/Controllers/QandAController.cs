@@ -9,7 +9,8 @@ using WoW.Services;
 
 namespace WoW.Web.Controllers
 {
-    [RoutePrefix("Q&A")]
+    [RoutePrefix("q&a")]
+    [Authorize(Roles = "User, Admin")]
     public class QandAController : Controller
     {
         private QandAService QandAService;
@@ -42,8 +43,12 @@ namespace WoW.Web.Controllers
         [HttpPost]
         public ActionResult AddQuestion([Bind(Include = "Word, Content")] AddQVM question)
         {
+            if (string.IsNullOrEmpty(question.Content))
+            {
+                return Json(new { result = "Missing content", message = "Моля въведете описание!" });
+            }
 
-            if (this.ModelState.IsValid)
+            else if (this.ModelState.IsValid)
             {
                 var user = User.Identity.Name;
                 this.QandAService.AddQuestion(question, user);
@@ -51,7 +56,7 @@ namespace WoW.Web.Controllers
                 return Json(new { result = "Redirect", url = Url.Action("AllQuestionsOfUsers", "QandA") });
             }
 
-            return this.View();
+            return Json(new { result = "Model error", message = "Възникна проблем, моля опитайте отново." });
         }
 
         [HttpGet, Route("addAnswer/{id}")]
@@ -83,48 +88,48 @@ namespace WoW.Web.Controllers
             return this.View();
         }
 
-        // GET: QandA/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+        //// GET: QandA/Edit/5
+        //public ActionResult Edit(int id)
+        //{
+        //    return View();
+        //}
 
-        // POST: QandA/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
+        //// POST: QandA/Edit/5
+        //[HttpPost]
+        //public ActionResult Edit(int id, FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
-        // GET: QandA/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //// GET: QandA/Delete/5
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
-        // POST: QandA/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+        //// POST: QandA/Delete/5
+        //[HttpPost]
+        //public ActionResult Delete(int id, FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }

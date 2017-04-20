@@ -1,0 +1,63 @@
+﻿@model WoW.Models.ViewModels.User.ProfileVM
+@{
+    ViewBag.Title = "Profile Page";
+    string Active = "";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            @using (Html.BeginForm("Info", "User", FormMethod.Post))
+            {
+                <h2>Моята Зона</h2>
+
+                <h4 class="col-md-8">Първо име: @Html.TextBoxFor(vm => vm.Info.FirstName, new { @class = "form-control" })</h4>
+                <h4 class="col-md-8">Фамилия: @Html.TextBoxFor(vm => vm.Info.LastName, new { @class = "form-control" })</h4>
+                <h4 class="col-md-8">Пол: @Html.EnumDropDownListFor(vm => vm.Info.Gender, new { @class = "form-control" })</h4>
+                <h4 class="col-md-8">Възраст: @Html.TextBoxFor(vm => vm.Info.Age, new { @class = "form-control" })</h4>
+                <h4 class="col-md-8">Ел. поща: @Html.TextBoxFor(vm => Model.Email, new { @class = "form-control" })</h4>
+                <h4 class="col-md-8">Работна среда: @Html.EnumDropDownListFor(vm => vm.Info.WorkingSphere, new { @class = "form-control" })</h4>
+                <h4 class="col-md-8">Степен на образование: @Html.EnumDropDownListFor(vm => vm.Info.EducationDegree, new { @class = "form-control" })</h4>
+                <h4 class="col-md-8">Статут: @Html.EnumDropDownListFor(vm => vm.Info.SocialStatus, new { @class = "form-control" })</h4>
+
+                if (Model.Info == null)
+                {
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Запази" class="btn btn-default" />
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Промени" class="btn btn-default" />
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <div class="col-xs-6">
+            <table class="table table-striped">
+                <tr>
+                    <td>
+                        <h3>Неодобрени думи:</h3>
+                        <h3>@Html.DisplayFor(vm => vm.WordForValidateCount)</h3>
+                    </td>
+                    <td>
+                        <h3>Одобрени думи:</h3>
+                        <h3>@Html.DisplayFor(vm => vm.WordCount)</h3>
+                    </td>
+                    <td>
+                        <h3>Зададени въпроси:</h3>
+                        <h3>@Html.DisplayFor(vm => vm.QuestionCount)</h3>
+                    </td>
+                    <td>
+                        <h3>Добавени отговори:</h3>
+                        <h3>@Html.DisplayFor(vm => vm.AnswerCount)</h3>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

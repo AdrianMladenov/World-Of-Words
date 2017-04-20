@@ -25,7 +25,7 @@ namespace WoW.Models.EntityModels
 
         public override string ToString()
         {
-            return $"{this.Content}\t";
+            return $"{this.Content};\t ";
         }
     }
 }

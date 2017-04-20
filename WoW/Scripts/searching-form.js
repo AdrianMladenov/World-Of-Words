@@ -38,7 +38,7 @@ function input_keydown(e) {
     let id = $(this).attr('id');
     last_id = id.replace('letter', '');
 
-    // $('#letter' + last_id).val('');
+     
 
     let keycode = e.keyCode;
 
@@ -74,13 +74,13 @@ function input_keydown(e) {
         }
     }
     else {
-        let result = ((keycode >= 62) && (keycode <= 90));
+        let result = ((keycode >= 65) && (keycode <= 90)) || keycode == 192 || keycode == 219 || keycode == 221 || keycode == 220;
         if (!result) {
             e.preventDefault();
         }
         else {
+            $('#letter' + last_id).val('');
             $(this).addClass('lett-known').removeClass('lett-unknown');
-
         }
     }
 
@@ -123,3 +123,15 @@ function input_keyup(e) {
         }
     }
 }
+
+function makeWordPattern() {
+    let word = '';
+    //e.preventDefault();
+    //tempChars = $('.lett').toArray();
+    let selected = $('.1-30').find(":selected").text();
+    for (let i = 1; i <= selected; i++) {
+        //tempChars[i - 1] = $('#letter' + i).val() == '' || $('#letter' + i).val() == ' ' ? '.' : $('#letter' + i).val();
+        word += $('#letter' + i).val() == '' || $('#letter' + i).val() == ' ' ? '.' : $('#letter' + i).val();
+    }
+    return word;
+};

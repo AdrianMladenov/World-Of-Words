@@ -17,13 +17,32 @@ namespace WoW.Web.Controllers
             this.userService = new UserService();
         }
 
-        // GET: User
+        // GET: User info
+        [HttpGet]
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Info()
         {
             string userName = this.User.Identity.Name;
             ProfileVM user = this.userService.GetUser(userName);
 
             return this.View(user);
+            
         }
+
+        //POST: User info
+        [HttpPost]
+        [Authorize(Roles = "User, Admin")]
+        public ActionResult Info(ProfileVM userDetails)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var user = User.Identity.Name;
+                this.userService.AddInfo(userDetails, user);
+                return this.RedirectToAction("Info");
+            }
+
+            return this.View();
+        }
+        
     }
 }

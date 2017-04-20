@@ -1,4 +1,4 @@
-namespace WoW.Data.Migrations
+﻿namespace WoW.Data.Migrations
 {
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
@@ -79,25 +79,25 @@ namespace WoW.Data.Migrations
                 SecurityStamp = Guid.NewGuid().ToString()
             };
 
-            UserInfo alexanderInfo = new UserInfo(22, "Alexander", "Lazarov",
+            UserInfo alexanderInfo = new UserInfo(22, "Александър", "Лазаров",
                 Models.EntityModels.Enum.Gender.Male,
                 Models.EntityModels.Enum.SocialStatus.Student,
                 Models.EntityModels.Enum.EducationDegree.HalfHighEducation,
                 Models.EntityModels.Enum.WorkingSphere.IT);
 
-            UserInfo adrianInfo = new UserInfo(23, "Adrian", "Mladenov",
+            UserInfo adrianInfo = new UserInfo(23, "Адриан", "Младенов",
                 Models.EntityModels.Enum.Gender.Male,
                 Models.EntityModels.Enum.SocialStatus.Student,
                 Models.EntityModels.Enum.EducationDegree.HighEducation,
                 Models.EntityModels.Enum.WorkingSphere.IT);
 
-            UserInfo nikolaiInfo = new UserInfo(21, "Nikolai", "Lutakov",
+            UserInfo nikolaiInfo = new UserInfo(21, "Николай", "Лютаков",
                 Models.EntityModels.Enum.Gender.Male,
                 Models.EntityModels.Enum.SocialStatus.EmployeeInPrivateSector,
                 Models.EntityModels.Enum.EducationDegree.SecondarySpecialEducation,
                 Models.EntityModels.Enum.WorkingSphere.IT);
 
-            UserInfo zdravkoInfo = new UserInfo(25, "Zdravko", "Katsarov",
+            UserInfo zdravkoInfo = new UserInfo(25, "Здравко", "Кацаров",
                 Models.EntityModels.Enum.Gender.Male,
                 Models.EntityModels.Enum.SocialStatus.EmployeeInPrivateSector,
                 Models.EntityModels.Enum.EducationDegree.HighEducation,
@@ -123,7 +123,7 @@ namespace WoW.Data.Migrations
             userManager.AddToRole(userNl.Id, "Admin");
             userManager.AddToRole(userZk.Id, "Admin");
 
-            //context.SaveChanges();
+            context.SaveChanges();
             var userFolderName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             var userSasho = "Sasho";
             var userAdrian = "Adrian";
@@ -137,23 +137,37 @@ namespace WoW.Data.Migrations
             }
 
 
-            //string[] words = File.ReadAllLines(userFolderName + @"\Words.txt");
+            string[] words = File.ReadAllLines(userFolderName + @"\Words5.txt");
 
-            //string[] descriptions = File.ReadAllLines(userFolderName + @"\WordsDescriptions.txt");
+            string[] descriptions = File.ReadAllLines(userFolderName + @"\WordsDescriptions5.txt");
 
-            //string[] words = File.ReadAllLines(userFolderName + @"\Words.txt");
 
-            //string[] descriptions = File.ReadAllLines(userFolderName + @"\WordsDescriptions.txt");
+            //string[] words = File.ReadAllLines(@"C:\Users\AleksandarLazarov\Documents\GitHub\World-Of-Words\Words.txt");
 
-            string[] words = File.ReadAllLines(@"C:\Users\2351x\Documents\GitHub\World-Of-Words\Words.txt");
+            //string[] descriptions = File.ReadAllLines(@"C:\Users\AleksandarLazarov\Documents\GitHub\World-Of-Words\WordsDescriptions.txt");
 
-            string[] descriptions = File.ReadAllLines(@"C:\Users\2351x\Documents\GitHub\World-Of-Words\WordsDescriptions.txt");
 
 
             for (int i = 0; i < words.Length; i++)
             {
                 Word currentWord = new Word();
+                int charCounter = 0;
                 currentWord.Name = words[i];
+
+                for (int p = 0; p < currentWord.Name.Length; p++)
+                {
+
+                    if (currentWord.Name[p] == ' ')
+                    {
+                        continue;
+                    }
+                    else
+                    {
+
+                        charCounter++;
+                    }
+                }
+                currentWord.LetterCount = charCounter;
 
                 Description currentDescription = new Description();
                 currentDescription.Content = descriptions[i];
@@ -161,7 +175,7 @@ namespace WoW.Data.Migrations
 
                 if (context.Words.Any(w => w.Name == currentWord.Name))
                 {
-                    var existingWord = context.Words.Include(ew => ew.Descriptions).SingleOrDefault(ew => ew.Name == currentWord.Name);
+                    var existingWord = context.Words.Include(ew => ew.Descriptions).FirstOrDefault(ew => ew.Name == currentWord.Name);
 
                     if (existingWord.Descriptions.Any(d => d.Content == currentDescription.Content))
                     {
@@ -178,7 +192,7 @@ namespace WoW.Data.Migrations
 
                 else if (context.Descriptions.Any(d => d.Content == currentDescription.Content))
                 {
-                    var existingDescription = context.Descriptions.Include(ew => ew.Words).SingleOrDefault(ew => ew.Content == currentDescription.Content);
+                    var existingDescription = context.Descriptions.Include(ew => ew.Words).FirstOrDefault(ew => ew.Content == currentDescription.Content);
                     existingDescription.Words.Add(currentWord);
                     ChooseUser(context, userAl, userAm, userNl, userZk, i, words, currentWord);
                     context.SaveChanges();

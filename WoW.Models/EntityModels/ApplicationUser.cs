@@ -33,7 +33,7 @@ namespace WoW.Models.EntityModels
 
         public override string ToString()
         {
-            return $"{this.UserName}";
+            return $"{this.UserName};\t ";
         }
 
         //public virtual  AddWordVM wordsForValidation { get; set; }

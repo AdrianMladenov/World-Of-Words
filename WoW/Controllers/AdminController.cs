@@ -24,7 +24,7 @@
         public ActionResult Import()
         {
             this.adminService.ImportEntitiesInDB();
-            return RedirectToAction("GetUser", "User");
+            return RedirectToAction("Info", "User");
         }
     }
 }

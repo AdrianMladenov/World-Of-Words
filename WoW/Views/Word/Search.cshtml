@@ -19,7 +19,6 @@
             </div>
         </div>
         <div class="form-group">
-
             @Html.LabelFor(model => model.Word, "Въведете буквите, които знаете от думата", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10" id="letters">
                 @Html.ValidationMessageFor(model => model.Word, "", new { @class = "text-danger" })
@@ -43,7 +42,7 @@
             </div>
         </div>
     </div>
-    
+
     <div id="wordResult"></div>
 }
 

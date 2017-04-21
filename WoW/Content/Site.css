@@ -84,5 +84,14 @@ textarea {
 }
 
 .selectform {
-    max-width : 125px;
+    max-width: 155px;
+    display: inline-block;
+    font-size: 20px;
+    text-indent: 4px;
 }
+/*select { 
+	display:inline-block;
+	font-size:26px; text-align:left; text-indent:4px; 
+	border:1px solid #909080;
+	width:105px; height:44px; line-height:44px;
+}*/

@@ -130,11 +130,11 @@
         {
             if (!string.IsNullOrEmpty(sWord.Content))
             {
-                var searchedWordDescr = sWord.Content;
+                var searchedWordDescr = sWord.Content.ToLower();
                 var searchedWordLength = sWord.Word.Length;
 
                 var allWordsWithSearchedLength = this.Context.Words
-                .Where(w => w.LetterCount == searchedWordLength && w.Descriptions.Any(d => d.Content.Contains(sWord.Content)))
+                .Where(w => w.LetterCount == searchedWordLength && w.Descriptions.Any(d => d.Content.ToLower().Contains(searchedWordDescr)))
                 .Select(w => new { w.Descriptions, w.LetterCount, w.Name });
                 var listResult = new List<SearchedWordVM>();
 
@@ -145,7 +145,7 @@
                         Regex searchingPattern = new Regex(sWord.Word, RegexOptions.IgnoreCase);
                         var tempWord = word.Name.Split(' ');
                         var cleanWord = string.Join("", tempWord);
-                        if (searchingPattern.IsMatch(cleanWord))
+                        if (searchingPattern.IsMatch(cleanWord) && descr.Content.ToLower().Contains(searchedWordDescr))
                         {
                             var newSearchedWord = new SearchedWordVM();
                             newSearchedWord.Word = word.Name;
